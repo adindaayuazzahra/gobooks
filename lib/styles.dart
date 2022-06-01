@@ -18,7 +18,7 @@ final TextTheme myTextTheme = TextTheme(
       fontSize: 33, fontWeight: FontWeight.w400, letterSpacing: 0.25),
   headline5: GoogleFonts.poppins(fontSize: 23, fontWeight: FontWeight.w400),
   headline6: GoogleFonts.poppins(
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: FontWeight.w700,
     letterSpacing: 0.15,
   ),
