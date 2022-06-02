@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/registerpage.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gobooks/loginpage.dart';
 import 'package:gobooks/styles.dart';
 import 'package:lottie/lottie.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +15,17 @@ class LoginPage extends StatelessWidget {
       body: SizedBox.expand(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: size.height * 0.06),
+              SizedBox(height: size.height * 0.05),
               Text(
-                'LOGIN',
+                'REGISTER',
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: accentColor,
                       fontWeight: FontWeight.w700,
                     ),
               ),
               Lottie.asset(
-                'assets/lottie/login.json',
+                'assets/lottie/register.json',
                 height: size.height * 0.35,
               ),
               Container(
@@ -91,7 +91,7 @@ class LoginPage extends StatelessWidget {
                         horizontal: 40,
                       ),
                     ),
-                    child: Text('Login',
+                    child: Text('Register',
                         style: Theme.of(context)
                             .textTheme
                             .button
@@ -99,12 +99,40 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: size.height * 0.03),
+              SizedBox(height: size.height * 0.009),
+              DeviderOr(size: size),
+              Container(
+                width: size.width * 0.7,
+                height: size.height * 0.06,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(7),
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/image/google.svg',
+                          height: 20,
+                          width: 20,
+                        ),
+                        const SizedBox(width: 5),
+                        Text('Lanjut dengan Akun Google',
+                            style: Theme.of(context)
+                                .textTheme
+                                .button
+                                ?.copyWith(color: Colors.black, fontSize: 13)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: size.height * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Belum punya Akun ? ",
+                    "Sudah punya Akun ? ",
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2
@@ -116,13 +144,13 @@ class LoginPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const RegisterPage();
+                            return const LoginPage();
                           },
                         ),
                       );
                     },
                     child: Text(
-                      "Register",
+                      "Login",
                       style: Theme.of(context).textTheme.button?.copyWith(
                           color: accentColor,
                           fontWeight: FontWeight.bold,
@@ -130,10 +158,53 @@ class LoginPage extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DeviderOr extends StatelessWidget {
+  const DeviderOr({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: size.height * 0.02),
+      width: size.width * 0.8,
+      child: Row(
+        children: <Widget>[
+          const Expanded(
+            child: Divider(
+              color: Colors.black87,
+              height: 1.5,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              "OR",
+              style: Theme.of(context).textTheme.button?.copyWith(
+                  color: accentColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13),
+            ),
+          ),
+          const Expanded(
+            child: Divider(
+              color: Colors.black87,
+              height: 1.5,
+            ),
+          ),
+        ],
       ),
     );
   }

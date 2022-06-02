@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/loginpage.dart';
+import 'package:gobooks/registerpage.dart';
 import 'package:gobooks/styles.dart';
 import 'package:lottie/lottie.dart';
 
@@ -86,7 +87,16 @@ class WelcomePage extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(7),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const RegisterPage();
+                        },
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: secdarkColor,
                     padding: const EdgeInsets.symmetric(
