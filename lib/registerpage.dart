@@ -101,7 +101,7 @@ class RegisterPage extends StatelessWidget {
               ),
               SizedBox(height: size.height * 0.009),
               DeviderOr(size: size),
-              Container(
+              SizedBox(
                 width: size.width * 0.7,
                 height: size.height * 0.06,
                 child: ClipRRect(
