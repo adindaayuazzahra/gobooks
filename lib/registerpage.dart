@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gobooks/mainpage.dart';
 import 'package:gobooks/loginpage.dart';
 import 'package:gobooks/styles.dart';
 import 'package:lottie/lottie.dart';
@@ -26,7 +27,7 @@ class RegisterPage extends StatelessWidget {
               ),
               Lottie.asset(
                 'assets/lottie/register.json',
-                height: size.height * 0.35,
+                height: size.height * 0.30,
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
@@ -42,6 +43,28 @@ class RegisterPage extends StatelessWidget {
                   decoration: InputDecoration(
                     icon: Icon(
                       Icons.person,
+                      color: secdarkColor,
+                    ),
+                    hintText: "Username",
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (String value) {},
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                width: size.width * 0.8,
+                decoration: BoxDecoration(
+                  color: secLightColor,
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                child: TextField(
+                  cursorColor: secdarkColor,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.mail,
                       color: secdarkColor,
                     ),
                     hintText: "Email",
@@ -84,7 +107,16 @@ class RegisterPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Mainpage();
+                          },
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: secdarkColor,
                       padding: const EdgeInsets.symmetric(
@@ -99,7 +131,7 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: size.height * 0.009),
+              SizedBox(height: size.height * 0.001),
               DeviderOr(size: size),
               SizedBox(
                 width: size.width * 0.7,

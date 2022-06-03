@@ -7,6 +7,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.white,
   ));
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const GoBooks());
