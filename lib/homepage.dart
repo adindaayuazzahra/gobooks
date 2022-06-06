@@ -16,7 +16,7 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        elevation: 10,
+        elevation: 0,
         title: Text(
           'goBooks',
           style: Theme.of(context).textTheme.headline6?.copyWith(
@@ -32,33 +32,84 @@ class _HomepageState extends State<Homepage> {
             ),
           )
         ],
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(75),
-            bottomRight: Radius.circular(75),
-          ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(125),
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 17),
-            height: 95,
-            width: 320,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(80),
-              child: Image.asset(
-                'assets/image/banner.png',
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-        ),
+        // shape: const RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.only(
+        //     bottomLeft: Radius.circular(75),
+        //     bottomRight: Radius.circular(75),
+        //   ),
+        // ),
+        // bottom: PreferredSize(
+        //   preferredSize: const Size.fromHeight(125),
+        //   child: Container(
+        //     margin: const EdgeInsets.only(bottom: 17),
+        //     height: 95,
+        //     width: 320,
+        //     child: ClipRRect(
+        //       borderRadius: BorderRadius.circular(80),
+        //       child: Image.asset(
+        //         'assets/image/banner.png',
+        //         fit: BoxFit.fitWidth,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
           child: Column(
             children: <Widget>[
+              Container(
+                margin: const EdgeInsets.only(bottom: 17),
+                padding: EdgeInsets.symmetric(horizontal: 17),
+                height: size.height * 0.15,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: secLightColor),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 160,
+                          child: Text(
+                            'Lorem ipsum dolor sit amet',
+                            textAlign: TextAlign.start,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                Theme.of(context).textTheme.subtitle2?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        SizedBox(
+                          width: 160,
+                          child: Text(
+                            'Etiam tempor blandit ligula a iaculis. Donec ',
+                            textAlign: TextAlign.start,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 12,
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Image.asset(
+                      'assets/image/banner.png',
+                      fit: BoxFit.fitWidth,
+                      width: 125,
+                    ),
+                  ],
+                ),
+              ),
               _buildSubHeading(
                 title: 'Kategori',
                 onTap: () {},
