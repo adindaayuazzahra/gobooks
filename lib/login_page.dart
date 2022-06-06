@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/mainpage.dart';
-import 'package:gobooks/registerpage.dart';
+import 'package:gobooks/main_page.dart';
+import 'package:gobooks/register_page.dart';
 import 'package:gobooks/styles.dart';
 import 'package:lottie/lottie.dart';
 
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: TextField(
                   cursorColor: secdarkColor,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(
                       Icons.person,
                       color: secdarkColor,
@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                 child: TextField(
                   obscureText: true,
                   cursorColor: secdarkColor,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(
                       Icons.lock,
                       color: secdarkColor,

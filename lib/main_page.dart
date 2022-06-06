@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/historypage.dart';
-import 'package:gobooks/homepage.dart';
-import 'package:gobooks/profilepage.dart';
-import 'package:gobooks/searchpage.dart';
+import 'package:gobooks/history_page.dart';
+import 'package:gobooks/home_page.dart';
+import 'package:gobooks/profile_page.dart';
+import 'package:gobooks/search_page.dart';
 import 'package:gobooks/styles.dart';
 
 class Mainpage extends StatefulWidget {
@@ -16,9 +16,9 @@ class _MainpageState extends State<Mainpage> {
   int currentIndex = 0;
   final pages = [
     const Homepage(),
-    const Searchpage(),
-    const Historypage(),
-    const Profilepage(),
+    const SearchPage(),
+    const HistoryPage(),
+    const ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {

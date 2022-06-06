@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gobooks/home_page.dart';
-import 'package:gobooks/loginpage.dart';
-import 'package:gobooks/mainpage.dart';
+import 'package:gobooks/main_page.dart';
 import 'package:gobooks/styles.dart';
-import 'package:gobooks/welcome_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
