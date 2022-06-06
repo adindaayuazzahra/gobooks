@@ -135,7 +135,8 @@ class _HomepageState extends State<Homepage> {
                 key: const Key('rekomendasi_lainnya'),
               ),
               SizedBox(
-                height: size.height * 0.23,
+                height: 180,
+                //height: size.height * 0.23,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
@@ -153,7 +154,7 @@ class _HomepageState extends State<Homepage> {
                 key: const Key('popular_lainnya'),
               ),
               SizedBox(
-                height: size.height * 0.379,
+                height: 277,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
@@ -269,29 +270,29 @@ class PopularList extends StatelessWidget {
       onTap: onTap,
       child: Card(
         elevation: 7,
-        margin: const EdgeInsets.fromLTRB(6, 13, 17, 13),
+        margin: const EdgeInsets.fromLTRB(6, 13, 10, 13),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 17),
+          padding: const EdgeInsets.all(15),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   'assets/image/cover_book.jpg',
                   fit: BoxFit.cover,
-                  width: 130,
-                  height: 155,
+                  width: 110,
+                  height: 140,
                 ),
               ),
               const SizedBox(height: 6),
               SizedBox(
                 width: 110,
                 child: Text(
-                  'Pendidikan Matematika Dasar ',
+                  'Pendidikan Matematika dasar',
                   textAlign: TextAlign.center,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
@@ -377,72 +378,69 @@ class RekomenList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      //width: 315,
-      width: size.width * 0.88,
-      child: InkWell(
-        onTap: onTap,
-        child: Card(
-          //color: secLightColor,
-          elevation: 7,
-          margin: const EdgeInsets.fromLTRB(6, 13, 10, 13),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  child: Image.asset(
-                    'assets/image/cover_book.jpg',
-                    fit: BoxFit.cover,
-                    width: 95,
-                  ),
+    return
+        //width: 315,
+        //width: size.width * 0.88,
+        InkWell(
+      onTap: onTap,
+      child: Card(
+        //color: secLightColor,
+        elevation: 7,
+        margin: const EdgeInsets.fromLTRB(6, 13, 10, 13),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 14),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 160,
-                        child: Text(
-                          'Pendidikan Matematika Dasar',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              Theme.of(context).textTheme.bodyText1?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: accentColor,
-                                    fontSize: 16,
-                                  ),
+                child: Image.asset(
+                  'assets/image/cover_book.jpg',
+                  fit: BoxFit.cover,
+                  //width: size.width * 0.25,
+                  width: 90,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 160,
+                      child: Text(
+                        'Pendidikan Matematika Dasar',
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: accentColor,
+                              fontSize: 16,
+                            ),
+                      ),
+                    ),
+                    Text('Penulis',
+                        style: Theme.of(context).textTheme.bodyText2),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.amber,
                         ),
-                      ),
-                      Text('Penulis',
-                          style: Theme.of(context).textTheme.bodyText2),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          Text(
-                            '5.0',
-                            style: Theme.of(context).textTheme.bodyText2,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        Text(
+                          '5.0',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
