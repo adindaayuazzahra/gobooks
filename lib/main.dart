@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gobooks/home_page.dart';
 import 'package:gobooks/loginpage.dart';
+import 'package:gobooks/mainpage.dart';
 import 'package:gobooks/styles.dart';
 import 'package:gobooks/welcome_page.dart';
 
@@ -9,7 +10,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Colors.white,
+    systemNavigationBarColor: bgColor,
   ));
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const GoBooks());
@@ -31,8 +32,8 @@ class GoBooks extends StatelessWidget {
             ),
         textTheme: myTextTheme,
       ),
-      home: const LoginPage(),
-      // home: const HomePage(),
+      //home: const WelcomePage(),
+      home: const Mainpage(),
     );
   }
 }

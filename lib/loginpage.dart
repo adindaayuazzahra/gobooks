@@ -101,11 +101,13 @@ class LoginPage extends StatelessWidget {
                         horizontal: 40,
                       ),
                     ),
-                    child: Text('Login',
-                        style: Theme.of(context)
-                            .textTheme
-                            .button
-                            ?.copyWith(color: Colors.white)),
+                    child: Text(
+                      'Login',
+                      style: Theme.of(context)
+                          .textTheme
+                          .button
+                          ?.copyWith(color: Colors.white),
+                    ),
                   ),
                 ),
               ),

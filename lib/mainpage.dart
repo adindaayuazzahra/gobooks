@@ -63,7 +63,7 @@ class _MainpageState extends State<Mainpage> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.grid_view_rounded), label: "beranda"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search_rounded), label: "cari"),
+                icon: Icon(Icons.bookmark_outline_rounded), label: "bookmark"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.receipt_long_rounded), label: "Riwayat"),
             BottomNavigationBarItem(
