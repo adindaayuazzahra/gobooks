@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/loginpage.dart';
-import 'package:gobooks/registerpage.dart';
+import 'package:gobooks/login_page.dart';
+import 'package:gobooks/register_page.dart';
 import 'package:gobooks/styles.dart';
 import 'package:lottie/lottie.dart';
 
