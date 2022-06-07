@@ -32,7 +32,7 @@ class BookmarkPage extends StatelessWidget {
         itemCount: 10,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return RekomenList(
+          return BookmarkList(
             key: const Key('rekomen_list_1'),
             onTap: () {},
           );
@@ -42,9 +42,9 @@ class BookmarkPage extends StatelessWidget {
   }
 }
 
-class RekomenList extends StatelessWidget {
+class BookmarkList extends StatelessWidget {
   final Function() onTap;
-  const RekomenList({
+  const BookmarkList({
     Key? key,
     required this.onTap,
   }) : super(key: key);
