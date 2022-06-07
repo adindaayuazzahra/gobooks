@@ -17,6 +17,7 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: bgColor,
       appBar: AppBar(
         elevation: 0,
+        centerTitle: false,
         title: Text(
           'goBooks',
           style: Theme.of(context).textTheme.headline6?.copyWith(
@@ -102,7 +103,7 @@ class _HomepageState extends State<Homepage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 4,
                   itemBuilder: (context, index) {
-                    return KategoriList(
+                    return CategoryList(
                       key: const Key('kategori_list_1'),
                       onTap: () {},
                     );
@@ -122,7 +123,7 @@ class _HomepageState extends State<Homepage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    return RekomenList(
+                    return RecommendationList(
                       key: const Key('rekomen_list_1'),
                       onTap: () {},
                     );
@@ -160,7 +161,7 @@ class _HomepageState extends State<Homepage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 9,
                   itemBuilder: (context, index) {
-                    return PenulisList(
+                    return WriterList(
                       key: const Key('penulis_popular_1'),
                       onTap: () {},
                     );
@@ -212,9 +213,9 @@ class _HomepageState extends State<Homepage> {
   }
 }
 
-class PenulisList extends StatelessWidget {
+class WriterList extends StatelessWidget {
   final Function() onTap;
-  const PenulisList({
+  const WriterList({
     required this.onTap,
     Key? key,
   }) : super(key: key);
@@ -302,9 +303,9 @@ class PopularList extends StatelessWidget {
   }
 }
 
-class KategoriList extends StatelessWidget {
+class CategoryList extends StatelessWidget {
   final Function() onTap;
-  const KategoriList({
+  const CategoryList({
     Key? key,
     required this.onTap,
   }) : super(key: key);
@@ -350,9 +351,9 @@ class KategoriList extends StatelessWidget {
   }
 }
 
-class RekomenList extends StatelessWidget {
+class RecommendationList extends StatelessWidget {
   final Function() onTap;
-  const RekomenList({
+  const RecommendationList({
     Key? key,
     required this.onTap,
   }) : super(key: key);
