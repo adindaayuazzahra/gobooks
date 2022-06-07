@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gobooks/bookmark_page.dart';
 import 'package:gobooks/history_page.dart';
 import 'package:gobooks/home_page.dart';
 import 'package:gobooks/profile_page.dart';
@@ -63,7 +64,7 @@ class _MainpageState extends State<Mainpage> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.grid_view_rounded), label: "beranda"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.bookmark_outline_rounded), label: "bookmark"),
+                icon: Icon(Icons.search_rounded), label: "search"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.receipt_long_rounded), label: "Riwayat"),
             BottomNavigationBarItem(

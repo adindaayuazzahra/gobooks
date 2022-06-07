@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gobooks/bookmark_page.dart';
 import 'package:gobooks/styles.dart';
 
 class Homepage extends StatefulWidget {
@@ -24,34 +25,15 @@ class _HomepageState extends State<Homepage> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, BookmarkPage.ROUTE_NAME);
+            },
             icon: const Icon(
-              Icons.search_rounded,
+              Icons.bookmark_outline_rounded,
               color: Colors.black,
             ),
           )
         ],
-        // shape: const RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.only(
-        //     bottomLeft: Radius.circular(75),
-        //     bottomRight: Radius.circular(75),
-        //   ),
-        // ),
-        // bottom: PreferredSize(
-        //   preferredSize: const Size.fromHeight(125),
-        //   child: Container(
-        //     margin: const EdgeInsets.only(bottom: 17),
-        //     height: 95,
-        //     width: 320,
-        //     child: ClipRRect(
-        //       borderRadius: BorderRadius.circular(80),
-        //       child: Image.asset(
-        //         'assets/image/banner.png',
-        //         fit: BoxFit.fitWidth,
-        //       ),
-        //     ),
-        //   ),
-        // ),
       ),
       body: SingleChildScrollView(
         child: Padding(
