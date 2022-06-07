@@ -12,13 +12,14 @@ class BookmarkPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
         title: Text(
           'Bookmark',
           style: Theme.of(context)
@@ -26,7 +27,6 @@ class BookmarkPage extends StatelessWidget {
               .headline6
               ?.copyWith(color: accentColor, fontSize: 25),
         ),
-        //automaticallyImplyLeading: true,
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -107,8 +107,10 @@ class RekomenList extends StatelessWidget {
                         ],
                       ),
                     ),
+
+                    // Untuk tulisan tersedia dan tidak tersedia
                     // Text(
-                    //   ' Tersedia ',
+                    //   'Tersedia',
                     //   style: Theme.of(context).textTheme.bodyText2?.copyWith(
                     //         fontWeight: FontWeight.w300,
                     //         color: Colors.green,
@@ -116,11 +118,11 @@ class RekomenList extends StatelessWidget {
                     //       ),
                     // ),
                     Text(
-                      ' Tidak Tersedia ',
+                      'Tidak Tersedia',
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontWeight: FontWeight.w300,
                           color: Colors.red,
-                          fontSize: 11),
+                          fontSize: 12),
                     ),
                   ],
                 ),
