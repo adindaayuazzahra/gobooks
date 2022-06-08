@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gobooks/main_page.dart';
-import 'package:gobooks/login_page.dart';
-import 'package:gobooks/styles.dart';
+import 'package:gobooks/pages/main_page.dart';
+import 'package:gobooks/pages/login_page.dart';
+import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/widgets/devider_or.dart';
 import 'package:lottie/lottie.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -40,7 +41,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 child: TextField(
                   cursorColor: secdarkColor,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(
                       Icons.person,
                       color: secdarkColor,
@@ -62,7 +63,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 child: TextField(
                   cursorColor: secdarkColor,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(
                       Icons.mail,
                       color: secdarkColor,
@@ -85,7 +86,7 @@ class RegisterPage extends StatelessWidget {
                 child: TextField(
                   obscureText: true,
                   cursorColor: secdarkColor,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(
                       Icons.lock,
                       color: secdarkColor,
@@ -112,7 +113,7 @@ class RegisterPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const Mainpage();
+                            return const MainPage();
                           },
                         ),
                       );
@@ -194,49 +195,6 @@ class RegisterPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DeviderOr extends StatelessWidget {
-  const DeviderOr({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: size.height * 0.02),
-      width: size.width * 0.8,
-      child: Row(
-        children: <Widget>[
-          const Expanded(
-            child: Divider(
-              color: Colors.black87,
-              height: 1.5,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              "OR",
-              style: Theme.of(context).textTheme.button?.copyWith(
-                  color: accentColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13),
-            ),
-          ),
-          const Expanded(
-            child: Divider(
-              color: Colors.black87,
-              height: 1.5,
-            ),
-          ),
-        ],
       ),
     );
   }

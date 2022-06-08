@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/main_page.dart';
-import 'package:gobooks/register_page.dart';
-import 'package:gobooks/styles.dart';
+import 'package:gobooks/pages/main_page.dart';
+import 'package:gobooks/pages/register_page.dart';
+import 'package:gobooks/common/styles.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
@@ -90,7 +90,7 @@ class LoginPage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const Mainpage();
+                            return const MainPage();
                           },
                         ),
                       );
