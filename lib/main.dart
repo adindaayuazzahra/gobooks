@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gobooks/bookmark_page.dart';
-import 'package:gobooks/main_page.dart';
-import 'package:gobooks/styles.dart';
+import 'package:gobooks/pages/bookmark_page.dart';
+import 'package:gobooks/pages/main_page.dart';
+import 'package:gobooks/common/styles.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -33,16 +33,16 @@ class GoBooks extends StatelessWidget {
         textTheme: myTextTheme,
       ),
       //home: const WelcomePage(),
-      home: const Mainpage(),
+      home: const MainPage(),
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/home':
-            return MaterialPageRoute(builder: (_) => Mainpage());
+            return MaterialPageRoute(builder: (_) => const MainPage());
           case BookmarkPage.ROUTE_NAME:
-            return CupertinoPageRoute(builder: (_) => BookmarkPage());
+            return CupertinoPageRoute(builder: (_) => const BookmarkPage());
           default:
             return MaterialPageRoute(builder: (_) {
-              return Scaffold(
+              return const Scaffold(
                 body: Center(
                   child: Text('Page not found :('),
                 ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/styles.dart';
+import 'package:gobooks/common/styles.dart';
 
 class SearchPage extends StatefulWidget {
   static const ROUTE_NAME = '/search';

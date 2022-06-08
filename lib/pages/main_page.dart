@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/bookmark_page.dart';
-import 'package:gobooks/history_page.dart';
-import 'package:gobooks/home_page.dart';
-import 'package:gobooks/profile_page.dart';
-import 'package:gobooks/search_page.dart';
-import 'package:gobooks/styles.dart';
+import 'package:gobooks/pages/history_page.dart';
+import 'package:gobooks/pages/home_page.dart';
+import 'package:gobooks/pages/profile_page.dart';
+import 'package:gobooks/pages/search_page.dart';
+import 'package:gobooks/common/styles.dart';
 
-class Mainpage extends StatefulWidget {
-  const Mainpage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  State<Mainpage> createState() => _MainpageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MainpageState extends State<Mainpage> {
+class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
   final pages = [
     const Homepage(),
