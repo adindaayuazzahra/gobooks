@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/pages/bookmark_page.dart';
 import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/pages/detail_buku.dart';
 import 'package:gobooks/widgets/category_list.dart';
 import 'package:gobooks/widgets/popular_list.dart';
 import 'package:gobooks/widgets/recommendation_list.dart';
@@ -129,7 +130,16 @@ class _HomepageState extends State<Homepage> {
                   itemBuilder: (context, index) {
                     return RecommendationList(
                       key: const Key('rekomen_list_1'),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            // return const MainPage();
+                            return const DetailPage();
+                          },
+                        ),
+                      );},
                     );
                   },
                 ),
