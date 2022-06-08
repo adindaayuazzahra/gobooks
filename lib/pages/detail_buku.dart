@@ -9,27 +9,58 @@ class DetailPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: bgColor,
-        appBar: AppBar(
-          title: Text(
-            'Pendidikan Matematika Dasar',
-            style: Theme.of(context).textTheme.headline6?.copyWith(
-                color: accentColor, fontWeight: FontWeight.bold, fontSize: 25
-            ),
-          ),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: accentColor,
-              size: 25,
-            ),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          backgroundColor: Colors.blue.withOpacity(0),
-          elevation: 0.0,
-        ),
+        // appBar: AppBar(
+        //   title: Text(
+        //     'Pendidikan Matematika Dasar',
+        //     style: Theme.of(context).textTheme.headline6?.copyWith(
+        //         color: accentColor, fontWeight: FontWeight.bold, fontSize: 25
+        //     ),
+        //   ),
+        //   leading: IconButton(
+        //     icon: const Icon(
+        //       Icons.arrow_back_ios,
+        //       color: accentColor,
+        //       size: 25,
+        //     ),
+        //     onPressed: () => Navigator.of(context).pop(),
+        //   ),
+        //   backgroundColor: Colors.blue.withOpacity(0),
+        //   elevation: 0.0,
+        // ),
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SafeArea(
+                child: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: accentColor,
+                              size: 25,
+                            ),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 9,
+                          child: Text(
+                            'Pendidikan Matematika Dasar',
+                            style: Theme.of(context).textTheme.headline6?.copyWith(
+                                color: accentColor, fontWeight: FontWeight.bold, fontSize: 25
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                )
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
