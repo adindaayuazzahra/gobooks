@@ -17,8 +17,9 @@ class BookmarkPage extends StatelessWidget {
             Navigator.pop(context);
           },
           icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+            Icons.arrow_back_ios,
+            color: accentColor,
+            size: 25,
           ),
         ),
         title: Text(
