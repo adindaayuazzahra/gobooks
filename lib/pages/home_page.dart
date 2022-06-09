@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/pages/bookmark_page.dart';
 import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/detail_buku.dart';
+import 'package:gobooks/pages/detail_book_page.dart';
 import 'package:gobooks/widgets/category_list.dart';
 import 'package:gobooks/widgets/popular_list.dart';
 import 'package:gobooks/widgets/recommendation_list.dart';
@@ -33,10 +33,11 @@ class _HomepageState extends State<Homepage> {
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, BookmarkPage.ROUTE_NAME);
-            },
+              },
             icon: const Icon(
               Icons.bookmark_outline_rounded,
               color: Colors.black,
+              size: 25,
             ),
           )
         ],
