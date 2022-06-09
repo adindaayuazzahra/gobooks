@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1027028682125",
+    "project_id": "gobooks-dda60",
+    "storage_bucket": "gobooks-dda60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027028682125:android:29646a81f04ebb2ac8e9c4",
+        "android_client_info": {
+          "package_name": "com.example.gobooks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027028682125-lqtv5cjjb45mc4jskh42bqtmcdn0apqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDatqTF9nlXySw3vPwCgvIFEdkcrkrm4VI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027028682125-lqtv5cjjb45mc4jskh42bqtmcdn0apqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
