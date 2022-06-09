@@ -137,7 +137,7 @@ class _HomepageState extends State<Homepage> {
                         MaterialPageRoute(
                           builder: (context) {
                             // return const MainPage();
-                            return const DetailPage();
+                            return const DetailBookPage();
                           },
                         ),
                       );},
