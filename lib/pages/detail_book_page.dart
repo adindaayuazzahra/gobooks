@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/bookmark_page.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -27,9 +26,7 @@ class DetailPage extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, BookmarkPage.ROUTE_NAME);
-              },
+              onPressed: () {},
               icon: Container(
                 margin: const EdgeInsets.only(right: 8.0),
                 child: const Icon(
@@ -46,46 +43,29 @@ class DetailPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              // SafeArea(
-              //   child: Container(
-              //     alignment: Alignment.center,
-              //     margin: const EdgeInsets.all(8.0),
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: Text(
-              //       'Pendidikan Matematika Dasar',
-              //       style: Theme.of(context).textTheme.headline6?.copyWith(
-              //           color: accentColor,
-              //           fontWeight: FontWeight.bold,
-              //           fontSize: 25
-              //       ),
-              //     ),
-              //   )
-              // ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: Container(
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 3,
-                              offset: const Offset(2, 3),
-                            ),
-                          ],
-                        ),
+              Container(
+                  margin: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: const Offset(2, 3),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 6,
                         child: Container(
                           margin: const EdgeInsets.all(8.0),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Image.asset(
                                 'assets/image/cover_book.jpg',
@@ -115,18 +95,12 @@ class DetailPage extends StatelessWidget {
                               InkWell(
                                 onTap: () {},
                                 child: Container(
-                                    child:  const Text(
-                                      'Pinjam',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black
-                                      ),
-                                    ),
-                                    padding: const EdgeInsets.all(8.0),
+                                    width: size.height * 0.15,
                                     margin: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.lightGreen,
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
@@ -136,32 +110,24 @@ class DetailPage extends StatelessWidget {
                                           offset: const Offset(2, 3),
                                         ),
                                       ],
+                                    ),
+                                    child: const Text(
+                                      'Pinjam',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black
+                                      ),
+                                      textAlign: TextAlign.center,
                                     )
                                 ),
                               ),
                             ],
                           ),
-                        )
-                    ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 3,
-                              offset: const Offset(2, 3),
-                            ),
-                          ],
                         ),
+                      ),
+                      const VerticalDivider(color: Colors.black87, thickness: 2,),
+                      Expanded(
+                        flex: 7,
                         child: Container(
                           margin: const EdgeInsets.all(8.0),
                           child: Column(
@@ -193,10 +159,10 @@ class DetailPage extends StatelessWidget {
                               const Text('Rak A103/2/4'),
                             ],
                           ),
-                        )
-                    ),
+                        ),
+                      )
+                    ],
                   )
-                ],
               ),
               Container(
                   margin: const EdgeInsets.all(8.0),
