@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
-class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+class DetailBookPage extends StatelessWidget {
+  const DetailBookPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,9 @@ class DetailPage extends StatelessWidget {
           title: Text(
             'Detail Buku',
             style: Theme.of(context).textTheme.headline6?.copyWith(
-                color: accentColor, fontWeight: FontWeight.bold, fontSize: 25
+                color: accentColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 25
             ),
           ),
           leading: IconButton(
@@ -67,10 +69,13 @@ class DetailPage extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset(
-                                'assets/image/cover_book.jpg',
-                                fit: BoxFit.cover,
-                                width: size.height * 0.15,
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: Image.asset(
+                                  'assets/image/cover_book.jpg',
+                                  fit: BoxFit.cover,
+                                  width: size.height * 0.15,
+                                ),
                               ),
                               const SizedBox(height: 5),
                               const Text('BN11MAX5JFJ67890'),
