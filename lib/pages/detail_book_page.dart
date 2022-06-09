@@ -69,10 +69,13 @@ class DetailBookPage extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset(
-                                'assets/image/cover_book.jpg',
-                                fit: BoxFit.cover,
-                                width: size.height * 0.15,
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: Image.asset(
+                                  'assets/image/cover_book.jpg',
+                                  fit: BoxFit.cover,
+                                  width: size.height * 0.15,
+                                ),
                               ),
                               const SizedBox(height: 5),
                               const Text('BN11MAX5JFJ67890'),
