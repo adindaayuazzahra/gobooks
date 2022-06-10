@@ -4,8 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:gobooks/pages/bookmark_page.dart';
 import 'package:gobooks/pages/main_page.dart';
 import 'package:gobooks/common/styles.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
