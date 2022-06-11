@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gobooks/pages/main_page.dart';
@@ -11,6 +12,8 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        TextEditingController emailController = TextEditingController(text: "");
+    TextEditingController passwordController = TextEditingController(text: "");
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
