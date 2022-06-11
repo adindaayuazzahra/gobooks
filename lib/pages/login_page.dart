@@ -3,12 +3,15 @@ import 'package:gobooks/pages/main_page.dart';
 import 'package:gobooks/pages/register_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:lottie/lottie.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController(text: "");
+    TextEditingController passwordController = TextEditingController(text: "");
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
