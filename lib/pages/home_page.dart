@@ -124,7 +124,6 @@ class _HomepageState extends State<Homepage> {
               ),
               SizedBox(
                 height: 180,
-                //height: size.height * 0.23,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
@@ -134,15 +133,16 @@ class _HomepageState extends State<Homepage> {
                       onTap: () {
                         Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            // return const MainPage();
-                            return const DetailBookPage();
-                          },
-                        ),
-                      );},
+                          MaterialPageRoute(
+                            builder: (context) {
+                              // return const MainPage();
+                              return const DetailBookPage();
+                              },
+                          ),
+                        );
+                        },
                     );
-                  },
+                    },
                 ),
               ),
               _buildSubHeading(

@@ -10,34 +10,18 @@ class DetailBookPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
-          title: Text(
-            'Detail Buku',
-            style: Theme.of(context).textTheme.headline6?.copyWith(
-                color: accentColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 25
-            ),
-          ),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: accentColor,
-              size: 25,
-            ),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+          title: const Text('Detail Buku'),
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: Container(
-                margin: const EdgeInsets.only(right: 8.0),
-                child: const Icon(
-                  Icons.bookmark_outline_rounded,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              )
-            )
+                onPressed: () {},
+                icon: Container(
+                  margin: const EdgeInsets.only(right: 8.0),
+                  child: const Icon(
+                    Icons.bookmark_outline_rounded,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                ))
           ],
           backgroundColor: Colors.blue.withOpacity(0),
           elevation: 0.0,
@@ -83,14 +67,10 @@ class DetailBookPage extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
-                                  Text(
-                                      'Status : ',
-                                      style: TextStyle(color: accentColor)
-                                  ),
-                                  Text(
-                                      'Tersedia',
-                                      style: TextStyle(color: Colors.green)
-                                  ),
+                                  Text('Status : ',
+                                      style: TextStyle(color: accentColor)),
+                                  Text('Tersedia',
+                                      style: TextStyle(color: Colors.green)),
                                   // Text(
                                   //     'Tidak tersedia',
                                   //     style: TextStyle(color: Colors.red)
@@ -120,17 +100,18 @@ class DetailBookPage extends StatelessWidget {
                                       'Pinjam',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black
-                                      ),
+                                          color: Colors.black),
                                       textAlign: TextAlign.center,
-                                    )
-                                ),
+                                    )),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      const VerticalDivider(color: Colors.black87, thickness: 2,),
+                      const VerticalDivider(
+                        color: Colors.black87,
+                        thickness: 2,
+                      ),
                       Expanded(
                         flex: 7,
                         child: Container(
@@ -140,35 +121,37 @@ class DetailBookPage extends StatelessWidget {
                             children: [
                               Text(
                                 'Pendidikan Matematika Dasar',
-                                style: Theme.of(context).textTheme.headline6
-                                    ?.copyWith(color: Colors.black, fontSize: 25),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    ?.copyWith(
+                                        color: Colors.black, fontSize: 25),
                                 textAlign: TextAlign.center,
                               ),
-                              Text(
-                                  'Author',
-                                  style: Theme.of(context).textTheme.headline6
-                                      ?.copyWith(color: accentColor)
-                              ),
+                              Text('Author',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(color: accentColor)),
                               const Text('Matt Ridley'),
-                              Text(
-                                  'Penerbit',
-                                  style: Theme.of(context).textTheme.headline6
-                                      ?.copyWith(color: accentColor)
-                              ),
+                              Text('Penerbit',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(color: accentColor)),
                               const Text('Matt Ridley'),
-                              Text(
-                                  'Letak Buku',
-                                  style: Theme.of(context).textTheme.headline6
-                                      ?.copyWith(color: accentColor)
-                              ),
+                              Text('Letak Buku',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(color: accentColor)),
                               const Text('Rak A103/2/4'),
                             ],
                           ),
                         ),
                       )
                     ],
-                  )
-              ),
+                  )),
               Container(
                   margin: const EdgeInsets.all(8.0),
                   padding: const EdgeInsets.all(8.0),
@@ -185,24 +168,25 @@ class DetailBookPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        'Sinopsis',
-                        style: Theme.of(context).textTheme.headline6
-                            ?.copyWith(color: accentColor),
-                      ),
-                      const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tristique et egestas quis. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Massa tincidunt nunc pulvinar sapien et ligula. Eu mi bibendum neque egestas. Convallis posuere morbi leo urna molestie at elementum. Blandit turpis cursus in hac habitasse platea dictumst quisque. Ante metus dictum at tempor commodo ullamcorper a. Et ultrices neque ornare aenean euismod. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Maecenas ultricies mi eget mauris pharetra et ultrices neque ornare. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est. Ut sem nulla pharetra diam. Accumsan lacus vel facilisis volutpat est velit egestas dui. Tempor orci eu lobortis elementum nibh.'),
-                    ],
-                  ),
-                )
-              ),
+                  child: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Sinopsis',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(color: accentColor),
+                        ),
+                        const Text(
+                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tristique et egestas quis. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Massa tincidunt nunc pulvinar sapien et ligula. Eu mi bibendum neque egestas. Convallis posuere morbi leo urna molestie at elementum. Blandit turpis cursus in hac habitasse platea dictumst quisque. Ante metus dictum at tempor commodo ullamcorper a. Et ultrices neque ornare aenean euismod. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Maecenas ultricies mi eget mauris pharetra et ultrices neque ornare. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est. Ut sem nulla pharetra diam. Accumsan lacus vel facilisis volutpat est velit egestas dui. Tempor orci eu lobortis elementum nibh.'),
+                      ],
+                    ),
+                  )),
             ],
           ),
-        )
-    );
+        ));
   }
 }
