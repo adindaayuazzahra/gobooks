@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gobooks/pages/bookmark_page.dart';
+import 'package:gobooks/pages/home_page.dart';
 import 'package:gobooks/pages/main_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,8 +37,8 @@ class GoBooks extends StatelessWidget {
             ),
         textTheme: myTextTheme,
       ),
-      //home: const WelcomePage(),
-      home: const MainPage(),
+      home: const Homepage(),
+      // home: const MainPage(),
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/home':
