@@ -7,12 +7,14 @@ import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/widgets/devider_or.dart';
 import 'package:lottie/lottie.dart';
 
+import '../data/auth_service.dart';
+
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-        TextEditingController emailController = TextEditingController(text: "");
+    TextEditingController emailController = TextEditingController(text: "");
     TextEditingController passwordController = TextEditingController(text: "");
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -65,6 +67,7 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: TextField(
+                  controller: emailController,
                   cursorColor: secdarkColor,
                   decoration: const InputDecoration(
                     icon: Icon(
@@ -87,6 +90,7 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true,
                   cursorColor: secdarkColor,
                   decoration: const InputDecoration(
@@ -111,12 +115,15 @@ class RegisterPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await AuthServices.signUp(
+                        emailController.text, passwordController.text
+                      );           
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const MainPage();
+                            return const LoginPage();
                           },
                         ),
                       );
