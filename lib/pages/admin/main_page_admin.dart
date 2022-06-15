@@ -36,7 +36,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
         ),
       ),
 
-      body: InputBook(),
+      body: const InputBook(),
 
       //drawer
       drawer: Drawer(
