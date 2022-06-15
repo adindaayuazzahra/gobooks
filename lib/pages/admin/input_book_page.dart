@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
 class InputBook extends StatefulWidget {
+  static const ROUTE_NAME = '/input_buku';
   const InputBook({Key? key}) : super(key: key);
 
   @override
@@ -12,36 +14,38 @@ class _InputBookState extends State<InputBook> {
   // final _formKey = GlobalKey<FormState>();
 
   bool status = false;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: accentColor,
-            size: 25,
-          ),
-        ),
-        title: Text(
-          'Detail Buku',
-          style: Theme.of(context)
-              .textTheme.headline6?.copyWith(
-              color: accentColor,
-              fontSize: 25,
-              fontWeight: FontWeight.bold
-          ),
-        ),
-        backgroundColor: Colors.blue.withOpacity(0),
-        elevation: 0.0,
-      ),
-      body: Container(
+    return SafeArea(
+      // backgroundColor: bgColor,
+      // appBar: AppBar(
+      //   // leading: IconButton(
+      //   //   icon: Icon(Icons.menu_sharp),
+      //   //   color: Colors.black,
+      //   //   //onPressed: () {},
+      //   //   onPressed: _openDrawer,
+      //   // ),
+      //   // leading: IconButton(
+      //   //   onPressed: () {
+      //   //     Navigator.pop(context);
+      //   //   },
+      //   //   icon: const Icon(
+      //   //     Icons.arrow_back_ios,
+      //   //     color: accentColor,
+      //   //     size: 25,
+      //   //   ),
+      //   // ),
+      //   centerTitle: true,
+      //   title: Text(
+      //     'Dashboard',
+      //     style: Theme.of(context).textTheme.headline6?.copyWith(
+      //         color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
+      //   ),
+      //   backgroundColor: Colors.blue.withOpacity(0),
+      //   elevation: 0.0,
+      // ),
+      child: Container(
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(8.0),
         height: size.height,
@@ -134,7 +138,6 @@ class _InputBookState extends State<InputBook> {
                       // },
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
@@ -152,7 +155,6 @@ class _InputBookState extends State<InputBook> {
                       // },
                     ),
                   ),
-
                   SwitchListTile(
                     title: Text('Status : ${_status(status)}'),
                     value: status,
@@ -171,7 +173,7 @@ class _InputBookState extends State<InputBook> {
                         padding: const EdgeInsets.all(8.0),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: accentColor,
+                          color: secdarkColor,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
@@ -185,12 +187,9 @@ class _InputBookState extends State<InputBook> {
                         child: const Text(
                           'Input',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                          ),
+                              fontWeight: FontWeight.bold, color: Colors.white),
                           textAlign: TextAlign.center,
-                        )
-                    ),
+                        )),
                   ),
                 ],
               ),
@@ -201,8 +200,7 @@ class _InputBookState extends State<InputBook> {
     );
   }
 
-  String _status(bool value){
+  String _status(bool value) {
     return value == true ? 'Tersedia' : 'Tidak tersedia';
   }
 }
-

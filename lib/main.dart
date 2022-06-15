@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gobooks/pages/admin/main_page_admin.dart';
+import 'package:gobooks/pages/admin/input_book_page.dart';
 import 'package:gobooks/pages/bookmark_page.dart';
 import 'package:gobooks/pages/home_page.dart';
 import 'package:gobooks/pages/main_page.dart';
@@ -28,7 +30,6 @@ class GoBooks extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: Theme.of(context).colorScheme.copyWith(
@@ -37,14 +38,16 @@ class GoBooks extends StatelessWidget {
             ),
         textTheme: myTextTheme,
       ),
-      home: const Homepage(),
-      // home: const MainPage(),
+      //home: const WelcomePage(),
+      home: const MainPageAdmin(),
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/home':
             return MaterialPageRoute(builder: (_) => const MainPage());
           case BookmarkPage.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const BookmarkPage());
+          case InputBook.ROUTE_NAME:
+            return CupertinoPageRoute(builder: (_) => const InputBook());
           default:
             return MaterialPageRoute(builder: (_) {
               return const Scaffold(
