@@ -12,7 +12,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //testing clone
   await Firebase.initializeApp();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
