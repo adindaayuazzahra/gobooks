@@ -47,6 +47,8 @@ class GoBooks extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const MainPage());
           case BookmarkPage.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const BookmarkPage());
+          case InputBook.ROUTE_NAME:
+            return CupertinoPageRoute(builder: (_) => const InputBook());
           case MainPageAdmin.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const MainPageAdmin());
           case PeminjamanPage.ROUTE_NAME:

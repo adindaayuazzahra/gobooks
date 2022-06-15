@@ -18,6 +18,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -36,7 +37,77 @@ class _MainPageAdminState extends State<MainPageAdmin> {
         ),
       ),
 
-      body: const InputBook(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(2, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  cursorColor: Colors.black,
+                  decoration: const InputDecoration(
+                    icon: Icon(
+                      Icons.search_rounded,
+                      color: secdarkColor,
+                    ),
+                    hintText: "Cari ID Buku",
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (String value) {},
+                ),
+              ),
+              const SizedBox(height: 5),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                    primary: secdarkColor,
+                    padding: EdgeInsets.symmetric(vertical: 9, horizontal: 8)),
+                onPressed: () {
+                  Navigator.pushNamed(context, InputBook.ROUTE_NAME);
+                },
+                icon: Icon(
+                  Icons.add_rounded,
+                  size: 20,
+                ),
+                label: Text('Tambah Buku',
+                    style: Theme.of(context)
+                        .textTheme
+                        .button
+                        ?.copyWith(color: Colors.white)),
+              ),
+              SizedBox(
+                height: size.height * 0.7,
+                child: ListView.builder(
+                  itemCount: 10,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Container();
+                    // return HistoryBookmarkList(
+                    //   key: const Key('rekomen_list_1'),
+                    //   onTap: () {},
+                    // );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
 
       //drawer
       drawer: Drawer(
@@ -78,43 +149,58 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                           style: Theme.of(context).textTheme.caption?.copyWith(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            height: 40,
-                            width: 130,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: secdarkColor,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.logout_rounded,
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              primary: secdarkColor,
+                              padding: EdgeInsets.all(7)),
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.logout_rounded,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                          label: Text(
+                            'Log Out',
+                            style: Theme.of(context).textTheme.button?.copyWith(
+                                  fontSize: 14,
                                   color: Colors.white,
-                                  size: 20,
                                 ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  'Log Out',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .button
-                                      ?.copyWith(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                ),
-                              ],
-                            ),
                           ),
                         ),
+                        // InkWell(
+                        //   onTap: () {},
+                        //   child: Container(
+                        //     padding: EdgeInsets.all(5),
+                        //     height: 40,
+                        //     width: 130,
+                        //     alignment: Alignment.center,
+                        //     decoration: BoxDecoration(
+                        //       color: secdarkColor,
+                        //       borderRadius: BorderRadius.circular(8),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         Icon(
+                        //           Icons.logout_rounded,
+                        //           color: Colors.white,
+                        //           size: 20,
+                        //         ),
+                        //         const SizedBox(width: 4),
+                        //         Text(
+                        //           'Log Out',
+                        //           style: Theme.of(context)
+                        //               .textTheme
+                        //               .button
+                        //               ?.copyWith(
+                        //                 fontSize: 14,
+                        //                 color: Colors.white,
+                        //               ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],

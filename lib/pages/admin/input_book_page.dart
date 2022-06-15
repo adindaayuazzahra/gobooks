@@ -3,6 +3,7 @@ import 'package:gobooks/common/styles.dart';
 import 'package:date_field/date_field.dart';
 
 class InputBook extends StatefulWidget {
+  static const ROUTE_NAME = '/input_book';
   const InputBook({Key? key}) : super(key: key);
 
   @override
@@ -16,37 +17,31 @@ class _InputBookState extends State<InputBook> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SafeArea(
-      // backgroundColor: bgColor,
-      // appBar: AppBar(
-      //   // leading: IconButton(
-      //   //   icon: Icon(Icons.menu_sharp),
-      //   //   color: Colors.black,
-      //   //   //onPressed: () {},
-      //   //   onPressed: _openDrawer,
-      //   // ),
-      //   // leading: IconButton(
-      //   //   onPressed: () {
-      //   //     Navigator.pop(context);
-      //   //   },
-      //   //   icon: const Icon(
-      //   //     Icons.arrow_back_ios,
-      //   //     color: accentColor,
-      //   //     size: 25,
-      //   //   ),
-      //   // ),
-      //   centerTitle: true,
-      //   title: Text(
-      //     'Dashboard',
-      //     style: Theme.of(context).textTheme.headline6?.copyWith(
-      //         color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
-      //   ),
-      //   backgroundColor: Colors.blue.withOpacity(0),
-      //   elevation: 0.0,
-      // ),
-      child: Container(
+    return Scaffold(
+      backgroundColor: bgColor,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: accentColor,
+            size: 25,
+          ),
+        ),
+        centerTitle: true,
+        title: Text(
+          'Tambah Buku',
+          style: Theme.of(context).textTheme.headline6?.copyWith(
+              color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.blue.withOpacity(0),
+        elevation: 0.0,
+      ),
+      body: Container(
         margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 4),
         height: size.height,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -236,31 +231,23 @@ class _InputBookState extends State<InputBook> {
                       });
                     },
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                        width: size.width * 0.35,
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(8.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: accentColor,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 3,
-                              offset: const Offset(2, 3),
-                            ),
-                          ],
-                        ),
-                        child: const Text(
-                          'Input',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                          textAlign: TextAlign.center,
-                        )),
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      primary: secdarkColor,
+                      padding: EdgeInsets.all(7),
+                    ),
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.save_rounded,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    label: Text(
+                      'Simpan',
+                      style: Theme.of(context).textTheme.button?.copyWith(
+                            color: Colors.white,
+                          ),
+                    ),
                   ),
                 ],
               ),

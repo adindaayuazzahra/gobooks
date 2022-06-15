@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/admin/input_book_page.dart';
-import 'package:gobooks/pages/admin/list_peminjaman.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
 
 class PeminjamanPage extends StatefulWidget {
@@ -136,38 +134,22 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                         SizedBox(
                           height: 12,
                         ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            height: 40,
-                            width: 130,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: secdarkColor,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.logout_rounded,
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                              primary: secdarkColor,
+                              padding: EdgeInsets.all(7)),
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.logout_rounded,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                          label: Text(
+                            'Log Out',
+                            style: Theme.of(context).textTheme.button?.copyWith(
+                                  fontSize: 14,
                                   color: Colors.white,
-                                  size: 20,
                                 ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  'Log Out',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .button
-                                      ?.copyWith(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                ),
-                              ],
-                            ),
                           ),
                         ),
                       ],
