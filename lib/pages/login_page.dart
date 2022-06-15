@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/pages/main_page.dart';
+import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/pages/register_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:lottie/lottie.dart';

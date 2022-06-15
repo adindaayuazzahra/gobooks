@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gobooks/pages/history_page.dart';
-import 'package:gobooks/pages/home_page.dart';
-import 'package:gobooks/pages/profile_page.dart';
-import 'package:gobooks/pages/search_page.dart';
+import 'package:gobooks/pages/user/history_page.dart';
+import 'package:gobooks/pages/user/home_page.dart';
+import 'package:gobooks/pages/user/profile_page.dart';
+import 'package:gobooks/pages/user/search_page.dart';
 import 'package:gobooks/common/styles.dart';
 
 class MainPage extends StatefulWidget {

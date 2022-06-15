@@ -16,19 +16,16 @@ class _MainPageAdminState extends State<MainPageAdmin> {
     _scaffoldKey.currentState!.openDrawer();
   }
 
-  int currentIndex = 0;
-  final content = [InputBook()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.menu_rounded),
+          icon: const Icon(Icons.menu_rounded),
           color: Colors.black,
           onPressed: _openDrawer,
         ),
@@ -39,7 +36,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
         ),
       ),
 
-      body: content[currentIndex],
+      body: InputBook(),
 
       //drawer
       drawer: Drawer(
@@ -134,7 +131,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         color: Colors.white,
                       ),
                       title: Text(
-                        'Input Buku',
+                        'Daftar Buku',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
                               color: Colors.white,
                             ),

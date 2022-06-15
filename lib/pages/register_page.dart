@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gobooks/pages/main_page.dart';
+import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/pages/login_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/widgets/devider_or.dart';
@@ -117,8 +117,7 @@ class RegisterPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       await AuthServices.signUp(
-                        emailController.text, passwordController.text
-                      );           
+                          emailController.text, passwordController.text);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

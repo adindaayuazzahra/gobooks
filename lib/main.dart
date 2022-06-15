@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:gobooks/pages/admin/Daftar_Peminjaman_page.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
 import 'package:gobooks/pages/admin/input_book_page.dart';
-import 'package:gobooks/pages/bookmark_page.dart';
-import 'package:gobooks/pages/home_page.dart';
-import 'package:gobooks/pages/main_page.dart';
+import 'package:gobooks/pages/user/bookmark_page.dart';
+import 'package:gobooks/pages/user/home_page.dart';
+import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
 
