@@ -131,9 +131,6 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                           style: Theme.of(context).textTheme.caption?.copyWith(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
                         ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                               primary: secdarkColor,
