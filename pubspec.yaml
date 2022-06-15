@@ -23,6 +23,8 @@ dependencies:
   firebase_database: ^9.0.15
   provider: ^6.0.3
   google_sign_in: ^5.3.3
+  firebase_storage: ^10.2.17
+  file_picker: ^4.6.1
 
 dev_dependencies:
   flutter_test:
