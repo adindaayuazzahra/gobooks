@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
 class InputBook extends StatefulWidget {
-  static const ROUTE_NAME = '/input_buku';
   const InputBook({Key? key}) : super(key: key);
 
   @override

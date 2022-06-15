@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/admin/Daftar_Peminjaman_page.dart';
 import 'package:gobooks/pages/admin/input_book_page.dart';
+import 'package:gobooks/pages/admin/main_page_admin.dart';
 
-class MainPageAdmin extends StatefulWidget {
-  const MainPageAdmin({Key? key}) : super(key: key);
-  static const ROUTE_NAME = '/input_buku';
+class PeminjamanPage extends StatefulWidget {
+  static const ROUTE_NAME = '/list_peminjaman';
+  const PeminjamanPage({Key? key}) : super(key: key);
+
   @override
-  State<MainPageAdmin> createState() => _MainPageAdminState();
+  State<PeminjamanPage> createState() => _PeminjamanPageState();
 }
 
-class _MainPageAdminState extends State<MainPageAdmin> {
+class _PeminjamanPageState extends State<PeminjamanPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   void _openDrawer() {
     _scaffoldKey.currentState!.openDrawer();
   }
 
-  int currentIndex = 0;
-  final content = [InputBook()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +37,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
               color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
-
-      body: content[currentIndex],
 
       //drawer
       drawer: Drawer(
@@ -140,7 +137,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                             ),
                       ),
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, MainPageAdmin.ROUTE_NAME);
                       },
                     ),
                     SizedBox(height: 16),
@@ -156,7 +153,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                             ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, PeminjamanPage.ROUTE_NAME);
+                        Navigator.pop(context);
                       },
                     ),
                   ],
