@@ -165,7 +165,7 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                         color: Colors.white,
                       ),
                       title: Text(
-                        'Input Buku',
+                        'Daftar Buku',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
                               color: Colors.white,
                             ),
