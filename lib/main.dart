@@ -5,7 +5,6 @@ import 'package:gobooks/pages/admin/Daftar_Peminjaman_page.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
 import 'package:gobooks/pages/admin/input_book_page.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
-import 'package:gobooks/pages/user/home_page.dart';
 import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +25,6 @@ void main() async {
 class GoBooks extends StatelessWidget {
   const GoBooks({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,7 +37,7 @@ class GoBooks extends StatelessWidget {
             ),
         textTheme: myTextTheme,
       ),
-      //home: const WelcomePage(),
+      // home: const WelcomePage(),
       home: const MainPageAdmin(),
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
