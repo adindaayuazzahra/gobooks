@@ -35,7 +35,7 @@ class BookmarkPage extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return BookmarkList(
-            key: const Key('rekomen_list_1'),
+            key: const Key('bookmark_list'),
             onTap: () {},
           );
         },

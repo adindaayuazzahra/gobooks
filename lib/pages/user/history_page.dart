@@ -79,7 +79,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return HistoryBookmarkList(
-                    key: const Key('rekomen_list_1'),
+                    key: const Key('history_list_1'),
                     onTap: () {},
                   );
                 },
