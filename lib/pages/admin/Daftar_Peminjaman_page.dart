@@ -75,7 +75,7 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
               ),
             ),
             SizedBox(
-              height: size.height * 0.7,
+              height: size.height * 0.8,
               child: ListView.builder(
                 itemCount: 10,
                 shrinkWrap: true,

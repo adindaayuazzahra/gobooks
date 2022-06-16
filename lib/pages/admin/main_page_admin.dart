@@ -69,7 +69,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                           Icons.search_rounded,
                           color: secdarkColor,
                         ),
-                        hintText: "Cari ID Buku",
+                        hintText: "Cari Nomor Buku",
                         border: InputBorder.none,
                       ),
                       onChanged: (String value) {},
@@ -97,7 +97,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
               ),
             ),
             SizedBox(
-              height: size.height * 0.7,
+              height: size.height * 0.735,
               child: ListView.builder(
                 itemCount: 10,
                 shrinkWrap: true,
