@@ -38,78 +38,74 @@ class _MainPageAdminState extends State<MainPageAdmin> {
       ),
 
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-              child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset:
-                              const Offset(2, 3), // changes position of shadow
-                        ),
-                      ],
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(2, 3), // changes position of shadow
                     ),
-                    child: TextField(
-                      cursorColor: Colors.black,
-                      decoration: const InputDecoration(
-                        icon: Icon(
-                          Icons.search_rounded,
-                          color: secdarkColor,
-                        ),
-                        hintText: "Cari Nomor Buku",
-                        border: InputBorder.none,
-                      ),
-                      onChanged: (String value) {},
-                    ),
-                  ),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        primary: secdarkColor,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 9, horizontal: 8)),
-                    onPressed: () {
-                      Navigator.pushNamed(context, InputBook.ROUTE_NAME);
-                    },
+                  ],
+                ),
+                child: TextField(
+                  cursorColor: Colors.black,
+                  decoration: const InputDecoration(
                     icon: Icon(
-                      Icons.add_rounded,
-                      size: 20,
+                      Icons.search_rounded,
+                      color: secdarkColor,
                     ),
-                    label: Text('Tambah Buku',
-                        style: Theme.of(context)
-                            .textTheme
-                            .button
-                            ?.copyWith(color: Colors.white)),
+                    hintText: "Cari ID Buku",
+                    border: InputBorder.none,
                   ),
-                ],
+                  onChanged: (String value) {},
+                ),
               ),
-            ),
-            SizedBox(
-              height: size.height * 0.735,
-              child: ListView.builder(
-                itemCount: 10,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ListBuku(
-                    key: const Key('List_Buku_1'),
-                    onTap: () {},
-                  );
+              const SizedBox(height: 5),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                    primary: secdarkColor,
+                    padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 8)),
+                onPressed: () {
+                  Navigator.pushNamed(context, InputBook.ROUTE_NAME);
                 },
+                icon: const Icon(
+                  Icons.add_rounded,
+                  size: 20,
+                ),
+                label: Text('Tambah Buku',
+                    style: Theme.of(context)
+                        .textTheme
+                        .button
+                        ?.copyWith(color: Colors.white)),
               ),
-            ),
-          ],
+              SizedBox(
+                height: size.height * 0.7,
+                child: ListView.builder(
+                  itemCount: 10,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Container();
+                    // return HistoryBookmarkList(
+                    //   key: const Key('rekomen_list_1'),
+                    //   onTap: () {},
+                    // );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
 
@@ -122,7 +118,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(color: secLightColor),
-                padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                 child: Row(
                   children: <Widget>[
                     ClipOval(
@@ -136,7 +132,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -156,9 +152,9 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                               primary: secdarkColor,
-                              padding: EdgeInsets.all(7)),
+                              padding: const EdgeInsets.all(7)),
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.logout_rounded,
                             color: Colors.white,
                             size: 20,
@@ -171,18 +167,52 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                 ),
                           ),
                         ),
+                        // InkWell(
+                        //   onTap: () {},
+                        //   child: Container(
+                        //     padding: EdgeInsets.all(5),
+                        //     height: 40,
+                        //     width: 130,
+                        //     alignment: Alignment.center,
+                        //     decoration: BoxDecoration(
+                        //       color: secdarkColor,
+                        //       borderRadius: BorderRadius.circular(8),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         Icon(
+                        //           Icons.logout_rounded,
+                        //           color: Colors.white,
+                        //           size: 20,
+                        //         ),
+                        //         const SizedBox(width: 4),
+                        //         Text(
+                        //           'Log Out',
+                        //           style: Theme.of(context)
+                        //               .textTheme
+                        //               .button
+                        //               ?.copyWith(
+                        //                 fontSize: 14,
+                        //                 color: Colors.white,
+                        //               ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ListTile(
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.menu_book_rounded,
                         color: Colors.white,
                       ),
@@ -196,9 +226,9 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         Navigator.pop(context);
                       },
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ListTile(
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.group,
                         color: Colors.white,
                       ),
@@ -211,139 +241,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                       onTap: () {
                         Navigator.pushNamed(context, PeminjamanPage.ROUTE_NAME);
                       },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ListBuku extends StatelessWidget {
-  final Function() onTap;
-  const ListBuku({
-    Key? key,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        //color: secLightColor,
-        elevation: 7,
-        margin: const EdgeInsets.fromLTRB(15, 0, 15, 13),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/image/cover_book.jpg',
-                  fit: BoxFit.cover,
-                  //width: size.width * 0.25,
-                  width: 80,
-                  height: 80,
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(
-                              'Pendidikan Matematika Dasar',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: accentColor,
-                                    fontSize: 14,
-                                  ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Penulis',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                ?.copyWith(fontSize: 12),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'No. Buku : XO983874GH',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                ?.copyWith(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    //untuk keterangan dipinjam
-                    Column(
-                      children: [
-                        //Untuk tulisan tersedia dan tidak tersedia
-                        Text(
-                          'Tersedia',
-                          style:
-                              Theme.of(context).textTheme.bodyText2?.copyWith(
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.green,
-                                    fontSize: 12,
-                                  ),
-                        ),
-                        // Text(
-                        //   'Tidak Tersedia',
-                        //   style: Theme.of(context)
-                        //       .textTheme
-                        //       .bodyText2
-                        //       ?.copyWith(
-                        //           fontWeight: FontWeight.w300,
-                        //           color: Colors.red,
-                        //           fontSize: 12),
-                        // ),
-
-                        //tombol edit di arahkan ke halaman input buku untuk mengedit detail buku
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            primary: secdarkColor,
-                          ),
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                            size: 10,
-                          ),
-                          label: Text(
-                            'Edit',
-                            style: Theme.of(context).textTheme.button?.copyWith(
-                                  fontSize: 13,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),

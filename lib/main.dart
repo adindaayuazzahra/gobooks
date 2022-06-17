@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gobooks/pages/admin/Daftar_Peminjaman_page.dart';
+import 'package:gobooks/pages/admin/list_of_books.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
 import 'package:gobooks/pages/admin/input_book_page.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:gobooks/pages/welcome_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +20,7 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
     systemNavigationBarColor: bgColor,
   ));
-  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const GoBooks());
 }
 
@@ -37,8 +39,12 @@ class GoBooks extends StatelessWidget {
             ),
         textTheme: myTextTheme,
       ),
-      // home: const WelcomePage(),
+      // home: const WelcomePage(), => yang utama
+      // home: const InputBook(),
+      // home: const HomePage(),
       home: const MainPageAdmin(),
+      // home: const MainPage(),
+
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/home':
