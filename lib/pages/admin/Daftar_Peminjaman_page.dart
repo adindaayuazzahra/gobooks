@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
+import 'package:gobooks/widgets/booking_list.dart';
+
+import '../../widgets/history_bookmark_list.dart';
 
 class PeminjamanPage extends StatefulWidget {
   static const ROUTE_NAME = '/list_peminjaman';
@@ -11,6 +15,9 @@ class PeminjamanPage extends StatefulWidget {
 }
 
 class _PeminjamanPageState extends State<PeminjamanPage> {
+
+  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+
   String queries = '';
   final TextEditingController _searchControl = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -28,7 +35,7 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.menu_rounded),
+          icon: const Icon(Icons.menu_rounded),
           color: Colors.black,
           onPressed: _openDrawer,
         ),
@@ -75,14 +82,41 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
               ),
             ),
             SizedBox(
-              height: size.height * 0.8,
-              child: ListView.builder(
-                itemCount: 10,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ListPeminjaman(
-                    key: const Key('list_pinjam_1'),
-                    onTap: () {},
+              height: size.height * 0.7,
+              // child: ListView.builder(
+              //   itemCount: 10,
+              //   shrinkWrap: true,
+              //   itemBuilder: (context, index) {
+              //     // // return Container();
+              //     return HistoryBookmarkList(
+              //       key: const Key('rekomen_list_1'),
+              //       onTap: () {},
+              //     );
+              //   },
+              // ),
+              child: StreamBuilder(
+                stream: _books.snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  if (streamSnapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: streamSnapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final DocumentSnapshot documentSnapshot =
+                        streamSnapshot.data!.docs[index];
+                        return Container(
+                          padding: const EdgeInsets.all(8.0),
+                          child: BookingList(
+                            onTap: () {},
+                            imageUrl: documentSnapshot['bookUrl'],
+                            bookTitle: documentSnapshot['bookTitle'],
+                            bookLocation: documentSnapshot['bookLocation'],
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
                 },
               ),
@@ -91,7 +125,6 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
         ),
       ),
       //drawer
-
       drawer: Drawer(
         child: Material(
           color: accentColor,
@@ -100,7 +133,7 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(color: secLightColor),
-                padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                 child: Row(
                   children: <Widget>[
                     ClipOval(
@@ -114,7 +147,7 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -134,9 +167,9 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                         ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                               primary: secdarkColor,
-                              padding: EdgeInsets.all(7)),
+                              padding: const EdgeInsets.all(7)),
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.logout_rounded,
                             color: Colors.white,
                             size: 20,
@@ -155,12 +188,12 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ListTile(
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.menu_book_rounded,
                         color: Colors.white,
                       ),
@@ -174,9 +207,9 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                         Navigator.pushNamed(context, MainPageAdmin.ROUTE_NAME);
                       },
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ListTile(
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.group,
                         color: Colors.white,
                       ),
@@ -204,144 +237,5 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
   void dispose() {
     _searchControl.dispose();
     super.dispose();
-  }
-}
-
-class ListPeminjaman extends StatelessWidget {
-  final Function() onTap;
-  const ListPeminjaman({
-    Key? key,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        //color: secLightColor,
-        elevation: 7,
-        margin: const EdgeInsets.fromLTRB(15, 0, 15, 13),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/image/cover_book.jpg',
-                  fit: BoxFit.cover,
-                  //width: size.width * 0.25,
-                  width: 80,
-                  height: 80,
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(
-                              'Pendidikan Matematika Dasar',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: accentColor,
-                                    fontSize: 14,
-                                  ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'No Booking : 2100AB',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                ?.copyWith(fontSize: 12),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Batas Pinjam 2/12/22',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                ?.copyWith(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    //untuk keterangan dipinjam
-                    Column(
-                      children: [
-                        // Untuk Keterangan tepat waktu
-                        // Text(
-                        //   'Tepat Waktu',
-                        //   style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        //         fontWeight: FontWeight.w300,
-                        //         color: Colors.green,
-                        //         fontSize: 12,
-                        //       ),
-                        // ),
-
-                        //untuk keterangan terlambat
-                        // Text(
-                        //   'Terlambat',
-                        //   style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        //       fontWeight: FontWeight.w300,
-                        //       color: Colors.red,
-                        //       fontSize: 12),
-                        // ),
-                        Text(
-                          'Dipinjam',
-                          style:
-                              Theme.of(context).textTheme.bodyText2?.copyWith(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 12,
-                                  ),
-                        ),
-
-                        //tombol edit status
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            primary: secdarkColor,
-                          ),
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                            size: 10,
-                          ),
-                          label: Text(
-                            'Edit',
-                            style: Theme.of(context).textTheme.button?.copyWith(
-                                  fontSize: 13,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
