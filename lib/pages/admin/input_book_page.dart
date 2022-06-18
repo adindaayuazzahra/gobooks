@@ -18,11 +18,10 @@ class _InputBookState extends State<InputBook> {
   final TextEditingController _idController = TextEditingController();
   // bool or false
   // final TextEditingController _isBookedController = TextEditingController();
-  late bool _isAvailable;
+  bool _isAvailable = false;
 
   final TextEditingController _publisherController = TextEditingController();
   final TextEditingController _ratingController = TextEditingController();
-  final TextEditingController _releaseDateController = TextEditingController();
   final TextEditingController _synopsisController = TextEditingController();
 
   final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
