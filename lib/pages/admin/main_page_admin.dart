@@ -537,7 +537,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
           });
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              content: Text('Anda telah berhasil memperbarui buku.')
+              content: Text('Anda telah berhasil memperbaharui buku.')
           )
       );
     }
