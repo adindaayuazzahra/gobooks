@@ -327,7 +327,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                     ),
                     centerTitle: true,
                     title: Text(
-                      'Tambah Buku',
+                      'Perbaharui Buku',
                       style: Theme.of(context).textTheme.headline6?.copyWith(
                           color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
                     ),
