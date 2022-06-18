@@ -17,7 +17,8 @@ class _InputBookState extends State<InputBook> {
   final TextEditingController _bookUrlController = TextEditingController();
   final TextEditingController _idController = TextEditingController();
   // bool or false
-  final TextEditingController _isBookedController = TextEditingController();
+  // final TextEditingController _isBookedController = TextEditingController();
+  late bool _isAvailable;
 
   final TextEditingController _publisherController = TextEditingController();
   final TextEditingController _ratingController = TextEditingController();
@@ -26,8 +27,7 @@ class _InputBookState extends State<InputBook> {
 
   final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
 
-  DateTime? selectedDate;
-  bool status = false;
+  late bool status;
 
   @override
   Widget build(BuildContext context) {
@@ -113,12 +113,6 @@ class _InputBookState extends State<InputBook> {
                               borderRadius: BorderRadius.circular(5.0)
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Judul Tidak boleh kosong';
-                          }
-                          return null;
-                        },
                       ),
                     ),
                     Padding(
@@ -136,42 +130,6 @@ class _InputBookState extends State<InputBook> {
                         ),
                       ),
                     ),
-
-// Hanya jam
-// DateTimeFormField(
-//   decoration: const InputDecoration(
-//     hintStyle: TextStyle(color: Colors.black45),
-//     errorStyle: TextStyle(color: Colors.redAccent),
-//     border: OutlineInputBorder(),
-//     suffixIcon: Icon(Icons.event_note),
-//     labelText: 'Only time',
-//   ),
-//   mode: DateTimeFieldPickerMode.time,
-//   autovalidateMode: AutovalidateMode.always,
-//   validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-//   onDateSelected: (DateTime value) {
-//     print(value);
-//   },
-// ),
-
-// Tanggal dan waktu
-// Padding(
-//   padding: const EdgeInsets.all(8.0),
-//   child: DateTimeField(
-//       decoration: InputDecoration(
-//         icon: const Icon(Icons.date_range),
-//         hintText: 'Tanggal',
-//         border: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(5.0)),
-//       ),
-//       selectedDate: selectedDate,
-//       onDateSelected: (DateTime value) {
-//         setState(() {
-//           selectedDate = value;
-//         });
-//       }),
-// ),
-
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
@@ -241,6 +199,18 @@ class _InputBookState extends State<InputBook> {
                         ),
                       ),
                     ),
+
+                    SwitchListTile(
+                      title: Text('Status : ${_status(status)}'),
+                      value: status,
+                      activeColor: secdarkColor,
+                      onChanged: (value) {
+                        setState(() {
+                          _isAvailable = value;
+                        });
+                      },
+                    ),
+
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         primary: secdarkColor,
@@ -255,6 +225,7 @@ class _InputBookState extends State<InputBook> {
                         final String publisher = _publisherController.text;
                         final String bookLocation = _bookLocationController.text;
                         final String synopsis = _synopsisController.text;
+                        final bool isBooked = _isAvailable;
 
                         _books.add({
                           "id" : id,
@@ -264,7 +235,8 @@ class _InputBookState extends State<InputBook> {
                           "bookAuthor": author,
                           "publisher": publisher,
                           "bookLocation": bookLocation,
-                          "synopsis": synopsis
+                          "synopsis": synopsis,
+                          "isBooked": isBooked
                         });
 
                         _idController.text = "";
@@ -275,6 +247,7 @@ class _InputBookState extends State<InputBook> {
                         _publisherController.text = "";
                         _bookLocationController.text = "";
                         _synopsisController.text = "";
+                        _isAvailable = false;
 
                       },
                       icon: const Icon(
@@ -303,180 +276,3 @@ class _InputBookState extends State<InputBook> {
     return value == true ? 'Tersedia' : 'Tidak tersedia';
   }
 }
-
-//
-// class HomePage extends StatefulWidget {
-//   const HomePage({Key? key}) : super(key: key);
-//
-//   @override
-//   _HomePageState createState() => _HomePageState();
-// }
-//
-// class _HomePageState extends State<HomePage> {
-//
-//   final TextEditingController _nameController = TextEditingController();
-//   final TextEditingController _priceController = TextEditingController();
-//
-//   final CollectionReference _products = FirebaseFirestore.instance.collection('Book');
-//
-//   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
-//
-//     await showModalBottomSheet(
-//         isScrollControlled: true,
-//         context: context,
-//         builder: (BuildContext ctx) {
-//           return Padding(
-//             padding: EdgeInsets.only(
-//                 top: 20,
-//                 left: 20,
-//                 right: 20,
-//                 bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-//             child: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 TextField(
-//                   controller: _nameController,
-//                   decoration: const InputDecoration(labelText: 'Name'),
-//                 ),
-//                 TextField(
-//                   keyboardType:
-//                   const TextInputType.numberWithOptions(decimal: true),
-//                   controller: _priceController,
-//                   decoration: const InputDecoration(
-//                     labelText: 'Price',
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 20,
-//                 ),
-//                 ElevatedButton(
-//                   child: const Text('Create'),
-//                   onPressed: () async {
-//                     final String name = _nameController.text;
-//                     final double? price =
-//                     double.tryParse(_priceController.text);
-//                     if (price != null) {
-//                       await _products.add({"name": name, "price": price});
-//
-//                       _nameController.text = '';
-//                       _priceController.text = '';
-//                       Navigator.of(context).pop();
-//                     }
-//                   },
-//                 )
-//               ],
-//             ),
-//           );
-//
-//         });
-//   }
-//
-//   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
-//     if (documentSnapshot != null) {
-//
-//       _nameController.text = documentSnapshot['name'];
-//       _priceController.text = documentSnapshot['price'].toString();
-//     }
-//
-//     await showModalBottomSheet(
-//         isScrollControlled: true,
-//         context: context,
-//         builder: (BuildContext ctx) {
-//           return Padding(
-//             padding: EdgeInsets.only(
-//                 top: 20,
-//                 left: 20,
-//                 right: 20,
-//                 bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-//             child: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 TextField(
-//                   controller: _nameController,
-//                   decoration: const InputDecoration(labelText: 'Name'),
-//                 ),
-//                 TextField(
-//                   keyboardType:
-//                   const TextInputType.numberWithOptions(decimal: true),
-//                   controller: _priceController,
-//                   decoration: const InputDecoration(
-//                     labelText: 'Price',
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 20,
-//                 ),
-//                 ElevatedButton(
-//                   child: const Text( 'Update'),
-//                   onPressed: () async {
-//                     final String name = _nameController.text;
-//                     final double? price =
-//                     double.tryParse(_priceController.text);
-//                     if (price != null) {
-//
-//                       await _products
-//                           .doc(documentSnapshot!.id)
-//                           .update({"name": name, "price": price});
-//                       _nameController.text = '';
-//                       _priceController.text = '';
-//                       Navigator.of(context).pop();
-//                     }
-//                   },
-//                 )
-//               ],
-//             ),
-//           );
-//         });
-//   }
-//
-//   Future<void> _delete(String productId) async {
-//     await _products.doc(productId).delete();
-//
-//     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-//         content: Text('You have successfully deleted a product')));
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Center(child: Text('Firebase Firestore')),
-//       ),
-//       body: StreamBuilder(
-//         stream: _products.snapshots(),
-//         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-//           if (streamSnapshot.hasData) {
-//             return ListView.builder(
-//               itemCount: streamSnapshot.data!.docs.length,
-//               itemBuilder: (context, index) {
-//                 final DocumentSnapshot documentSnapshot =
-//                 streamSnapshot.data!.docs[index];
-//                 return Card(
-//                   margin: const EdgeInsets.all(10),
-//                   child: ListTile(
-//                     title: Text(documentSnapshot['bookTitle']),
-//                     subtitle: Text(documentSnapshot['bookAuthor'].toString()),
-//                   ),
-//                 );
-//               },
-//             );
-//           }
-//
-//           return const Center(
-//             child: CircularProgressIndicator(),
-//           );
-//         },
-//       ),
-//
-//       // Add new product
-//       // floatingActionButton: FloatingActionButton(
-//       //   onPressed: () => _create(),
-//       //   child: const Icon(Icons.add),
-//       //
-//       // ),
-//       // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
-//     );
-//   }
-// }

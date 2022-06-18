@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/admin/Daftar_Peminjaman_page.dart';
+import 'package:gobooks/pages/admin/booking_list_page.dart';
 import 'package:gobooks/pages/admin/input_book_page.dart';
+
+import '../../widgets/booking_list.dart';
 
 class MainPageAdmin extends StatefulWidget {
   const MainPageAdmin({Key? key}) : super(key: key);
@@ -16,9 +19,362 @@ class _MainPageAdminState extends State<MainPageAdmin> {
     _scaffoldKey.currentState!.openDrawer();
   }
 
+  final TextEditingController _bookAuthorController = TextEditingController();
+  final TextEditingController _bookLocationController = TextEditingController();
+  final TextEditingController _bookTitleController = TextEditingController();
+  final TextEditingController _bookUrlController = TextEditingController();
+  final TextEditingController _idController = TextEditingController();
+  late bool _isAvailable = false;
+
+  final TextEditingController _publisherController = TextEditingController();
+  final TextEditingController _ratingController = TextEditingController();
+  final TextEditingController _synopsisController = TextEditingController();
+
+  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    // Fungsi untuk menambahkan buku
+    Future<void> _create() async {
+      await showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext ctx) {
+            return MaterialApp(
+              theme: ThemeData(
+                colorScheme: Theme.of(context).colorScheme.copyWith(
+                  primary: accentColor,
+                ),
+                textTheme: myTextTheme,
+              ),
+              home: Scaffold(
+                  backgroundColor: bgColor,
+                  appBar: AppBar(
+                    foregroundColor: Colors.black,
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: accentColor,
+                        size: 25,
+                      ),
+                    ),
+                    centerTitle: true,
+                    title: Text(
+                      'Tambah Buku',
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                          color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    backgroundColor: Colors.blue.withOpacity(0),
+                    elevation: 0.0,
+                  ),
+                  body: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    height: size.height,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(2, 3),
+                        ),
+                      ],
+                    ),
+                    child: Form(
+                      child: SingleChildScrollView(
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _idController,
+
+                                  decoration: InputDecoration(
+                                    labelText: "ID Buku",
+                                    icon: const Icon(Icons.numbers),
+
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _bookTitleController,
+
+                                  decoration: InputDecoration(
+                                    labelText: "Judul Buku",
+                                    icon: const Icon(Icons.book),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0)
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return 'Judul Tidak boleh kosong';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _ratingController,
+                                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+
+                                  decoration: InputDecoration(
+                                    labelText: "Rating Buku",
+                                    icon: const Icon(Icons.star_border),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0)
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _bookUrlController,
+
+                                  decoration: InputDecoration(
+                                    labelText: "URL Buku",
+                                    icon: const Icon(Icons.link),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _bookAuthorController,
+
+                                  decoration: InputDecoration(
+                                    labelText: "Author",
+                                    icon: const Icon(Icons.people),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _publisherController,
+
+                                  decoration: InputDecoration(
+                                    labelText: "Penerbit Buku",
+                                    icon: const Icon(Icons.published_with_changes),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _bookLocationController,
+
+                                  decoration: InputDecoration(
+                                    labelText: "Letak Buku",
+                                    icon: const Icon(Icons.library_books_sharp),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _synopsisController,
+
+                                  decoration: InputDecoration(
+                                    labelText: "Sinopsis",
+                                    icon: const Icon(Icons.library_books_sharp),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ),
+
+                              SwitchListTile(
+                                title: Text('Status : ${_status(_isAvailable)}'),
+                                value: _isAvailable,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isAvailable = value;
+                                  });
+                                },
+                                activeTrackColor: secdarkColor,
+                                activeColor: accentColor,
+                              ),
+
+                              ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                  primary: secdarkColor,
+                                  padding: const EdgeInsets.all(7),
+                                ),
+                                onPressed: () {
+                                  final String id = _idController.text;
+                                  final String bookTitle = _bookTitleController.text;
+                                  final double? rating = double.tryParse(_ratingController.text);
+                                  final String bookUrl = _bookUrlController.text;
+                                  final String author = _bookAuthorController.text;
+                                  final String publisher = _publisherController.text;
+                                  final String bookLocation = _bookLocationController.text;
+                                  final String synopsis = _synopsisController.text;
+                                  final bool isAvailable = _isAvailable;
+
+                                  _books.add({
+                                    "id" : id,
+                                    "bookTitle": bookTitle,
+                                    "rating": rating,
+                                    "bookUrl": bookUrl,
+                                    "bookAuthor": author,
+                                    "publisher": publisher,
+                                    "bookLocation": bookLocation,
+                                    "synopsis": synopsis,
+                                    "isBooked": isAvailable
+                                  });
+
+                                  _idController.text = "";
+                                  _bookTitleController.text = "";
+                                  _ratingController.text = "";
+                                  _bookUrlController.text = "";
+                                  _bookAuthorController.text = "";
+                                  _publisherController.text = "";
+                                  _bookLocationController.text = "";
+                                  _synopsisController.text = "";
+                                  _isAvailable = false;
+
+                                },
+                                icon: const Icon(
+                                  Icons.save_rounded,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                                label: Text(
+                                  'Simpan',
+                                  style: Theme.of(context).textTheme.button?.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+              ),
+            );
+          });
+    }
+
+    //Update Informasi Buku
+    Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
+      if (documentSnapshot != null) {
+
+        _idController.text = documentSnapshot['id'];
+        _bookTitleController.text = documentSnapshot['bookTitle'];
+        _ratingController.text = documentSnapshot['rating'].toString();
+        _bookUrlController.text = documentSnapshot['bookUrl'];
+        _bookAuthorController.text = documentSnapshot['bookAuthor'];
+        _publisherController.text = documentSnapshot['publisher'];
+        _bookLocationController.text = documentSnapshot['bookLocation'];
+        _synopsisController.text = documentSnapshot['synopsis'];
+        _isAvailable = documentSnapshot['isBooked'];
+      }
+
+      await showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext ctx) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                  right: 20,
+                  bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextField(
+                    controller: _idController,
+                    decoration: const InputDecoration(labelText: 'ID Buku'),
+                  ),
+                  TextField(
+                    keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                    controller: _ratingController,
+                    decoration: const InputDecoration(labelText: 'Rating'),
+                  ),
+                  TextField(
+                    controller: _bookUrlController,
+                    decoration: const InputDecoration(labelText: 'URL Buku'),
+                  ),
+                  TextField(
+                    controller: _bookLocationController,
+                    decoration: const InputDecoration(labelText: 'Lokasi Buku'),
+                  ),
+                  SwitchListTile(
+                    title: Text('Status : ${_status(_isAvailable)}'),
+                    value: _isAvailable,
+                    activeColor: secdarkColor,
+                    onChanged: (value) {
+                      setState(() {
+                        _isAvailable = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // ElevatedButton(
+                  //   child: const Text( 'Update'),
+                  //   onPressed: () async {
+                  //     final String id = _idController.text;
+                  //     final String bookUrl = _bookUrlController.text;
+                  //     final bool isBooked = _isAvailable;
+                  //     final double? rating = double.tryParse(_ratingController.text);
+                  //
+                  //   //   if (price != null) {
+                  //   //     await _products
+                  //   //         .doc(documentSnapshot!.id)
+                  //   //         .update({"name": name, "price": price});
+                  //   //     _nameController.text = '';
+                  //   //     _priceController.text = '';
+                  //   //     Navigator.of(context).pop();
+                  //   //   }
+                  //   // },
+                  // )
+                ],
+              ),
+            );
+          });
+    }
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -36,6 +392,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
               color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _create(),
+          child: const Icon(Icons.add),
+        ),
 
       body: SingleChildScrollView(
         child: Padding(
@@ -43,64 +403,77 @@ class _MainPageAdminState extends State<MainPageAdmin> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: const Offset(2, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: TextField(
-                  cursorColor: Colors.black,
-                  decoration: const InputDecoration(
-                    icon: Icon(
-                      Icons.search_rounded,
-                      color: secdarkColor,
-                    ),
-                    hintText: "Cari ID Buku",
-                    border: InputBorder.none,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: const Offset(2, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
-                  onChanged: (String value) {},
+                  child: TextField(
+                    cursorColor: Colors.black,
+                    decoration: const InputDecoration(
+                      icon: Icon(
+                        Icons.search_rounded,
+                        color: secdarkColor,
+                      ),
+                      hintText: "Cari id Buku",
+                      border: InputBorder.none,
+                    ),
+                    onChanged: (String value) {},
+                  ),
                 ),
               ),
               const SizedBox(height: 5),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                    primary: secdarkColor,
-                    padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 8)),
-                onPressed: () {
-                  Navigator.pushNamed(context, InputBook.ROUTE_NAME);
-                },
-                icon: const Icon(
-                  Icons.add_rounded,
-                  size: 20,
-                ),
-                label: Text('Tambah Buku',
-                    style: Theme.of(context)
-                        .textTheme
-                        .button
-                        ?.copyWith(color: Colors.white)),
-              ),
+              // ElevatedButton.icon(
+              //   style: ElevatedButton.styleFrom(
+              //       primary: secdarkColor,
+              //       padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 8)),
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, InputBook.ROUTE_NAME);
+              //   },
+              //   icon: const Icon(
+              //     Icons.add_rounded,
+              //     size: 20,
+              //   ),
+              //   label: Text('Tambah Buku',
+              //       style: Theme.of(context)
+              //           .textTheme
+              //           .button
+              //           ?.copyWith(color: Colors.white)),
+              // ),
               SizedBox(
                 height: size.height * 0.7,
-                child: ListView.builder(
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Container();
-                    // return HistoryBookmarkList(
-                    //   key: const Key('rekomen_list_1'),
-                    //   onTap: () {},
-                    // );
+                child: StreamBuilder(
+                  stream: _books.snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    if (streamSnapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: streamSnapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                          return BookingList(
+                            onTap: () {},
+                            documentSnapshot: documentSnapshot,
+                            update: _update,
+                          );
+                        },
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   },
                 ),
               ),
@@ -239,7 +612,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                             ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, PeminjamanPage.ROUTE_NAME);
+                        Navigator.pushNamed(context, BookingPage.ROUTE_NAME);
                       },
                     ),
                   ],
@@ -251,4 +624,9 @@ class _MainPageAdminState extends State<MainPageAdmin> {
       ),
     );
   }
+
+  String _status(bool value) {
+    return value == true ? 'Tersedia' : 'Tidak tersedia';
+  }
 }
+

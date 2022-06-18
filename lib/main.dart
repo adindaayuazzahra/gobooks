@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gobooks/pages/admin/Daftar_Peminjaman_page.dart';
+import 'package:gobooks/pages/admin/booking_list_page.dart';
 import 'package:gobooks/pages/admin/list_of_books.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
 import 'package:gobooks/pages/admin/input_book_page.dart';
@@ -55,8 +55,8 @@ class GoBooks extends StatelessWidget {
             return CupertinoPageRoute(builder: (_) => const InputBook());
           case MainPageAdmin.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const MainPageAdmin());
-          case PeminjamanPage.ROUTE_NAME:
-            return CupertinoPageRoute(builder: (_) => const PeminjamanPage());
+          case BookingPage.ROUTE_NAME:
+            return CupertinoPageRoute(builder: (_) => const BookingPage());
           default:
             return MaterialPageRoute(builder: (_) {
               return const Scaffold(
