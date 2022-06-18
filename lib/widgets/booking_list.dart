@@ -1,19 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
 class BookingList extends StatelessWidget {
   final Function() onTap;
-  final String imageUrl;
-  final String bookTitle;
-  final String bookLocation;
-
+  final Function() update;
+  final DocumentSnapshot documentSnapshot;
 
   const BookingList({
     Key? key,
     required this.onTap,
-    required this.imageUrl,
-    required this.bookTitle,
-    required this.bookLocation
+    required this.update,
+    required this.documentSnapshot
   }) : super(key: key);
 
   @override
@@ -34,7 +32,8 @@ class BookingList extends StatelessWidget {
               children: [
                 // ClipRRect(
                 //   borderRadius: BorderRadius.circular(8),
-                //   child: Image.asset(
+                //   child:
+                //   Image.network(
                 //     imageUrl,
                 //     fit: BoxFit.cover,
                 //     width: 10,
@@ -53,7 +52,8 @@ class BookingList extends StatelessWidget {
                             SizedBox(
                               width: 130,
                               child: Text(
-                                bookTitle,
+                                // bookTitle,
+                                documentSnapshot['bookTitle'],
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
@@ -68,7 +68,7 @@ class BookingList extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Lokasi Rak : $bookLocation',
+                              'Lokasi Rak : ${documentSnapshot['bookLocation']}',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText2
@@ -98,12 +98,24 @@ class BookingList extends StatelessWidget {
                       // ),
 
                       //untuk keterangan dipinjam
-                      Text(
-                        'Dipinjam',
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 12,
-                        ),
+                      // Text(
+                      //   'Dipinjam',
+                      //   style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      //     fontWeight: FontWeight.w300,
+                      //     fontSize: 12,
+                      //   ),
+                      // ),
+                      Row(
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () => update()
+                          ),
+                          IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {}
+                          ) // _delete(documentSnapshot.id)),
+                        ],
                       ),
                     ],
                   ),

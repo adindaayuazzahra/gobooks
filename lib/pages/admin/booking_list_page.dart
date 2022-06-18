@@ -6,15 +6,15 @@ import 'package:gobooks/widgets/booking_list.dart';
 
 import '../../widgets/history_bookmark_list.dart';
 
-class PeminjamanPage extends StatefulWidget {
-  static const ROUTE_NAME = '/list_peminjaman';
-  const PeminjamanPage({Key? key}) : super(key: key);
+class BookingPage extends StatefulWidget {
+  static const ROUTE_NAME = '/booking_list';
+  const BookingPage({Key? key}) : super(key: key);
 
   @override
-  State<PeminjamanPage> createState() => _PeminjamanPageState();
+  State<BookingPage> createState() => _BookingPageState();
 }
 
-class _PeminjamanPageState extends State<PeminjamanPage> {
+class _BookingPageState extends State<BookingPage> {
 
   final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
 
@@ -53,8 +53,7 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
@@ -74,7 +73,7 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                       Icons.search_rounded,
                       color: secdarkColor,
                     ),
-                    hintText: "Cari nomor booking",
+                    hintText: "Cari id Buku",
                     border: InputBorder.none,
                   ),
                   onChanged: (String value) {},
@@ -83,17 +82,6 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
             ),
             SizedBox(
               height: size.height * 0.7,
-              // child: ListView.builder(
-              //   itemCount: 10,
-              //   shrinkWrap: true,
-              //   itemBuilder: (context, index) {
-              //     // // return Container();
-              //     return HistoryBookmarkList(
-              //       key: const Key('rekomen_list_1'),
-              //       onTap: () {},
-              //     );
-              //   },
-              // ),
               child: StreamBuilder(
                 stream: _books.snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
@@ -105,12 +93,13 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
                         streamSnapshot.data!.docs[index];
                         return Container(
                           padding: const EdgeInsets.all(8.0),
-                          child: BookingList(
-                            onTap: () {},
-                            imageUrl: documentSnapshot['bookUrl'],
-                            bookTitle: documentSnapshot['bookTitle'],
-                            bookLocation: documentSnapshot['bookLocation'],
-                          ),
+                          // child: BookingList(
+                          //   onTap: () {},
+                          //   documentSnapshot: documentSnapshot,
+                          //   // imageUrl: documentSnapshot['bookUrl'],
+                          //   // bookTitle: documentSnapshot['bookTitle'],
+                          //   // bookLocation: documentSnapshot['bookLocation'],
+                          // ),
                         );
                       },
                     );
@@ -231,6 +220,89 @@ class _PeminjamanPageState extends State<PeminjamanPage> {
         ),
       ),
     );
+  }
+
+  // Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
+  //   if (documentSnapshot != null) {
+  //     // // final TextEditingController _bookAuthorController = TextEditingController();
+  //     // // final TextEditingController _bookLocationController = TextEditingController();
+  //     // final TextEditingController _bookTitleController = TextEditingController();
+  //     // final TextEditingController _bookUrlController = TextEditingController();
+  //     // // final TextEditingController _idController = TextEditingController();
+  //     // // // bool or false
+  //     // // // final TextEditingController _isBookedController = TextEditingController();
+  //     // bool _isAvaiable;
+  //     // //
+  //     // // final TextEditingController _publisherController = TextEditingController();
+  //     // // final TextEditingController _ratingController = TextEditingController();
+  //     // // final TextEditingController _releaseDateController = TextEditingController();
+  //     // // final TextEditingController _synopsisController = TextEditingController();
+  //
+  //
+  //     _bookTitleController.text = documentSnapshot['bookTitle'];
+  //     _bookUrlController.text = documentSnapshot['bookUrl'];
+  //     _isAvaiable = documentSnapshot['isBooked'];
+  //
+  //
+  //   }
+  //
+  //   await showModalBottomSheet(
+  //       isScrollControlled: true,
+  //       context: context,
+  //       builder: (BuildContext ctx) {
+  //         return Padding(
+  //           padding: EdgeInsets.only(
+  //               top: 20,
+  //               left: 20,
+  //               right: 20,
+  //               bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               TextField(
+  //                 controller: _bookTitleController,
+  //                 decoration: const InputDecoration(labelText: 'Name'),
+  //               ),
+  //               TextField(
+  //                 keyboardType:
+  //                 const TextInputType.numberWithOptions(decimal: true),
+  //                 controller: _priceController,
+  //                 decoration: const InputDecoration(
+  //                   labelText: 'Price',
+  //                 ),
+  //               ),
+  //               const SizedBox(
+  //                 height: 20,
+  //               ),
+  //               ElevatedButton(
+  //                 child: const Text( 'Update'),
+  //                 onPressed: () async {
+  //                   final String name = _nameController.text;
+  //                   final double? price =
+  //                   double.tryParse(_priceController.text);
+  //                   if (price != null) {
+  //
+  //                     await _products
+  //                         .doc(documentSnapshot!.id)
+  //                         .update({"name": name, "price": price});
+  //                     _nameController.text = '';
+  //                     _priceController.text = '';
+  //                     Navigator.of(context).pop();
+  //                   }
+  //                 },
+  //               )
+  //             ],
+  //           ),
+  //         );
+  //       });
+  // }
+
+  Future<void> _delete(String productId) async {
+    await _books.doc(productId).delete();
+
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Menghapus buku telah berhasil.')));
   }
 
   @override
