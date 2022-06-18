@@ -2,13 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
-class BookingList extends StatelessWidget {
+class BookingList02 extends StatelessWidget {
   final Function() onTap;
+  // Future Function(DocumentSnapshot) update;
   final DocumentSnapshot documentSnapshot;
 
-  const BookingList({
+  const BookingList02({
     Key? key,
     required this.onTap,
+    // required this.update,
     required this.documentSnapshot
   }) : super(key: key);
 
@@ -103,18 +105,20 @@ class BookingList extends StatelessWidget {
                       //     fontSize: 12,
                       //   ),
                       // ),
-                      // Row(
-                      //   children: [
-                      //     IconButton(
-                      //         icon: const Icon(Icons.edit),
-                      //         onPressed: () => update(documentSnapshot)
-                      //     ),
-                      //     IconButton(
-                      //         icon: const Icon(Icons.delete),
-                      //         onPressed: () => delete(documentSnapshot)
-                      //     )
-                      //   ],
-                      // ),
+                      Row(
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {}
+            // update(documentSnapshot)
+                          ),
+                          IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {}
+                              // delete(documentSnapshot)
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
