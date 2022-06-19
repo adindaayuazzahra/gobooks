@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthServices {
   static FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,15 +29,32 @@ class AuthServices {
 
     static Future<User?> signIn(String email, String password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-      User firebaseUser = result.user!;
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password
+      );
+      } on FirebaseAuthException catch (e) {
+        if (e.code != email) {
+          print('No user found for that email.');
+      } else if (e.code != password) {
+        print('Wrong password provided for that user.');
+      }
+}
+  }
 
-      return firebaseUser;
+  static Future<User?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+    //return await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
       print(e.toString());
       return null;
-    }
   }
+  } 
 
   static Future<void> signOut() async {
     _auth.signOut();
