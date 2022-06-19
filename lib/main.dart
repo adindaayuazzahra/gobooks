@@ -42,8 +42,8 @@ class GoBooks extends StatelessWidget {
       // home: const WelcomePage(), => yang utama
       // home: const InputBook(),
       // home: const HomePage(),
-      home: const MainPageAdmin(),
-      // home: const MainPage(),
+      // home: const MainPageAdmin(),
+      home: const MainPage(),
 
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
