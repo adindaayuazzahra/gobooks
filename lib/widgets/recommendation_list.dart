@@ -1,20 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
+import '../pages/user/detail_book_page.dart';
+
 class RecommendationList extends StatelessWidget {
-  final Function() onTap;
+  final DocumentSnapshot documentSnapshot;
+
   const RecommendationList({
     Key? key,
-    required this.onTap,
+    required this.documentSnapshot
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return
-      //width: 315,
-      //width: size.width * 0.88,
       InkWell(
-        onTap: onTap,
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => DetailBookPage(documentSnapshot: documentSnapshot)
+            ),
+          );
+        },
         child: Card(
           //color: secLightColor,
           elevation: 7,
@@ -29,11 +36,10 @@ class RecommendationList extends StatelessWidget {
                     bottomLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
-                  child: Image.asset(
-                    'assets/image/cover_book.jpg',
+                  child: Image.network(
+                    documentSnapshot['bookUrl'],
                     fit: BoxFit.cover,
-                    //width: size.width * 0.25,
-                    width: 90,
+                      width: 90,
                   ),
                 ),
                 Padding(
@@ -45,7 +51,7 @@ class RecommendationList extends StatelessWidget {
                       SizedBox(
                         width: 160,
                         child: Text(
-                          'Pendidikan Matematika Dasar',
+                          documentSnapshot['bookTitle'],
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyText1?.copyWith(
@@ -55,7 +61,7 @@ class RecommendationList extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text('Penulis',
+                      Text(documentSnapshot['bookAuthor'],
                           style: Theme.of(context).textTheme.bodyText2),
                       Row(
                         children: [
@@ -64,7 +70,7 @@ class RecommendationList extends StatelessWidget {
                             color: Colors.amber,
                           ),
                           Text(
-                            '5.0',
+                            documentSnapshot['rating'].toString(),
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
                         ],
