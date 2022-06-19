@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/pages/admin/main_page_admin.dart';
 import 'package:gobooks/widgets/profile_item.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -74,6 +75,18 @@ class _ProfilePageState extends State<ProfilePage> {
                             ],
                           ),
                         ],
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const MainPageAdmin())
+                          );
+                        },
+                        child: Container(
+                          color: secdarkColor,
+                          child: const Text('Page untuk Admin'),
+                        ),
                       ),
                     ],
                   )

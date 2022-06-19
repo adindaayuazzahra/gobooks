@@ -1,17 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
+import '../pages/user/detail_book_page.dart';
 
 class PopularList extends StatelessWidget {
-  final Function() onTap;
+  final DocumentSnapshot documentSnapshot;
   const PopularList({
-    required this.onTap,
+    required this.documentSnapshot,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => DetailBookPage(documentSnapshot: documentSnapshot)
+        ),);
+        },
       child: Card(
         elevation: 7,
         margin: const EdgeInsets.fromLTRB(6, 13, 10, 13),
@@ -25,8 +31,8 @@ class PopularList extends StatelessWidget {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  'assets/image/cover_book.jpg',
+                child: Image.network(
+                  documentSnapshot['bookUrl'],
                   fit: BoxFit.cover,
                   width: 110,
                   height: 140,
@@ -36,7 +42,7 @@ class PopularList extends StatelessWidget {
               SizedBox(
                 width: 110,
                 child: Text(
-                  'Pendidikan Matematika dasar',
+                  documentSnapshot['bookTitle'],
                   textAlign: TextAlign.center,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
@@ -48,7 +54,7 @@ class PopularList extends StatelessWidget {
                 ),
               ),
               Text(
-                'Penulis',
+                documentSnapshot['bookAuthor'],
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2

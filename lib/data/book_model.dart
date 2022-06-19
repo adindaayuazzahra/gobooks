@@ -3,7 +3,7 @@ class BookModel {
     required this.id,
     required this.bookAuthor,
     required this.bookTitle,
-    required this.isBooked,
+    required this.isAvailable,
     required this.releaseDate,
     required this.synopsis,
     required this.bookLocation,
@@ -11,7 +11,7 @@ class BookModel {
     required this.rating,
     required this.bookUrl,
   });
-  bool isBooked;
+  bool isAvailable;
   String bookTitle;
   String id;
   String bookAuthor;
@@ -31,14 +31,14 @@ class BookModel {
         'publisher': publisher,
         'bookLocation': bookLocation,
         'synopsis': synopsis,
-        'isBooked': isBooked,
-        'bookUrl':bookUrl,
+        'isAvailable': isAvailable,
+        'bookUrl': bookUrl,
       };
   static BookModel fromJson(Map<String, dynamic> json) => BookModel(
         id: json['id'],
         bookAuthor: json['bookAuthor'],
         bookTitle: json['bookTitle'],
-        isBooked: json['isBooked'],
+        isAvailable: json['isAvailable'],
         releaseDate: json['releaseData'],
         synopsis: json['synopsis'],
         publisher: json['publisher'],
