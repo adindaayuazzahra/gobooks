@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/user/detail_book_page.dart';
+import 'package:gobooks/pages/user/popular_page.dart';
+import 'package:gobooks/pages/user/recommendation_page.dart';
 import 'package:gobooks/widgets/category_list.dart';
 import 'package:gobooks/widgets/popular_list.dart';
 import 'package:gobooks/widgets/recommendation_list.dart';
@@ -119,7 +121,9 @@ class _HomepageState extends State<Homepage> {
               const SizedBox(height: 5),
               _buildSubHeading(
                 title: 'Rekomendasi Buku',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, RecommendationPage.ROUTE_NAME);
+                },
                 key: const Key('rekomendasi_lainnya'),
               ),
               SizedBox(
@@ -147,7 +151,9 @@ class _HomepageState extends State<Homepage> {
               ),
               _buildSubHeading(
                 title: 'Buku Popular',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, PopularPage.ROUTE_NAME);
+                },
                 key: const Key('popular_lainnya'),
               ),
               SizedBox(

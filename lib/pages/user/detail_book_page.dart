@@ -10,7 +10,22 @@ class DetailBookPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
-          title: const Text('Detail Buku'),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+          ),
+          title: Text(
+            'Detail Buku',
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(color: accentColor, fontSize: 25),
+          ),
           actions: [
             IconButton(
                 onPressed: () {},

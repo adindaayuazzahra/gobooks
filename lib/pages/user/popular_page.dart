@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/widgets/booklist.dart';
 
-class RecommendationPage extends StatefulWidget {
-  static const ROUTE_NAME = '/rekomendasi_page';
-  const RecommendationPage({Key? key}) : super(key: key);
+class PopularPage extends StatefulWidget {
+  static const ROUTE_NAME = '/popular_page';
+  const PopularPage({Key? key}) : super(key: key);
 
   @override
-  State<RecommendationPage> createState() => _RecommendationPageState();
+  State<PopularPage> createState() => _PopularPageState();
 }
 
-class _RecommendationPageState extends State<RecommendationPage> {
+class _PopularPageState extends State<PopularPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
           ),
         ),
         title: Text(
-          'Rekomendasi',
+          'Popular',
           style: Theme.of(context)
               .textTheme
               .headline6

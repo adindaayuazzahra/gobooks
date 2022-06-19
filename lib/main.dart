@@ -9,6 +9,8 @@ import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:gobooks/pages/user/popular_page.dart';
+import 'package:gobooks/pages/user/recommendation_page.dart';
 import 'package:gobooks/pages/welcome_page.dart';
 
 void main() async {
@@ -51,12 +53,17 @@ class GoBooks extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const MainPage());
           case BookmarkPage.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const BookmarkPage());
+          case PopularPage.ROUTE_NAME:
+            return CupertinoPageRoute(builder: (_) => const PopularPage());
           case InputBook.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const InputBook());
           case MainPageAdmin.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const MainPageAdmin());
           case BookingPage.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const BookingPage());
+          case RecommendationPage.ROUTE_NAME:
+            return CupertinoPageRoute(
+                builder: (_) => const RecommendationPage());
           default:
             return MaterialPageRoute(builder: (_) {
               return const Scaffold(
