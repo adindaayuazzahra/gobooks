@@ -5,6 +5,8 @@ import 'package:gobooks/common/styles.dart';
 import 'package:lottie/lottie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../data/auth_service.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -42,6 +44,7 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: TextField(
+                  controller: emailController,
                   cursorColor: secdarkColor,
                   decoration: const InputDecoration(
                     icon: Icon(
@@ -64,6 +67,7 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true,
                   cursorColor: secdarkColor,
                   decoration: const InputDecoration(
@@ -88,15 +92,16 @@ class LoginPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const MainPage();
-                          },
-                        ),
-                      );
+                    onPressed: () async {
+                      await AuthServices.signIn(emailController.text, passwordController.text);
+                  //    Navigator.push(
+                   //     context,
+                  //      MaterialPageRoute(
+                   //       builder: (context) {
+                  //          return const MainPage();
+                   //       },
+                  //      ),
+                   //   );
                     },
                     style: ElevatedButton.styleFrom(
                       primary: secdarkColor,
