@@ -176,21 +176,15 @@ class _HomepageState extends State<Homepage> {
               ),
               SizedBox(
                 height: size.height * 0.075,
-                // child: ListView.builder(
-                //   scrollDirection: Axis.horizontal,
-                //   itemCount: 4,
-                //   itemBuilder: (context, index) {
-                //     return CategoryList(
-                //       key: const Key('kategori_list_1'),
-                //       onTap: () {},
-                //     );
-                //   },
-                // ),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
                     CategoryList(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => const LibraryBookPage()
+                        ));
+                      },
                       numberOfPages: '2010 - Sekarang',
                     ),
                     CategoryList(

@@ -4,6 +4,7 @@ import 'package:gobooks/common/styles.dart';
 class CategoryList extends StatelessWidget {
   final Function() onTap;
   final String numberOfPages;
+
   const CategoryList({
     Key? key,
     required this.onTap,
