@@ -5,7 +5,7 @@ import 'package:gobooks/pages/admin/booking_list_page.dart';
 
 class MainPageAdmin extends StatefulWidget {
   const MainPageAdmin({Key? key}) : super(key: key);
-  static const ROUTE_NAME = '/input_buku';
+  static const ROUTE_NAME = '/main_page_admin';
   @override
   State<MainPageAdmin> createState() => _MainPageAdminState();
 }
@@ -20,10 +20,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
   final TextEditingController _bookLocationController = TextEditingController();
   final TextEditingController _bookTitleController = TextEditingController();
   final TextEditingController _bookUrlController = TextEditingController();
-  final TextEditingController _idController = TextEditingController();
   final TextEditingController _publisherController = TextEditingController();
-  final TextEditingController _ratingController = TextEditingController();
+  final TextEditingController _numberOfPagesController = TextEditingController();
   final TextEditingController _synopsisController = TextEditingController();
+  final TextEditingController _yearPublishedController = TextEditingController();
   late bool _isAvailable = false;
 
   final CollectionReference _books =
@@ -52,14 +52,14 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                     foregroundColor: Colors.black,
                     leading: IconButton(
                       onPressed: () {
-                        _idController.text = "";
                         _bookTitleController.text = "";
-                        _ratingController.text = "";
                         _bookUrlController.text = "";
                         _bookAuthorController.text = "";
                         _publisherController.text = "";
                         _bookLocationController.text = "";
                         _synopsisController.text = "";
+                        _yearPublishedController.text = "";
+                        _numberOfPagesController.text = "";
                         _isAvailable = false;
                         Navigator.pop(context);
                       },
@@ -107,39 +107,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
-                                  controller: _idController,
-                                  decoration: InputDecoration(
-                                    labelText: "ID Buku",
-                                    icon: const Icon(Icons.numbers),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
                                   controller: _bookTitleController,
                                   decoration: InputDecoration(
                                     labelText: "Judul Buku",
                                     icon: const Icon(Icons.book),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0)),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: _ratingController,
-                                  keyboardType:
-                                      const TextInputType.numberWithOptions(
-                                          decimal: true),
-                                  decoration: InputDecoration(
-                                    labelText: "Rating Buku",
-                                    icon: const Icon(Icons.star_border),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
@@ -169,6 +140,32 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _numberOfPagesController,
+                                  decoration: InputDecoration(
+                                    labelText: "Jumlah Halaman",
+                                    icon: const Icon(Icons.people),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _yearPublishedController,
+                                  decoration: InputDecoration(
+                                    labelText: "Tahun Terbit",
+                                    icon: const Icon(Icons.people),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -230,17 +227,18 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   padding: const EdgeInsets.all(7),
                                 ),
                                 onPressed: () {
-                                  final String id = _idController.text;
                                   final String bookTitle =
                                       _bookTitleController.text;
-                                  final double? rating =
-                                      double.tryParse(_ratingController.text);
                                   final String bookUrl =
                                       _bookUrlController.text;
                                   final String author =
                                       _bookAuthorController.text;
+                                  final int? numberOfPages =
+                                      int.tryParse(_numberOfPagesController.text);
                                   final String publisher =
                                       _publisherController.text;
+                                  final int? yearPublished =
+                                      int.tryParse(_yearPublishedController.text);
                                   final String bookLocation =
                                       _bookLocationController.text;
                                   final String synopsis =
@@ -248,23 +246,23 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   final bool isAvailable = _isAvailable;
 
                                   _books.add({
-                                    "id": id,
                                     "bookTitle": bookTitle,
-                                    "rating": rating,
                                     "bookUrl": bookUrl,
                                     "bookAuthor": author,
+                                    "numberOfPages": numberOfPages,
                                     "publisher": publisher,
+                                    "yearPublished": yearPublished,
                                     "bookLocation": bookLocation,
                                     "synopsis": synopsis,
                                     "isAvailable": isAvailable
                                   });
 
-                                  _idController.text = "";
                                   _bookTitleController.text = "";
-                                  _ratingController.text = "";
                                   _bookUrlController.text = "";
                                   _bookAuthorController.text = "";
+                                  _numberOfPagesController.text = "";
                                   _publisherController.text = "";
+                                  _yearPublishedController.text = "";
                                   _bookLocationController.text = "";
                                   _synopsisController.text = "";
                                   _isAvailable = false;
@@ -302,12 +300,12 @@ class _MainPageAdminState extends State<MainPageAdmin> {
     //Update Informasi Buku
     Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
       if (documentSnapshot != null) {
-        _idController.text = documentSnapshot['id'];
         _bookTitleController.text = documentSnapshot['bookTitle'];
-        _ratingController.text = documentSnapshot['rating'].toString();
         _bookUrlController.text = documentSnapshot['bookUrl'];
         _bookAuthorController.text = documentSnapshot['bookAuthor'];
+        _numberOfPagesController.text = documentSnapshot['numberOfPages'].toString();
         _publisherController.text = documentSnapshot['publisher'];
+        _yearPublishedController.text = documentSnapshot['yearPublished'].toString();
         _bookLocationController.text = documentSnapshot['bookLocation'];
         _synopsisController.text = documentSnapshot['synopsis'];
         _isAvailable = documentSnapshot['isAvailable'];
@@ -330,15 +328,15 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                     foregroundColor: Colors.black,
                     leading: IconButton(
                       onPressed: () {
-                        _idController.text = "";
                         _bookTitleController.text = "";
-                        _ratingController.text = "";
                         _bookUrlController.text = "";
                         _bookAuthorController.text = "";
                         _publisherController.text = "";
                         _bookLocationController.text = "";
                         _synopsisController.text = "";
-                        _isAvailable = false;
+                        _numberOfPagesController.text = "";
+                        _yearPublishedController.text = "";
+                        _isAvailable = true;
                         Navigator.pop(context);
                       },
                       icon: const Icon(
@@ -385,39 +383,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
-                                  controller: _idController,
-                                  decoration: InputDecoration(
-                                    labelText: "ID Buku",
-                                    icon: const Icon(Icons.numbers),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
                                   controller: _bookTitleController,
                                   decoration: InputDecoration(
                                     labelText: "Judul Buku",
                                     icon: const Icon(Icons.book),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0)),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: _ratingController,
-                                  keyboardType:
-                                      const TextInputType.numberWithOptions(
-                                          decimal: true),
-                                  decoration: InputDecoration(
-                                    labelText: "Rating Buku",
-                                    icon: const Icon(Icons.star_border),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
@@ -446,7 +415,21 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _numberOfPagesController,
+                                  decoration: InputDecoration(
+                                    labelText: "Jumlah Halaman",
+                                    icon: const Icon(Icons.people),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -460,7 +443,22 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                         Icons.published_with_changes),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _yearPublishedController,
+                                  decoration: InputDecoration(
+                                    labelText: "Tahun Terbit",
+                                    icon: const Icon(Icons.people),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -473,7 +471,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -486,7 +485,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -508,17 +508,18 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   padding: const EdgeInsets.all(7),
                                 ),
                                 onPressed: () {
-                                  final String id = _idController.text;
                                   final String bookTitle =
                                       _bookTitleController.text;
-                                  final double? rating =
-                                      double.tryParse(_ratingController.text);
                                   final String bookUrl =
                                       _bookUrlController.text;
                                   final String author =
                                       _bookAuthorController.text;
+                                  final int? numberOfPages =
+                                      int.tryParse(_numberOfPagesController.text);
                                   final String publisher =
                                       _publisherController.text;
+                                  final int? yearPublished =
+                                      int.tryParse(_yearPublishedController.text);
                                   final String bookLocation =
                                       _bookLocationController.text;
                                   final String synopsis =
@@ -526,26 +527,26 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   final bool isAvailable = _isAvailable;
 
                                   _books.doc(documentSnapshot!.id).update({
-                                    "id": id,
                                     "bookTitle": bookTitle,
-                                    "rating": rating,
                                     "bookUrl": bookUrl,
                                     "bookAuthor": author,
+                                    "numberOfPages": numberOfPages,
                                     "publisher": publisher,
+                                    "yearPublished": yearPublished,
                                     "bookLocation": bookLocation,
                                     "synopsis": synopsis,
                                     "isAvailable": isAvailable
                                   });
 
-                                  _idController.text = "";
                                   _bookTitleController.text = "";
-                                  _ratingController.text = "";
                                   _bookUrlController.text = "";
                                   _bookAuthorController.text = "";
+                                  _numberOfPagesController.text = "";
                                   _publisherController.text = "";
+                                  _yearPublishedController.text = "";
                                   _bookLocationController.text = "";
                                   _synopsisController.text = "";
-                                  _isAvailable = false;
+                                  _isAvailable = true;
                                   Navigator.of(context).pop();
 
                                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -694,7 +695,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                             child: ListTile(
                               title: Text(documentSnapshot['bookTitle']),
                               subtitle:
-                                  Text(documentSnapshot['rating'].toString()),
+                                  Text(documentSnapshot['yearPublished'].toString()),
                               trailing: SizedBox(
                                 width: 100,
                                 child: Row(

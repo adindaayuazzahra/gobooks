@@ -54,7 +54,9 @@ class RecommendationList extends StatelessWidget {
                           documentSnapshot['bookTitle'],
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          style: Theme.of(context)
+                              .textTheme.bodyText1
+                              ?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: accentColor,
                             fontSize: 16,
@@ -62,19 +64,24 @@ class RecommendationList extends StatelessWidget {
                         ),
                       ),
                       Text(documentSnapshot['bookAuthor'],
-                          style: Theme.of(context).textTheme.bodyText2),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          Text(
-                            documentSnapshot['rating'].toString(),
-                            style: Theme.of(context).textTheme.bodyText2,
-                          ),
-                        ],
+                          style: Theme.of(context)
+                              .textTheme.bodyText2
+                              ?.copyWith(
+                              fontWeight: FontWeight.bold)
                       ),
+                      // Row(
+                      //   children: [
+                      //     const Icon(
+                      //       Icons.star,
+                      //       color: Colors.amber,
+                      //     ),
+                      //     Text(
+                      //       documentSnapshot['rating'].toString(),
+                      //       style: Theme.of(context).textTheme.bodyText2,
+                      //     ),
+                      //   ],
+                      // ),
+                      Text('${documentSnapshot['numberOfPages']} Halaman')
                     ],
                   ),
                 ),

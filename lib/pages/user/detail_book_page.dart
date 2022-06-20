@@ -81,8 +81,13 @@ class DetailBookPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Text(documentSnapshot['id']),
-                              const SizedBox(height: 5),
+                              // Text(
+                              //     documentSnapshot['id'],
+                              //     style: const TextStyle(fontWeight: FontWeight.bold)
+                              // ),
+                              // const SizedBox(height: 5),
+                              Text('${documentSnapshot['numberOfPages']} Halaman'),
+                              Text('Tahun Terbit : ${documentSnapshot['yearPublished']}'),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

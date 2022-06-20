@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gobooks/common/styles.dart';
 
 class CategoryList extends StatelessWidget {
   final Function() onTap;
+  final String numberOfPages;
   const CategoryList({
     Key? key,
     required this.onTap,
+    required this.numberOfPages
   }) : super(key: key);
 
   @override
@@ -29,13 +32,13 @@ class CategoryList extends StatelessWidget {
         ),
         child: Row(
           children: <Widget>[
-            Image.asset(
-              'assets/image/teknologi.png',
-              width: 20,
+            const Icon(
+                Icons.date_range,
+                color: accentColor
             ),
             const SizedBox(width: 3),
             Text(
-              'Teknologi',
+              numberOfPages,
               style: Theme.of(context)
                   .textTheme
                   .caption
