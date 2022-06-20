@@ -16,7 +16,7 @@ class PopularList extends StatelessWidget {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => DetailBookPage(documentSnapshot: documentSnapshot)
-        ),);
+        ));
         },
       child: Card(
         elevation: 7,

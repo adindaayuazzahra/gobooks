@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/user/detail_book_page.dart';
-import 'package:gobooks/pages/user/popular_page.dart';
-import 'package:gobooks/pages/user/recommendation_page.dart';
+import 'package:gobooks/pages/user/Latest_Book_Page.dart';
+import 'package:gobooks/pages/user/Library_Book_Page.dart';
 import 'package:gobooks/widgets/category_list.dart';
 import 'package:gobooks/widgets/popular_list.dart';
 import 'package:gobooks/widgets/recommendation_list.dart';
@@ -20,7 +20,6 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -31,8 +30,14 @@ class _HomepageState extends State<Homepage> {
         centerTitle: false,
         title: Text(
           'goBooks',
-          style: Theme.of(context).textTheme.headline6?.copyWith(
-              color: accentColor, fontWeight: FontWeight.bold, fontSize: 25),
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              ?.copyWith(
+              color: accentColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 25
+          ),
         ),
         automaticallyImplyLeading: false,
         actions: [
@@ -209,9 +214,9 @@ class _HomepageState extends State<Homepage> {
               ),
               const SizedBox(height: 5),
               _buildSubHeading(
-                title: 'Rekomendasi Buku',
+                title: 'List Buku Perpustakaan',
                 onTap: () {
-                  Navigator.pushNamed(context, RecommendationPage.ROUTE_NAME);
+                  Navigator.pushNamed(context, LibraryBookPage.ROUTE_NAME);
                 },
                 key: const Key('rekomendasi_lainnya'),
               ),
@@ -223,7 +228,7 @@ class _HomepageState extends State<Homepage> {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: streamSnapshot.data!.docs.length,
+                        itemCount: 4,
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
                           streamSnapshot.data!.docs[index];
@@ -240,9 +245,9 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
               _buildSubHeading(
-                title: 'Buku Terbaru',
+                title: 'List Buku Terbaru',
                 onTap: () {
-                  Navigator.pushNamed(context, PopularPage.ROUTE_NAME);
+                  Navigator.pushNamed(context, LatestBookPage.ROUTE_NAME);
                 },
                 key: const Key('popular_lainnya'),
               ),

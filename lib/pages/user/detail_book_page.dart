@@ -14,6 +14,7 @@ class DetailBookPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
               'Detail Buku',
               style: Theme.of(context).textTheme.headline6?.copyWith(
