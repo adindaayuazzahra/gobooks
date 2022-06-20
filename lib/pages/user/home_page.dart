@@ -165,22 +165,47 @@ class _HomepageState extends State<Homepage> {
                 // ),
               ),
               _buildSubHeading(
-                title: 'Kategori',
+                title: 'Tahun dipublikasi',
                 onTap: () {},
                 key: const Key('kategori_lainnya'),
               ),
               SizedBox(
                 height: size.height * 0.075,
-                child: ListView.builder(
+                // child: ListView.builder(
+                //   scrollDirection: Axis.horizontal,
+                //   itemCount: 4,
+                //   itemBuilder: (context, index) {
+                //     return CategoryList(
+                //       key: const Key('kategori_list_1'),
+                //       onTap: () {},
+                //     );
+                //   },
+                // ),
+                child: ListView(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return CategoryList(
-                      key: const Key('kategori_list_1'),
-                      onTap: () {},
-                    );
-                  },
-                ),
+                  children: [
+                    CategoryList(
+                      onTap: (){},
+                      numberOfPages: '2010 - Sekarang',
+                    ),
+                    CategoryList(
+                      onTap: (){},
+                      numberOfPages: '2000 - 1975',
+                    ),
+                    CategoryList(
+                      onTap: (){},
+                      numberOfPages: '1974 - 1950',
+                    ),
+                    CategoryList(
+                      onTap: (){},
+                      numberOfPages: '1949 - 1900',
+                    ),
+                    CategoryList(
+                      onTap: (){},
+                      numberOfPages: '> 1899',
+                    ),
+                  ],
+                )
               ),
               const SizedBox(height: 5),
               _buildSubHeading(
@@ -215,7 +240,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
               _buildSubHeading(
-                title: 'Buku Popular',
+                title: 'Buku Terbaru',
                 onTap: () {
                   Navigator.pushNamed(context, PopularPage.ROUTE_NAME);
                 },
@@ -246,26 +271,26 @@ class _HomepageState extends State<Homepage> {
                   },
                 ),
               ),
-              const SizedBox(height: 8),
-              _buildSubHeading(
-                title: 'Penulis Populer',
-                onTap: () {},
-                key: const Key('penulis_popular_lainnya'),
-              ),
-              const SizedBox(height: 7),
-              SizedBox(
-                height: 70,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 9,
-                  itemBuilder: (context, index) {
-                    return WriterList(
-                      key: const Key('penulis_popular_1'),
-                      onTap: () {},
-                    );
-                  },
-                ),
-              ),
+              // const SizedBox(height: 8),
+              // _buildSubHeading(
+              //   title: 'Penulis Populer',
+              //   onTap: () {},
+              //   key: const Key('penulis_popular_lainnya'),
+              // ),
+              // const SizedBox(height: 7),
+              // SizedBox(
+              //   height: 70,
+              //   child: ListView.builder(
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: 9,
+              //     itemBuilder: (context, index) {
+              //       return WriterList(
+              //         key: const Key('penulis_popular_1'),
+              //         onTap: () {},
+              //       );
+              //     },
+              //   ),
+              // ),
             ],
           ),
         ),
