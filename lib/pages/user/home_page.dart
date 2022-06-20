@@ -60,109 +60,108 @@ class _HomepageState extends State<Homepage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: secLightColor),
-                child: StreamBuilder(
-                  stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                    if (streamSnapshot.hasData) {
-                      int randomNumber = Random().nextInt(4);
-                      final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[randomNumber];
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                                child: Text(
-                                  documentSnapshot['bookTitle'],
-                                  textAlign: TextAlign.start,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style:
-                                  Theme.of(context).textTheme.subtitle2?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 3),
-                              SizedBox(
-                                width: 160,
-                                child: Text(
-                                  documentSnapshot['bookAuthor'],
-                                  textAlign: TextAlign.start,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style:
-                                  Theme.of(context).textTheme.bodyText1?.copyWith(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                              documentSnapshot['bookUrl'],
-                              fit: BoxFit.cover,
-                              width: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 160,
+                          child: Text(
+                            'Lorem ipsum dolor sit amet',
+                            textAlign: TextAlign.start,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                            Theme.of(context).textTheme.subtitle2?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
                             ),
                           ),
-                        ],
-
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(color: Colors.red),
-                    );
-                  },
+                        ),
+                        const SizedBox(height: 3),
+                        SizedBox(
+                          width: 160,
+                          child: Text(
+                            'Etiam tempor blandit ligula a iaculis. Donec ',
+                            textAlign: TextAlign.start,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                            Theme.of(context).textTheme.bodyText1?.copyWith(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Image.asset(
+                      'assets/image/banner.png',
+                      fit: BoxFit.fitWidth,
+                      width: 125,
+                    ),
+                  ],
                 ),
-
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Column(
-                //       mainAxisAlignment: MainAxisAlignment.center,
-                //       children: [
-                //         SizedBox(
-                //           width: 160,
-                //           child: Text(
-                //             'Lorem ipsum dolor sit amet',
-                //             textAlign: TextAlign.start,
-                //             maxLines: 3,
-                //             overflow: TextOverflow.ellipsis,
-                //             style:
-                //             Theme.of(context).textTheme.subtitle2?.copyWith(
-                //               fontWeight: FontWeight.bold,
-                //               fontSize: 15,
+                // child: StreamBuilder(
+                //   stream: _books.snapshots(),
+                //   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                //     if (streamSnapshot.hasData) {
+                //       int randomNumber = Random().nextInt(4);
+                //       final DocumentSnapshot documentSnapshot =
+                //             streamSnapshot.data!.docs[randomNumber];
+                //       return Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //         children: [
+                //           Column(
+                //             mainAxisAlignment: MainAxisAlignment.center,
+                //             children: [
+                //               SizedBox(
+                //                 width: 160,
+                //                 child: Text(
+                //                   documentSnapshot['bookTitle'],
+                //                   textAlign: TextAlign.start,
+                //                   maxLines: 3,
+                //                   overflow: TextOverflow.ellipsis,
+                //                   style:
+                //                   Theme.of(context).textTheme.subtitle2?.copyWith(
+                //                     fontWeight: FontWeight.bold,
+                //                     fontSize: 15,
+                //                   ),
+                //                 ),
+                //               ),
+                //               const SizedBox(height: 3),
+                //               SizedBox(
+                //                 width: 160,
+                //                 child: Text(
+                //                   documentSnapshot['bookAuthor'],
+                //                   textAlign: TextAlign.start,
+                //                   maxLines: 3,
+                //                   overflow: TextOverflow.ellipsis,
+                //                   style:
+                //                   Theme.of(context).textTheme.bodyText1?.copyWith(
+                //                     fontSize: 12,
+                //                   ),
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //           ClipRRect(
+                //             borderRadius: BorderRadius.circular(10.0),
+                //             child: Image.network(
+                //               documentSnapshot['bookUrl'],
+                //               fit: BoxFit.cover,
+                //               width: 70,
                 //             ),
                 //           ),
-                //         ),
-                //         const SizedBox(height: 3),
-                //         SizedBox(
-                //           width: 160,
-                //           child: Text(
-                //             'Etiam tempor blandit ligula a iaculis. Donec ',
-                //             textAlign: TextAlign.start,
-                //             maxLines: 3,
-                //             overflow: TextOverflow.ellipsis,
-                //             style:
-                //             Theme.of(context).textTheme.bodyText1?.copyWith(
-                //               fontSize: 12,
-                //             ),
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //     Image.asset(
-                //       'assets/image/banner.png',
-                //       fit: BoxFit.fitWidth,
-                //       width: 125,
-                //     ),
-                //   ],
+                //         ],
+                //
+                //       );
+                //     }
+                //     return const Center(
+                //       child: CircularProgressIndicator(color: Colors.red),
+                //     );
+                //   },
                 // ),
               ),
               _buildSubHeading(
