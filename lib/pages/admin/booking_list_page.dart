@@ -15,8 +15,8 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
-
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
 
   String queries = '';
   final TextEditingController _searchControl = TextEditingController();
@@ -53,7 +53,8 @@ class _BookingPageState extends State<BookingPage> {
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
@@ -84,13 +85,14 @@ class _BookingPageState extends State<BookingPage> {
               height: size.height * 0.7,
               child: StreamBuilder(
                 stream: _books.snapshots(),
-                builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                builder:
+                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                   if (streamSnapshot.hasData) {
                     return ListView.builder(
                       itemCount: streamSnapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         final DocumentSnapshot documentSnapshot =
-                        streamSnapshot.data!.docs[index];
+                            streamSnapshot.data!.docs[index];
                         return Container(
                           padding: const EdgeInsets.all(8.0),
                           child: BookingList(
@@ -122,7 +124,8 @@ class _BookingPageState extends State<BookingPage> {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(color: secLightColor),
-                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                 child: Row(
                   children: <Widget>[
                     ClipOval(
@@ -230,7 +233,7 @@ class _BookingPageState extends State<BookingPage> {
   //     // final TextEditingController _bookUrlController = TextEditingController();
   //     // // final TextEditingController _idController = TextEditingController();
   //     // // // bool or false
-  //     // // // final TextEditingController _isBookedController = TextEditingController();
+  //     // // // final TextEditingController _isAvailableController = TextEditingController();
   //     // bool _isAvaiable;
   //     // //
   //     // // final TextEditingController _publisherController = TextEditingController();
@@ -241,7 +244,7 @@ class _BookingPageState extends State<BookingPage> {
   //
   //     _bookTitleController.text = documentSnapshot['bookTitle'];
   //     _bookUrlController.text = documentSnapshot['bookUrl'];
-  //     _isAvaiable = documentSnapshot['isBooked'];
+  //     _isAvaiable = documentSnapshot['isAvailable'];
   //
   //
   //   }
@@ -301,8 +304,8 @@ class _BookingPageState extends State<BookingPage> {
   Future<void> _delete(String productId) async {
     await _books.doc(productId).delete();
 
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Menghapus buku telah berhasil.')));
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Menghapus buku telah berhasil.')));
   }
 
   @override

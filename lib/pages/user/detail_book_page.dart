@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
 class DetailBookPage extends StatelessWidget {
-  const DetailBookPage({Key? key}) : super(key: key);
+  final DocumentSnapshot documentSnapshot;
+
+  const DetailBookPage({Key? key, required this.documentSnapshot})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +14,22 @@ class DetailBookPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
-          title: const Text('Detail Buku'),
+          title: Text(
+              'Detail Buku',
+              style: Theme.of(context).textTheme.headline6?.copyWith(
+                  color: accentColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25)),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: accentColor,
+              size: 25,
+            ),
+          ),
           actions: [
             IconButton(
                 onPressed: () {},
@@ -55,22 +74,23 @@ class DetailBookPage extends StatelessWidget {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
-                                child: Image.asset(
-                                  'assets/image/cover_book.jpg',
+                                child: Image.network(
+                                  documentSnapshot['bookUrl'],
                                   fit: BoxFit.cover,
                                   width: size.height * 0.15,
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              const Text('BN11MAX5JFJ67890'),
+                              Text(documentSnapshot['id']),
                               const SizedBox(height: 5),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text('Status : ',
+                                children: [
+                                  const Text('Status : ',
                                       style: TextStyle(color: accentColor)),
-                                  Text('Tersedia',
-                                      style: TextStyle(color: Colors.green)),
+                                  Text(status(documentSnapshot['isAvailable']))
+                                  // Text('Tersedia',
+                                  //     style: TextStyle(color: Colors.green)),
                                   // Text(
                                   //     'Tidak tersedia',
                                   //     style: TextStyle(color: Colors.red)
@@ -120,32 +140,36 @@ class DetailBookPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'Pendidikan Matematika Dasar',
+                                documentSnapshot['bookTitle'],
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6
                                     ?.copyWith(
-                                        color: Colors.black, fontSize: 25),
+                                    color: Colors.black, fontSize: 25),
                                 textAlign: TextAlign.center,
                               ),
                               Text('Author',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      ?.copyWith(color: accentColor)),
-                              const Text('Matt Ridley'),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    ?.copyWith(color: accentColor),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(documentSnapshot['bookAuthor']),
                               Text('Penerbit',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6
-                                      ?.copyWith(color: accentColor)),
-                              const Text('Matt Ridley'),
+                                      ?.copyWith(color: accentColor)
+                              ),
+                              Text(documentSnapshot['publisher']),
                               Text('Letak Buku',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6
-                                      ?.copyWith(color: accentColor)),
-                              const Text('Rak A103/2/4'),
+                                      ?.copyWith(color: accentColor)
+                              ),
+                              Text(documentSnapshot['bookLocation']),
                             ],
                           ),
                         ),
@@ -180,13 +204,16 @@ class DetailBookPage extends StatelessWidget {
                               .headline6
                               ?.copyWith(color: accentColor),
                         ),
-                        const Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut tristique et egestas quis. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Massa tincidunt nunc pulvinar sapien et ligula. Eu mi bibendum neque egestas. Convallis posuere morbi leo urna molestie at elementum. Blandit turpis cursus in hac habitasse platea dictumst quisque. Ante metus dictum at tempor commodo ullamcorper a. Et ultrices neque ornare aenean euismod. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Maecenas ultricies mi eget mauris pharetra et ultrices neque ornare. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est. Ut sem nulla pharetra diam. Accumsan lacus vel facilisis volutpat est velit egestas dui. Tempor orci eu lobortis elementum nibh.'),
+                        Text(documentSnapshot['synopsis']),
                       ],
                     ),
                   )),
             ],
           ),
         ));
+  }
+
+  String status(bool value) {
+    return value == true ? 'Tersedia' : 'Tidak tersedia';
   }
 }

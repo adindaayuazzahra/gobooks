@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/user/detail_book_page.dart';
+import 'package:gobooks/pages/user/popular_page.dart';
+import 'package:gobooks/pages/user/recommendation_page.dart';
 import 'package:gobooks/widgets/category_list.dart';
 import 'package:gobooks/widgets/popular_list.dart';
 import 'package:gobooks/widgets/recommendation_list.dart';
 import 'package:gobooks/widgets/writer_list.dart';
+import 'dart:math';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -15,6 +19,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -68,10 +74,10 @@ class _HomepageState extends State<Homepage> {
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style:
-                                Theme.of(context).textTheme.subtitle2?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
+                            Theme.of(context).textTheme.subtitle2?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 3),
@@ -83,9 +89,9 @@ class _HomepageState extends State<Homepage> {
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 12,
-                                    ),
+                            Theme.of(context).textTheme.bodyText1?.copyWith(
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ],
@@ -97,6 +103,66 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
+                // child: StreamBuilder(
+                //   stream: _books.snapshots(),
+                //   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                //     if (streamSnapshot.hasData) {
+                //       int randomNumber = Random().nextInt(4);
+                //       final DocumentSnapshot documentSnapshot =
+                //             streamSnapshot.data!.docs[randomNumber];
+                //       return Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //         children: [
+                //           Column(
+                //             mainAxisAlignment: MainAxisAlignment.center,
+                //             children: [
+                //               SizedBox(
+                //                 width: 160,
+                //                 child: Text(
+                //                   documentSnapshot['bookTitle'],
+                //                   textAlign: TextAlign.start,
+                //                   maxLines: 3,
+                //                   overflow: TextOverflow.ellipsis,
+                //                   style:
+                //                   Theme.of(context).textTheme.subtitle2?.copyWith(
+                //                     fontWeight: FontWeight.bold,
+                //                     fontSize: 15,
+                //                   ),
+                //                 ),
+                //               ),
+                //               const SizedBox(height: 3),
+                //               SizedBox(
+                //                 width: 160,
+                //                 child: Text(
+                //                   documentSnapshot['bookAuthor'],
+                //                   textAlign: TextAlign.start,
+                //                   maxLines: 3,
+                //                   overflow: TextOverflow.ellipsis,
+                //                   style:
+                //                   Theme.of(context).textTheme.bodyText1?.copyWith(
+                //                     fontSize: 12,
+                //                   ),
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //           ClipRRect(
+                //             borderRadius: BorderRadius.circular(10.0),
+                //             child: Image.network(
+                //               documentSnapshot['bookUrl'],
+                //               fit: BoxFit.cover,
+                //               width: 70,
+                //             ),
+                //           ),
+                //         ],
+                //
+                //       );
+                //     }
+                //     return const Center(
+                //       child: CircularProgressIndicator(color: Colors.red),
+                //     );
+                //   },
+                // ),
               ),
               _buildSubHeading(
                 title: 'Kategori',
@@ -119,46 +185,63 @@ class _HomepageState extends State<Homepage> {
               const SizedBox(height: 5),
               _buildSubHeading(
                 title: 'Rekomendasi Buku',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, RecommendationPage.ROUTE_NAME);
+                },
                 key: const Key('rekomendasi_lainnya'),
               ),
               SizedBox(
                 height: 180,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return RecommendationList(
-                      key: const Key('rekomen_list_1'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              // return const MainPage();
-                              return const DetailBookPage();
-                            },
-                          ),
-                        );
-                      },
+                child: StreamBuilder(
+                  stream: _books.snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    if (streamSnapshot.hasData) {
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: streamSnapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                          return RecommendationList(
+                              documentSnapshot: documentSnapshot
+                          );
+                        },
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.red),
                     );
                   },
                 ),
               ),
               _buildSubHeading(
                 title: 'Buku Popular',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, PopularPage.ROUTE_NAME);
+                },
                 key: const Key('popular_lainnya'),
               ),
               SizedBox(
                 height: 277,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return PopularList(
-                      key: const Key('popular_list_1'),
-                      onTap: () {},
+                child: StreamBuilder(
+                  stream: _books.snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    if (streamSnapshot.hasData) {
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: streamSnapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                          return PopularList(
+                            key: const Key('popular_list_1'),
+                            documentSnapshot: documentSnapshot,
+                          );
+                        },
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.red),
                     );
                   },
                 ),
