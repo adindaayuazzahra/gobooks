@@ -93,15 +93,15 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                   child: ElevatedButton(
                     onPressed: () async {
-                      final result = await AuthServices.signIn(emailController.text, passwordController.text);
-                      if (result != null) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainPage(),
-                          ),
-                        );
-                      }
+                      await AuthServices.signIn(emailController.text, passwordController.text);
+                  //    Navigator.push(
+                   //     context,
+                  //      MaterialPageRoute(
+                   //       builder: (context) {
+                  //          return const MainPage();
+                   //       },
+                  //      ),
+                   //   );
                     },
                     style: ElevatedButton.styleFrom(
                       primary: secdarkColor,
