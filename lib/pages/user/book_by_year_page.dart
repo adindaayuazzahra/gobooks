@@ -7,13 +7,13 @@ import 'package:gobooks/widgets/booklist.dart';
 class BookByYearPage extends StatelessWidget {
   static const ROUTE_NAME = '/bookByYearPage';
   final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
-  final int minYear;
-  final int maxYear;
+  // final int minYear;
+  // final int maxYear;
 
   BookByYearPage({
     Key? key,
-    required this.minYear,
-    required this.maxYear
+    // required this.minYear,
+    // required this.maxYear
   }) : super(key: key);
 
   @override
@@ -43,23 +43,34 @@ class BookByYearPage extends StatelessWidget {
       body: StreamBuilder(
         stream: _books.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+          final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
+            streamSnapshot.data!.docs.asMap().forEach((index, value) {
+              if(value['yearPublished'] >= 2010 && value['yearPublished'] <= 2022){
+                yearNumber.add(index);
+              }
+            });
             return ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: streamSnapshot.data!.docs.length,
+              itemCount: yearNumber.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot =
-                streamSnapshot.data!.docs[index];
-                final year = documentSnapshot['yearPublished'];
-                if(year > 2010 && year <= 2022){
-                  return BookList(
-                    documentSnapshot: documentSnapshot,
-                  );
-                } else {
-                  return const Center();
-                }
+                final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[yearNumber[index]];
+                return BookList(
+                  documentSnapshot: documentSnapshot,
+                );
               },
             );
+            // return ListView.builder(
+            //   scrollDirection: Axis.vertical,
+            //   itemCount: streamSnapshot.data!.docs.length,
+            //   itemBuilder: (context, index) {
+            //     final DocumentSnapshot documentSnapshot = streamSnapshot
+            //         .data!.docs[index];
+            //     return BookList(
+            //       documentSnapshot: documentSnapshot,
+            //     );
+            //   },
+            // );
           }
           return const Center(
             child: CircularProgressIndicator(color: Colors.red),

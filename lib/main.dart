@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gobooks/pages/admin/booking_list_page.dart';
-import 'package:gobooks/pages/admin/list_of_books.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
 import 'package:gobooks/pages/admin/input_book_page.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
@@ -11,7 +10,6 @@ import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gobooks/pages/user/Latest_Book_Page.dart';
 import 'package:gobooks/pages/user/Library_Book_Page.dart';
-import 'package:gobooks/pages/welcome_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
