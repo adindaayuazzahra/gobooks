@@ -43,7 +43,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 1,
                         blurRadius: 3,
-                        offset: const Offset(2, 3), // changes position of shadow
+                        offset:
+                            const Offset(2, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -53,24 +54,21 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CircleAvatar(
-                            backgroundImage: const AssetImage('assets/image/cover_book.jpg'),
+                            backgroundImage:
+                                const AssetImage('assets/image/cover_book.jpg'),
                             radius: size.width * 0.15,
                           ),
                           Column(
                             children: [
-                              Text(
-                                  'DICODING Indonesia',
+                              Text('DICODING Indonesia',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6
-                                      ?.copyWith(color: accentColor)
-                              ),
-                              const Text(
-                                  'Status : Mahasiswa',
+                                      ?.copyWith(color: accentColor)),
+                              const Text('Status : Mahasiswa',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                  )
-                              ),
+                                  )),
                               const Text('0812344566655')
                             ],
                           ),
@@ -79,9 +77,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const MainPageAdmin())
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MainPageAdmin()));
                         },
                         child: Container(
                           color: secdarkColor,
@@ -89,21 +87,32 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ],
-                  )
-              ),
+                  )),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ProfileItem(size: size.width * 0.35, icon: Icons.settings, title: 'Settings'),
-                  ProfileItem(size: size.width * 0.35, icon: Icons.bug_report, title: 'Report'),
+                  ProfileItem(
+                      size: size.width * 0.35,
+                      icon: Icons.settings,
+                      title: 'Settings'),
+                  ProfileItem(
+                      size: size.width * 0.35,
+                      icon: Icons.bug_report,
+                      title: 'Report'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ProfileItem(size: size.width * 0.35, icon: Icons.language, title: 'Language'),
-                  ProfileItem(size: size.width * 0.35, icon: Icons.logout, title: 'Log Out'),
+                  ProfileItem(
+                      size: size.width * 0.35,
+                      icon: Icons.language,
+                      title: 'Language'),
+                  ProfileItem(
+                      size: size.width * 0.35,
+                      icon: Icons.logout,
+                      title: 'Log Out'),
                 ],
               )
             ],
@@ -113,5 +122,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-
