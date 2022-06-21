@@ -6,7 +6,8 @@ import 'package:gobooks/widgets/booklist.dart';
 
 class BookByYearPage extends StatelessWidget {
   static const ROUTE_NAME = '/bookByYearPage';
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
   // final int minYear;
   // final int maxYear;
 
@@ -46,19 +47,35 @@ class BookByYearPage extends StatelessWidget {
           final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
             streamSnapshot.data!.docs.asMap().forEach((index, value) {
-              if(value['yearPublished'] >= 2010 && value['yearPublished'] <= 2022){
+              if (value['yearPublished'] >= 2010 &&
+                  value['yearPublished'] <= 2022) {
                 yearNumber.add(index);
               }
+              yearNumber.sort();
             });
+            //ascending order
             return ListView.builder(
               scrollDirection: Axis.vertical,
               itemCount: yearNumber.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[yearNumber[index]];
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[yearNumber[index]];
                 return BookList(
                   documentSnapshot: documentSnapshot,
                 );
               },
+              //decending order
+              /* return ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: yearNumber.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[yearNumber.reversed[index]];
+                return BookList(
+                  documentSnapshot: documentSnapshot,
+                );
+              },
+            */
             );
             // return ListView.builder(
             //   scrollDirection: Axis.vertical,
@@ -80,4 +97,3 @@ class BookByYearPage extends StatelessWidget {
     );
   }
 }
-
