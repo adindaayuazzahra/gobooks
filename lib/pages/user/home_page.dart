@@ -19,7 +19,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,14 +31,8 @@ class _HomepageState extends State<Homepage> {
         centerTitle: false,
         title: Text(
           'goBooks',
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              ?.copyWith(
-              color: accentColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 25
-          ),
+          style: Theme.of(context).textTheme.headline6?.copyWith(
+              color: accentColor, fontWeight: FontWeight.bold, fontSize: 25),
         ),
         automaticallyImplyLeading: false,
         actions: [
@@ -79,10 +74,10 @@ class _HomepageState extends State<Homepage> {
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style:
-                            Theme.of(context).textTheme.subtitle2?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
+                                Theme.of(context).textTheme.subtitle2?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                           ),
                         ),
                         const SizedBox(height: 3),
@@ -94,9 +89,9 @@ class _HomepageState extends State<Homepage> {
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style:
-                            Theme.of(context).textTheme.bodyText1?.copyWith(
-                              fontSize: 12,
-                            ),
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 12,
+                                    ),
                           ),
                         ),
                       ],
@@ -175,37 +170,38 @@ class _HomepageState extends State<Homepage> {
                 key: const Key('kategori_lainnya'),
               ),
               SizedBox(
-                height: size.height * 0.075,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    CategoryList(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => const LibraryBookPage()
-                        ));
-                      },
-                      numberOfPages: '2010 - Sekarang',
-                    ),
-                    CategoryList(
-                      onTap: (){},
-                      numberOfPages: '2000 - 1975',
-                    ),
-                    CategoryList(
-                      onTap: (){},
-                      numberOfPages: '1974 - 1950',
-                    ),
-                    CategoryList(
-                      onTap: (){},
-                      numberOfPages: '1949 - 1900',
-                    ),
-                    CategoryList(
-                      onTap: (){},
-                      numberOfPages: '> 1899',
-                    ),
-                  ],
-                )
-              ),
+                  height: size.height * 0.075,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      CategoryList(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const LibraryBookPage()));
+                        },
+                        numberOfPages: '2010 - Sekarang',
+                      ),
+                      CategoryList(
+                        onTap: () {},
+                        numberOfPages: '2000 - 1975',
+                      ),
+                      CategoryList(
+                        onTap: () {},
+                        numberOfPages: '1974 - 1950',
+                      ),
+                      CategoryList(
+                        onTap: () {},
+                        numberOfPages: '1949 - 1900',
+                      ),
+                      CategoryList(
+                        onTap: () {},
+                        numberOfPages: '> 1899',
+                      ),
+                    ],
+                  )),
               const SizedBox(height: 5),
               _buildSubHeading(
                 title: 'List Buku Perpustakaan',
@@ -218,17 +214,17 @@ class _HomepageState extends State<Homepage> {
                 height: 180,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: 4,
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
-                          streamSnapshot.data!.docs[index];
+                              streamSnapshot.data!.docs[index];
                           return RecommendationList(
-                              documentSnapshot: documentSnapshot
-                          );
+                              documentSnapshot: documentSnapshot);
                         },
                       );
                     }
@@ -243,20 +239,21 @@ class _HomepageState extends State<Homepage> {
                 onTap: () {
                   Navigator.pushNamed(context, LatestBookPage.ROUTE_NAME);
                 },
-                key: const Key('popular_lainnya'),
+                key: const Key('List_terbaru_lainnya'),
               ),
               SizedBox(
                 height: 277,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: streamSnapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
-                          streamSnapshot.data!.docs[index];
+                              streamSnapshot.data!.docs[index];
                           return PopularList(
                             key: const Key('popular_list_1'),
                             documentSnapshot: documentSnapshot,

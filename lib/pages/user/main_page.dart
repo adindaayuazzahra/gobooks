@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
       body: pages[currentIndex],
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(bottom: 10, right: 15, left: 15),
-        height: size.height * 0.08,
+        height: 60,
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(30),
