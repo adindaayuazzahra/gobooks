@@ -8,7 +8,7 @@ class BookList extends StatelessWidget {
 
   const BookList({
     Key? key,
-    required this.documentSnapshot
+    required this.documentSnapshot,
   }) : super(key: key);
 
   @override

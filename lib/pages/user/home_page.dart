@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gobooks/pages/user/book_by_year_page.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/user/detail_book_page.dart';
@@ -177,10 +178,11 @@ class _HomepageState extends State<Homepage> {
                       CategoryList(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const LibraryBookPage()));
+                              context, MaterialPageRoute(
+                              builder: (context) {
+                                return BookByYearPage();
+                              }),
+                          );
                         },
                         numberOfPages: '2010 - Sekarang',
                       ),
