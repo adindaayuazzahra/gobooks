@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
-
+import 'package:gobooks/main.dart';
 import '../pages/user/detail_book_page.dart';
 
-class RecommendationList extends StatelessWidget {
+class LibraryBookList extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
 
-  const RecommendationList({Key? key, required this.documentSnapshot})
+  const LibraryBookList({Key? key, required this.documentSnapshot})
       : super(key: key);
 
   @override
@@ -16,9 +16,9 @@ class RecommendationList extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  DetailBookPage(documentSnapshot: documentSnapshot)),
+          MaterialPageRoute(builder: (context) =>
+              DetailBookPage(documentSnapshot: documentSnapshot)
+          ),
         );
       },
       child: Card(

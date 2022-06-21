@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
-class CategoryList extends StatelessWidget {
+class BookByYearList extends StatelessWidget {
   final Function() onTap;
   final String numberOfPages;
 
-  const CategoryList({
+  const BookByYearList({
     Key? key,
     required this.onTap,
     required this.numberOfPages
@@ -21,7 +21,6 @@ class CategoryList extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          //border: Border.all(width: 1),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),

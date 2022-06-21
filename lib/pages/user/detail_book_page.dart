@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
+import 'bookmark_page.dart';
+
 class DetailBookPage extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
 
@@ -10,6 +12,7 @@ class DetailBookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -30,7 +33,9 @@ class DetailBookPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, BookmarkPage.ROUTE_NAME);
+              },
               icon: Container(
                 margin: const EdgeInsets.only(right: 8.0),
                 child: const Icon(
@@ -38,7 +43,8 @@ class DetailBookPage extends StatelessWidget {
                   color: Colors.black,
                   size: 25,
                 ),
-              ))
+              )
+          )
         ],
         backgroundColor: Colors.blue.withOpacity(0),
         elevation: 0.0,
@@ -93,11 +99,6 @@ class DetailBookPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 5),
-                          // Text(
-                          //     documentSnapshot['id'],
-                          //     style: const TextStyle(fontWeight: FontWeight.bold)
-                          // ),
-                          // const SizedBox(height: 5),
                           Text(
                             '${documentSnapshot['numberOfPages']} Halaman',
                             style: Theme.of(context).textTheme.subtitle1,
@@ -113,26 +114,35 @@ class DetailBookPage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // const Text('Status : ',
-                              //     style: TextStyle(color: accentColor)),
-                              Text(
-                                status(documentSnapshot['isAvailable']),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .caption
-                                    ?.copyWith(
-                                        color: Colors.green, fontSize: 16),
+                              documentSnapshot['isAvailable'] == true
+                                  ? Text(
+                                  'Tersedia',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption
+                                      ?.copyWith(
+                                      color: Colors.green,
+                                      fontSize: 16))
+                                  : Text(
+                                  'Tidak Tersedia',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption
+                                      ?.copyWith(
+                                      color: Colors.red,
+                                      fontSize: 16)
                               )
-                              // Text('Tersedia',
-                              //     style: TextStyle(color: Colors.green)),
-                              // Text(
-                              //     'Tidak tersedia',
-                              //     style: TextStyle(color: Colors.red)
-                              // )
                             ],
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              final bool isAvailable = documentSnapshot['isAvailable'];
+                              isAvailable == true
+                                  ? _books.doc(documentSnapshot.id).update({
+                                    "isAvailable": false})
+                                  : _books.doc(documentSnapshot.id).update({
+                                    "isAvailable": true});
+                              },
                             child: Container(
                               width: size.height * 0.15,
                               margin: const EdgeInsets.all(8.0),
@@ -150,14 +160,22 @@ class DetailBookPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: Text(
-                                'PINJAM',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .button
-                                    ?.copyWith(
-                                      color: Colors.white,
-                                    ),
+                              child: documentSnapshot['isAvailable'] == true
+                                  ? Text(
+                                    'PINJAM',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .button
+                                        ?.copyWith(
+                                      color: Colors.white))
+                                  : Text(
+                                  'KEMBALIKAN',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .button
+                                      ?.copyWith(
+                                      color: Colors.white
+                                  ),
                               ),
                             ),
                           ),
@@ -165,10 +183,6 @@ class DetailBookPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // const VerticalDivider(
-                  //   color: Colors.black,
-                  //   thickness: 3,
-                  // ),
                   Expanded(
                     flex: 7,
                     child: Container(
@@ -189,7 +203,8 @@ class DetailBookPage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
-                                ?.copyWith(color: accentColor, fontSize: 16),
+                                ?.copyWith(
+                                color: accentColor, fontSize: 16),
                             textAlign: TextAlign.center,
                           ),
                           Text(
@@ -200,7 +215,8 @@ class DetailBookPage extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
-                                  ?.copyWith(color: accentColor, fontSize: 16)),
+                                  ?.copyWith(color: accentColor, fontSize: 16)
+                          ),
                           Text(
                             documentSnapshot['publisher'],
                             textAlign: TextAlign.center,
@@ -264,9 +280,5 @@ class DetailBookPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String status(bool value) {
-    return value == true ? 'Tersedia' : 'Tidak tersedia';
   }
 }

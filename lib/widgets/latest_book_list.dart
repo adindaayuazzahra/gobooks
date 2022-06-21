@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 import '../pages/user/detail_book_page.dart';
 
-class PopularList extends StatelessWidget {
+class LatestBookList extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
-  const PopularList({
+
+  const LatestBookList({
     required this.documentSnapshot,
     Key? key,
   }) : super(key: key);
@@ -14,11 +15,9 @@ class PopularList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    DetailBookPage(documentSnapshot: documentSnapshot)));
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => DetailBookPage(documentSnapshot: documentSnapshot)
+        ));
       },
       child: Card(
         elevation: 7,

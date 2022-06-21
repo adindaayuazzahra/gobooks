@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/pages/user/book_by_year_page.dart';
 import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/user/detail_book_page.dart';
-import 'package:gobooks/pages/user/Latest_Book_Page.dart';
+import 'package:gobooks/pages/user/latest_book_page.dart';
 import 'package:gobooks/pages/user/Library_Book_Page.dart';
-import 'package:gobooks/widgets/category_list.dart';
-import 'package:gobooks/widgets/popular_list.dart';
-import 'package:gobooks/widgets/recommendation_list.dart';
-import 'package:gobooks/widgets/writer_list.dart';
-import 'dart:math';
+import 'package:gobooks/widgets/book_by_year_list.dart';
+import 'package:gobooks/widgets/latest_book_list.dart';
+import 'package:gobooks/widgets/library_book_list.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -104,66 +101,6 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-                // child: StreamBuilder(
-                //   stream: _books.snapshots(),
-                //   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                //     if (streamSnapshot.hasData) {
-                //       int randomNumber = Random().nextInt(4);
-                //       final DocumentSnapshot documentSnapshot =
-                //             streamSnapshot.data!.docs[randomNumber];
-                //       return Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //         children: [
-                //           Column(
-                //             mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               SizedBox(
-                //                 width: 160,
-                //                 child: Text(
-                //                   documentSnapshot['bookTitle'],
-                //                   textAlign: TextAlign.start,
-                //                   maxLines: 3,
-                //                   overflow: TextOverflow.ellipsis,
-                //                   style:
-                //                   Theme.of(context).textTheme.subtitle2?.copyWith(
-                //                     fontWeight: FontWeight.bold,
-                //                     fontSize: 15,
-                //                   ),
-                //                 ),
-                //               ),
-                //               const SizedBox(height: 3),
-                //               SizedBox(
-                //                 width: 160,
-                //                 child: Text(
-                //                   documentSnapshot['bookAuthor'],
-                //                   textAlign: TextAlign.start,
-                //                   maxLines: 3,
-                //                   overflow: TextOverflow.ellipsis,
-                //                   style:
-                //                   Theme.of(context).textTheme.bodyText1?.copyWith(
-                //                     fontSize: 12,
-                //                   ),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //           ClipRRect(
-                //             borderRadius: BorderRadius.circular(10.0),
-                //             child: Image.network(
-                //               documentSnapshot['bookUrl'],
-                //               fit: BoxFit.cover,
-                //               width: 70,
-                //             ),
-                //           ),
-                //         ],
-                //
-                //       );
-                //     }
-                //     return const Center(
-                //       child: CircularProgressIndicator(color: Colors.red),
-                //     );
-                //   },
-                // ),
               ),
               _buildSubHeading(
                 title: 'Tahun dipublikasi',
@@ -175,35 +112,77 @@ class _HomepageState extends State<Homepage> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      CategoryList(
+                      BookByYearList(
                         onTap: () {
-                          Navigator.push(
-                              context, MaterialPageRoute(
+                          Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return BookByYearPage();
+                                return BookByYearPage(
+                                  minYear: 2010,
+                                  // maxYear: DateTime(DateTime.now().year),
+                                  maxYear: 2022,
+                                );
                               }),
                           );
                         },
-                        numberOfPages: '2010 - Sekarang',
+                        numberOfPages: 'Sekarang - 2010',
                       ),
-                      CategoryList(
-                        onTap: () {},
+                      BookByYearList(
+                        onTap: () {
+                          Navigator.push(
+                            context, MaterialPageRoute(
+                              builder: (context) {
+                                return BookByYearPage(
+                                  minYear: 1975,
+                                  maxYear: 2000,
+                                );
+                              }),
+                          );
+                        },
                         numberOfPages: '2000 - 1975',
                       ),
-                      CategoryList(
-                        onTap: () {},
+                      BookByYearList(
+                        onTap: () {
+                          Navigator.push(
+                            context, MaterialPageRoute(
+                              builder: (context) {
+                                return BookByYearPage(
+                                  minYear: 1974,
+                                  maxYear: 1950,
+                                );
+                              }),
+                          );
+                        },
                         numberOfPages: '1974 - 1950',
                       ),
-                      CategoryList(
-                        onTap: () {},
+                      BookByYearList(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return BookByYearPage(
+                                  minYear: 1949,
+                                  maxYear: 1900,
+                                );
+                              }),
+                          );
+                        },
                         numberOfPages: '1949 - 1900',
                       ),
-                      CategoryList(
-                        onTap: () {},
+                      BookByYearList(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return BookByYearPage(
+                                  minYear: 1989,
+                                  maxYear: -9999,
+                                );
+                              }),
+                          );
+                        },
                         numberOfPages: '> 1899',
                       ),
                     ],
-                  )),
+                  )
+              ),
               const SizedBox(height: 5),
               _buildSubHeading(
                 title: 'List Buku Perpustakaan',
@@ -225,8 +204,9 @@ class _HomepageState extends State<Homepage> {
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
                               streamSnapshot.data!.docs[index];
-                          return RecommendationList(
-                              documentSnapshot: documentSnapshot);
+                          return LibraryBookList(
+                              documentSnapshot: documentSnapshot
+                          );
                         },
                       );
                     }
@@ -256,8 +236,8 @@ class _HomepageState extends State<Homepage> {
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
                               streamSnapshot.data!.docs[index];
-                          return PopularList(
-                            key: const Key('popular_list_1'),
+                          return LatestBookList(
+                            key: const Key('latest_book_list_1'),
                             documentSnapshot: documentSnapshot,
                           );
                         },
@@ -269,26 +249,6 @@ class _HomepageState extends State<Homepage> {
                   },
                 ),
               ),
-              // const SizedBox(height: 8),
-              // _buildSubHeading(
-              //   title: 'Penulis Populer',
-              //   onTap: () {},
-              //   key: const Key('penulis_popular_lainnya'),
-              // ),
-              // const SizedBox(height: 7),
-              // SizedBox(
-              //   height: 70,
-              //   child: ListView.builder(
-              //     scrollDirection: Axis.horizontal,
-              //     itemCount: 9,
-              //     itemBuilder: (context, index) {
-              //       return WriterList(
-              //         key: const Key('penulis_popular_1'),
-              //         onTap: () {},
-              //       );
-              //     },
-              //   ),
-              // ),
             ],
           ),
         ),
@@ -321,10 +281,10 @@ class _HomepageState extends State<Homepage> {
                 Text(
                   'Lainnya',
                   style: TextStyle(
-                      fontWeight: FontWeight.w500, color: secdarkColor),
+                      fontWeight: FontWeight.w500,
+                      color: secdarkColor
+                  ),
                 ),
-                //Icon(Icons.keyboard_arrow_right_rounded),
-                //Icon(Icons.arrow_right_alt_rounded)
               ],
             ),
           ),

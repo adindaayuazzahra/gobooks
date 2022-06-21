@@ -26,8 +26,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
   final TextEditingController _yearPublishedController = TextEditingController();
   late bool _isAvailable = false;
 
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
 
   @override
   Widget build(BuildContext context) {
@@ -210,8 +209,9 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                 ),
                               ),
                               SwitchListTile(
-                                title:
-                                    Text('Status : ${_status(_isAvailable)}'),
+                                title: Text(
+                                    'Status : ${_status(_isAvailable)}'
+                                ),
                                 value: _isAvailable,
                                 onChanged: (value) {
                                   setState(() {
@@ -661,29 +661,11 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                 ),
               ),
               const SizedBox(height: 5),
-              // ElevatedButton.icon(
-              //   style: ElevatedButton.styleFrom(
-              //       primary: secdarkColor,
-              //       padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 8)),
-              //   onPressed: () {
-              //     Navigator.pushNamed(context, InputBook.ROUTE_NAME);
-              //   },
-              //   icon: const Icon(
-              //     Icons.add_rounded,
-              //     size: 20,
-              //   ),
-              //   label: Text('Tambah Buku',
-              //       style: Theme.of(context)
-              //           .textTheme
-              //           .button
-              //           ?.copyWith(color: Colors.white)),
-              // ),
               SizedBox(
                 height: size.height * 0.7,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder:
-                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
                         itemCount: streamSnapshot.data!.docs.length,
