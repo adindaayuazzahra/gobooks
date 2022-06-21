@@ -167,7 +167,7 @@ class DetailBookPage extends StatelessWidget {
                   ),
                   // const VerticalDivider(
                   //   color: Colors.black,
-                  //   thickness: 9,
+                  //   thickness: 3,
                   // ),
                   Expanded(
                     flex: 7,
@@ -181,7 +181,7 @@ class DetailBookPage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
-                                ?.copyWith(color: Colors.black, fontSize: 18),
+                                ?.copyWith(color: Colors.black, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
                           Text(
