@@ -8,8 +8,10 @@ import 'package:gobooks/pages/user/bookmark_page.dart';
 import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:gobooks/pages/user/Latest_Book_Page.dart';
+import 'package:gobooks/pages/user/latest_book_page.dart';
 import 'package:gobooks/pages/user/Library_Book_Page.dart';
+
+export 'package:gobooks/pages/user/detail_book_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

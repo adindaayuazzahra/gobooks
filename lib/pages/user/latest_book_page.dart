@@ -41,13 +41,19 @@ class _LatestBookPageState extends State<LatestBookPage> {
       body: StreamBuilder(
         stream: _books.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+          final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
+            streamSnapshot.data!.docs.asMap().forEach((index, value) {
+              if(value['yearPublished'] >= 2021){
+                yearNumber.add(index);
+              }
+            });
             return ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: streamSnapshot.data!.docs.length,
+              itemCount: yearNumber.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot =
-                streamSnapshot.data!.docs[index];
+                final DocumentSnapshot documentSnapshot = streamSnapshot
+                    .data!.docs[yearNumber[index]];
                 return BookList(
                   documentSnapshot: documentSnapshot,
                 );
@@ -55,7 +61,7 @@ class _LatestBookPageState extends State<LatestBookPage> {
             );
           }
           return const Center(
-            child: CircularProgressIndicator(color: Colors.red),
+            child: CircularProgressIndicator(color: accentColor),
           );
         },
       ),
