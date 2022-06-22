@@ -32,10 +32,6 @@ class _MainPageState extends State<MainPage> {
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(30),
-          // borderRadius: BorderRadius.only(
-          //   topLeft: Radius.circular(30),
-          //   topRight: Radius.circular(30),
-          // ),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),

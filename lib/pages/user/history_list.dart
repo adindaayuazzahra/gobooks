@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/pages/user/detail_book_page.dart';
 
-import '../pages/user/detail_book_page.dart';
-
-class HistoryBookmarkList extends StatelessWidget {
+class HistoryList extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
 
-  const HistoryBookmarkList({
+  const HistoryList({
     Key? key,
     required this.documentSnapshot,
   }) : super(key: key);
@@ -67,7 +66,7 @@ class HistoryBookmarkList extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Tanggal dikembalikan 2/12/22',
+                            'Tanggal dikembalikan : ${documentSnapshot["date"]}',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
