@@ -67,7 +67,7 @@ class _HomepageState extends State<Homepage> {
                         SizedBox(
                           width: 160,
                           child: Text(
-                            'Lorem ipsum dolor sit amet',
+                            'Selamat datang di GoBooks',
                             textAlign: TextAlign.start,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
@@ -82,7 +82,7 @@ class _HomepageState extends State<Homepage> {
                         SizedBox(
                           width: 160,
                           child: Text(
-                            'Etiam tempor blandit ligula a iaculis. Donec ',
+                            'Ayo kembangkan jiwa literasi mulai sekarang.',
                             textAlign: TextAlign.start,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
@@ -114,14 +114,15 @@ class _HomepageState extends State<Homepage> {
                     children: [
                       BookByYearList(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return BookByYearPage(
-                                  minYear: 2010,
-                                  // maxYear: DateTime(DateTime.now().year),
-                                  maxYear: 2022,
-                                );
-                              }),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return BookByYearPage(
+                                minYear: 2010,
+                                // maxYear: DateTime(DateTime.now().year),
+                                maxYear: 2022,
+                              );
+                            }),
                           );
                         },
                         numberOfPages: 'Sekarang - 2010',
@@ -129,13 +130,13 @@ class _HomepageState extends State<Homepage> {
                       BookByYearList(
                         onTap: () {
                           Navigator.push(
-                            context, MaterialPageRoute(
-                              builder: (context) {
-                                return BookByYearPage(
-                                  minYear: 1975,
-                                  maxYear: 2000,
-                                );
-                              }),
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return BookByYearPage(
+                                minYear: 1975,
+                                maxYear: 2000,
+                              );
+                            }),
                           );
                         },
                         numberOfPages: '2000 - 1975',
@@ -143,46 +144,47 @@ class _HomepageState extends State<Homepage> {
                       BookByYearList(
                         onTap: () {
                           Navigator.push(
-                            context, MaterialPageRoute(
-                              builder: (context) {
-                                return BookByYearPage(
-                                  minYear: 1974,
-                                  maxYear: 1950,
-                                );
-                              }),
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return BookByYearPage(
+                                minYear: 1974,
+                                maxYear: 1950,
+                              );
+                            }),
                           );
                         },
                         numberOfPages: '1974 - 1950',
                       ),
                       BookByYearList(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return BookByYearPage(
-                                  minYear: 1949,
-                                  maxYear: 1900,
-                                );
-                              }),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return BookByYearPage(
+                                minYear: 1949,
+                                maxYear: 1900,
+                              );
+                            }),
                           );
                         },
                         numberOfPages: '1949 - 1900',
                       ),
                       BookByYearList(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return BookByYearPage(
-                                  minYear: 1989,
-                                  maxYear: -9999,
-                                );
-                              }),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return BookByYearPage(
+                                minYear: 1989,
+                                maxYear: -9999,
+                              );
+                            }),
                           );
                         },
                         numberOfPages: '> 1899',
                       ),
                     ],
-                  )
-              ),
+                  )),
               const SizedBox(height: 5),
               _buildSubHeading(
                 title: 'List Buku Perpustakaan',
@@ -205,8 +207,7 @@ class _HomepageState extends State<Homepage> {
                           final DocumentSnapshot documentSnapshot =
                               streamSnapshot.data!.docs[index];
                           return LibraryBookList(
-                              documentSnapshot: documentSnapshot
-                          );
+                              documentSnapshot: documentSnapshot);
                         },
                       );
                     }
@@ -281,9 +282,7 @@ class _HomepageState extends State<Homepage> {
                 Text(
                   'Lainnya',
                   style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: secdarkColor
-                  ),
+                      fontWeight: FontWeight.w500, color: secdarkColor),
                 ),
               ],
             ),

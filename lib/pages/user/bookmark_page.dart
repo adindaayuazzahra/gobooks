@@ -11,7 +11,8 @@ class BookmarkPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+    final CollectionReference _books =
+        FirebaseFirestore.instance.collection('Book');
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -26,6 +27,7 @@ class BookmarkPage extends StatelessWidget {
             size: 25,
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Bookmark',
           style: Theme.of(context)
@@ -34,14 +36,13 @@ class BookmarkPage extends StatelessWidget {
               ?.copyWith(color: accentColor, fontSize: 25),
         ),
       ),
-
       body: StreamBuilder(
         stream: _books.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           final List<int> listOfBooked = <int>[];
           if (streamSnapshot.hasData) {
             streamSnapshot.data!.docs.asMap().forEach((index, value) {
-              if(value['isAvailable'] == false){
+              if (value['isAvailable'] == false) {
                 listOfBooked.add(index);
               }
             });
@@ -49,8 +50,8 @@ class BookmarkPage extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: listOfBooked.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot = streamSnapshot
-                    .data!.docs[listOfBooked[index]];
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[listOfBooked[index]];
                 return BookList(
                   documentSnapshot: documentSnapshot,
                 );

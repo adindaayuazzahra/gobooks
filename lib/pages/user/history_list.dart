@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/user/detail_book_page.dart';
 
-class BookList extends StatelessWidget {
+class HistoryList extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
 
-  const BookList({
+  const HistoryList({
     Key? key,
     required this.documentSnapshot,
   }) : super(key: key);
@@ -23,7 +23,7 @@ class BookList extends StatelessWidget {
       },
       child: Card(
         elevation: 7,
-        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+        margin: const EdgeInsets.fromLTRB(15, 0, 15, 13),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -47,6 +47,7 @@ class BookList extends StatelessWidget {
                   child: Image.network(
                     documentSnapshot['bookUrl'],
                     fit: BoxFit.cover,
+                    //width: size.width * 0.25,
                     width: 80,
                     height: 80,
                   ),
@@ -78,10 +79,30 @@ class BookList extends StatelessWidget {
                                   ),
                             ),
                           ),
-                          Text(documentSnapshot['bookAuthor'],
-                              style: Theme.of(context).textTheme.bodyText2),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Tanggal dikembalikan :',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                ?.copyWith(fontSize: 12),
+                          ),
+                          Text(
+                            '${documentSnapshot["date"]}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                ?.copyWith(fontSize: 12),
+                          ),
                         ],
                       ),
+                    ),
+                    Text(
+                      'Dipinjam',
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                            fontWeight: FontWeight.w300,
+                            fontSize: 12,
+                          ),
                     ),
                   ],
                 ),
