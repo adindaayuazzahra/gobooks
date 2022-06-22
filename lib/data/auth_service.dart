@@ -50,20 +50,32 @@ class AuthServices {
     }
   }
 
+  //static Future<User?> signIn(String email, String password) async {
+  //  try {
+  //    final credential = await FirebaseAuth.instance
+  //        .signInWithEmailAndPassword(email: email, password: password);
+  //    if (credential != null) {
+  //      final User user = await _auth.currentUser!;
+  //      final userID = user.uid;
+  //    }
+  //  } on FirebaseAuthException catch (e) {
+  //    if (e.code != email) {
+  //      print('No user found for that email.');
+  //    } else if (e.code != password) {
+  //      print('Wrong password provided for that user.');
+  //    }
+  //  }
+  //}
+
   static Future<User?> signIn(String email, String password) async {
     try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      if (credential != null) {
-        final User user = await _auth.currentUser!;
-        final userID = user.uid;
-      }
-    } on FirebaseAuthException catch (e) {
-      if (e.code != email) {
-        print('No user found for that email.');
-      } else if (e.code != password) {
-        print('Wrong password provided for that user.');
-      }
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User firebaseUser = result.user!;
+
+      return firebaseUser;
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
   }
 
