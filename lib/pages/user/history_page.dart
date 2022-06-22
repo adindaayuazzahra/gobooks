@@ -151,16 +151,6 @@ class HistoryPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: accentColor,
-            size: 25,
-          ),
-        ),
         title: Text(
           'Riwayat Peminjaman',
           style: Theme.of(context)

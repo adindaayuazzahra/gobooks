@@ -13,13 +13,14 @@ class HistoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    DetailBookPage(documentSnapshot: documentSnapshot)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>
+                DetailBookPage(documentSnapshot: documentSnapshot)
+            )
+        );
       },
       child: Card(
         elevation: 7,
@@ -80,30 +81,61 @@ class HistoryList extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Text(
-                            'Tanggal dikembalikan :',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                ?.copyWith(fontSize: 12),
-                          ),
-                          Text(
-                            '${documentSnapshot["date"]}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                ?.copyWith(fontSize: 12),
-                          ),
+                          // documentSnapshot['dateBorrowed'] && documentSnapshot[dateReturned]
+                          documentSnapshot['isAvailable'] == false ? Column(
+                            children: [
+                              Text(
+                                '📅 Dipinjam Pada : ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    ?.copyWith(fontSize: 12),
+                              ),
+                              Text(
+                                '${documentSnapshot["dateBorrowed"]}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    ?.copyWith(fontSize: 12),
+                              ),
+                            ],
+                          ) : Column(
+                            children: [
+                              Text(
+                                '📅 Dikembalikan Pada : ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    ?.copyWith(fontSize: 12),
+                              ),
+                              Text(
+                                '${documentSnapshot["dateReturned"]}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    ?.copyWith(fontSize: 12),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
+                    documentSnapshot['isAvailable'] == false ?
                     Text(
                       'Dipinjam',
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 12,
-                          ),
-                    ),
+                          fontWeight: FontWeight.w300,
+                          fontSize: 12,
+                          color: Colors.red
+                      ),
+                    ) : Text(
+                      'Telah Dikembalikan',
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 12,
+                          color: Colors.green
+                      ),
+                    )
                   ],
                 ),
               ),

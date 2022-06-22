@@ -15,11 +15,11 @@ class BookList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    DetailBookPage(documentSnapshot: documentSnapshot)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>
+                DetailBookPage(documentSnapshot: documentSnapshot)
+            )
+        );
       },
       child: Card(
         elevation: 7,
@@ -79,7 +79,8 @@ class BookList extends StatelessWidget {
                             ),
                           ),
                           Text(documentSnapshot['bookAuthor'],
-                              style: Theme.of(context).textTheme.bodyText2),
+                              style: Theme.of(context).textTheme.bodyText2
+                          ),
                         ],
                       ),
                     ),

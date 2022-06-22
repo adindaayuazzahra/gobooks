@@ -12,7 +12,10 @@ class DetailBookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+    final CollectionReference _books =
+        FirebaseFirestore.instance.collection('Book');
+    var isBookmarked = documentSnapshot['isBookmarked'];
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -34,9 +37,17 @@ class DetailBookPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, BookmarkPage.ROUTE_NAME);
+                isBookmarked == true ? isBookmarked = false : isBookmarked = true;
+                _books.doc(documentSnapshot.id).update({"isBookmarked": isBookmarked});
               },
-              icon: Container(
+              icon: isBookmarked == true ? Container(
+                margin: const EdgeInsets.only(right: 8.0),
+                child: const Icon(
+                  Icons.bookmark,
+                  color: Colors.black,
+                  size: 25,
+                ),
+              ) : Container(
                 margin: const EdgeInsets.only(right: 8.0),
                 child: const Icon(
                   Icons.bookmark_outline_rounded,
@@ -115,48 +126,50 @@ class DetailBookPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               documentSnapshot['isAvailable'] == true
-                                  ? Text(
-                                  'Tersedia',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      ?.copyWith(
-                                      color: Colors.green,
-                                      fontSize: 16))
-                                  : Text(
-                                  'Tidak Tersedia',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      ?.copyWith(
-                                      color: Colors.red,
-                                      fontSize: 16)
-                              )
+                                  ? Text('Tersedia',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .caption
+                                          ?.copyWith(
+                                              color: Colors.green,
+                                              fontSize: 16))
+                                  : Text('Tidak Tersedia',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .caption
+                                          ?.copyWith(
+                                              color: Colors.red, fontSize: 16))
                             ],
                           ),
                           InkWell(
                             onTap: () {
                               bool history = documentSnapshot['history'];
-                              // if (history == false) {
-                              //   history = true;
-                              // } else {
-                              //   history = true;
-                              // }
+                              // history == true ? history = false : history = true;
                               history = true;
-                              _books.doc(documentSnapshot.id).update({"history": history});
+                              
+                              _books.doc(documentSnapshot.id)
+                                  .update({"history": history});
 
-                              String date = documentSnapshot['date'];
+                              String dateReturned = documentSnapshot['dateReturned'];
                               var dt = DateTime.now();
-                              date = '${dt.day} - ${dt.month} - ${dt.year} \n ${dt.hour} - ${dt.minute} - ${dt.second}';
-                              _books.doc(documentSnapshot.id).update({"date": date});
+                              var date = '${dt.day} - ${dt.month} - ${dt.year} • ${dt.hour} : ${dt.minute}'; 
+
+                              // ● ◦
+                              _books.doc(documentSnapshot.id).update({"dateBorrowed": date});
+                              // _books.doc(documentSnapshot.id).update({"dateReturned": ""});
 
                               final bool isAvailable = documentSnapshot['isAvailable'];
+                              // isAvailable == true
+                              //     ? _books.doc(documentSnapshot.id).update({"isAvailable": false})
+                              //
+                              //     : dateReturned != "" ? _books.doc(documentSnapshot.id).update({"isAvailable": true, "dateReturned": date})
+                              //
+                              //     : dateReturned == "" ;
                               isAvailable == true
-                                  ? _books.doc(documentSnapshot.id).update({
-                                    "isAvailable": false})
-                                  : _books.doc(documentSnapshot.id).update({
-                                    "isAvailable": true});
-                              },
+                                  ? _books.doc(documentSnapshot.id).update({"isAvailable": false})
+
+                                  : _books.doc(documentSnapshot.id).update({"isAvailable": true, "dateReturned": date});
+                            },
                             child: Container(
                               width: size.height * 0.15,
                               margin: const EdgeInsets.all(8.0),
@@ -175,22 +188,18 @@ class DetailBookPage extends StatelessWidget {
                                 ],
                               ),
                               child: documentSnapshot['isAvailable'] == true
-                                  ? Text(
-                                    'PINJAM',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .button
-                                        ?.copyWith(
-                                      color: Colors.white))
+                                  ? Text('PINJAM',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .button
+                                          ?.copyWith(color: Colors.white))
                                   : Text(
-                                  'KEMBALIKAN',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .button
-                                      ?.copyWith(
-                                      color: Colors.white
-                                  ),
-                              ),
+                                      'KEMBALIKAN',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .button
+                                          ?.copyWith(color: Colors.white),
+                                    ),
                             ),
                           ),
                         ],
@@ -217,8 +226,7 @@ class DetailBookPage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
-                                ?.copyWith(
-                                color: accentColor, fontSize: 16),
+                                ?.copyWith(color: accentColor, fontSize: 16),
                             textAlign: TextAlign.center,
                           ),
                           Text(
@@ -229,8 +237,7 @@ class DetailBookPage extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
-                                  ?.copyWith(color: accentColor, fontSize: 16)
-                          ),
+                                  ?.copyWith(color: accentColor, fontSize: 16)),
                           Text(
                             documentSnapshot['publisher'],
                             textAlign: TextAlign.center,
