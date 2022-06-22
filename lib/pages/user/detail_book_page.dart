@@ -136,6 +136,20 @@ class DetailBookPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
+                              bool history = documentSnapshot['history'];
+                              // if (history == false) {
+                              //   history = true;
+                              // } else {
+                              //   history = true;
+                              // }
+                              history = true;
+                              _books.doc(documentSnapshot.id).update({"history": history});
+
+                              String date = documentSnapshot['date'];
+                              var dt = DateTime.now();
+                              date = '${dt.day} - ${dt.month} - ${dt.year} \n ${dt.hour} - ${dt.minute} - ${dt.second}';
+                              _books.doc(documentSnapshot.id).update({"date": date});
+
                               final bool isAvailable = documentSnapshot['isAvailable'];
                               isAvailable == true
                                   ? _books.doc(documentSnapshot.id).update({
