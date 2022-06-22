@@ -10,6 +10,7 @@ import 'package:gobooks/common/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gobooks/pages/user/latest_book_page.dart';
 import 'package:gobooks/pages/user/Library_Book_Page.dart';
+import 'package:gobooks/pages/welcome_page.dart';
 
 export 'package:gobooks/pages/user/detail_book_page.dart';
 
@@ -41,7 +42,7 @@ class GoBooks extends StatelessWidget {
             ),
         textTheme: myTextTheme,
       ),
-      // home: const WelcomePage(), => yang utama
+      // home: const WelcomePage(),
       // home: const InputBook(),
       // home: const HomePage(),
       // home: const MainPageAdmin(),
@@ -62,8 +63,7 @@ class GoBooks extends StatelessWidget {
           case BookingPage.ROUTE_NAME:
             return CupertinoPageRoute(builder: (_) => const BookingPage());
           case LibraryBookPage.ROUTE_NAME:
-            return CupertinoPageRoute(
-                builder: (_) => const LibraryBookPage());
+            return CupertinoPageRoute(builder: (_) => const LibraryBookPage());
           default:
             return MaterialPageRoute(builder: (_) {
               return const Scaffold(
