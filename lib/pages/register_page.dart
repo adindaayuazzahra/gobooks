@@ -149,15 +149,15 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                   child: OutlinedButton(
                     onPressed: () async {
-                      // final result = await AuthServices.signUpWithGoogle();
-                      // if (result != null) {
-                      //   Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const MainPage(),
-                      //     ),
-                      //   );
-                      // }
+                       final result = await AuthServices.signUpWithGoogle();
+                       if (result != null) {
+                         Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) => const MainPage(),
+                           ),
+                         );
+                       }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
