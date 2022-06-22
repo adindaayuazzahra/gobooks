@@ -119,8 +119,7 @@ class _HomepageState extends State<Homepage> {
                             MaterialPageRoute(builder: (context) {
                               return BookByYearPage(
                                 minYear: 2010,
-                                // maxYear: DateTime(DateTime.now().year),
-                                maxYear: 2022,
+                                maxYear: DateTime.now().year,
                               );
                             }),
                           );
@@ -134,7 +133,7 @@ class _HomepageState extends State<Homepage> {
                             MaterialPageRoute(builder: (context) {
                               return BookByYearPage(
                                 minYear: 1975,
-                                maxYear: 2000,
+                                maxYear: 2009,
                               );
                             }),
                           );
@@ -147,8 +146,8 @@ class _HomepageState extends State<Homepage> {
                             context,
                             MaterialPageRoute(builder: (context) {
                               return BookByYearPage(
-                                minYear: 1974,
-                                maxYear: 1950,
+                                minYear: 1950,
+                                maxYear: 1974,
                               );
                             }),
                           );
@@ -161,8 +160,8 @@ class _HomepageState extends State<Homepage> {
                             context,
                             MaterialPageRoute(builder: (context) {
                               return BookByYearPage(
-                                minYear: 1949,
-                                maxYear: 1900,
+                                minYear: 1900,
+                                maxYear: 1949,
                               );
                             }),
                           );
@@ -175,8 +174,8 @@ class _HomepageState extends State<Homepage> {
                             context,
                             MaterialPageRoute(builder: (context) {
                               return BookByYearPage(
-                                minYear: 1989,
-                                maxYear: -9999,
+                                minYear: 0,
+                                maxYear: 1989,
                               );
                             }),
                           );

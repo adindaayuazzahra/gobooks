@@ -24,7 +24,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
   final TextEditingController _numberOfPagesController = TextEditingController();
   final TextEditingController _synopsisController = TextEditingController();
   final TextEditingController _yearPublishedController = TextEditingController();
-  late bool _isAvailable = false;
+  late bool _isAvailable = true;
 
   final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
 
@@ -59,7 +59,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         _synopsisController.text = "";
                         _yearPublishedController.text = "";
                         _numberOfPagesController.text = "";
-                        _isAvailable = false;
+                        _isAvailable = true;
                         Navigator.pop(context);
                       },
                       icon: const Icon(
@@ -246,15 +246,19 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   final bool isAvailable = _isAvailable;
 
                                   _books.add({
-                                    "bookTitle": bookTitle,
-                                    "bookUrl": bookUrl,
-                                    "bookAuthor": author,
-                                    "numberOfPages": numberOfPages,
-                                    "publisher": publisher,
-                                    "yearPublished": yearPublished,
-                                    "bookLocation": bookLocation,
-                                    "synopsis": synopsis,
-                                    "isAvailable": isAvailable
+                                    "bookTitle": bookTitle, //
+                                    "bookUrl": bookUrl, //
+                                    "bookAuthor": author, //
+                                    "numberOfPages": numberOfPages,//
+                                    "publisher": publisher, //
+                                    "yearPublished": yearPublished,//
+                                    "bookLocation": bookLocation, //
+                                    "synopsis": synopsis,//
+                                    "isAvailable": isAvailable, //
+                                    "dateBorrowed": "",
+                                    "dateReturned": "",
+                                    "history": false,
+                                    "isBookmarked": false,
                                   });
 
                                   _bookTitleController.text = "";
@@ -265,7 +269,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   _yearPublishedController.text = "";
                                   _bookLocationController.text = "";
                                   _synopsisController.text = "";
-                                  _isAvailable = false;
+                                  _isAvailable = true;
 
                                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                       content: Text('Anda telah berhasil menambahkan buku.'))
