@@ -4,7 +4,7 @@ import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/widgets/booklist.dart';
 
 class LatestBookPage extends StatefulWidget {
-  static const ROUTE_NAME = '/popular_page';
+  static const routeName = '/popular_page';
   const LatestBookPage({Key? key}) : super(key: key);
 
   @override
@@ -12,7 +12,8 @@ class LatestBookPage extends StatefulWidget {
 }
 
 class _LatestBookPageState extends State<LatestBookPage> {
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class _LatestBookPageState extends State<LatestBookPage> {
           final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
             streamSnapshot.data!.docs.asMap().forEach((index, value) {
-              if(value['yearPublished'] >= 2021){
+              if (value['yearPublished'] >= 2021) {
                 yearNumber.add(index);
               }
             });
@@ -52,8 +53,8 @@ class _LatestBookPageState extends State<LatestBookPage> {
               scrollDirection: Axis.vertical,
               itemCount: yearNumber.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot = streamSnapshot
-                    .data!.docs[yearNumber[index]];
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[yearNumber[index]];
                 return BookList(
                   documentSnapshot: documentSnapshot,
                 );

@@ -6,7 +6,7 @@ import 'package:gobooks/widgets/booklist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecommendationPage extends StatefulWidget {
-  static const ROUTE_NAME = '/rekomendasi_page';
+  static const routeName = '/rekomendasi_page';
   const RecommendationPage({Key? key}) : super(key: key);
 
   @override

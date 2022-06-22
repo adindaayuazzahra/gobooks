@@ -7,7 +7,7 @@ import 'package:gobooks/widgets/booking_list.dart';
 import '../../widgets/history_bookmark_list.dart';
 
 class BookingPage extends StatefulWidget {
-  static const ROUTE_NAME = '/booking_list';
+  static const routeName = '/booking_list';
   const BookingPage({Key? key}) : super(key: key);
 
   @override
@@ -196,7 +196,7 @@ class _BookingPageState extends State<BookingPage> {
                             ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, MainPageAdmin.ROUTE_NAME);
+                        Navigator.pushNamed(context, MainPageAdmin.routeName);
                       },
                     ),
                     const SizedBox(height: 16),

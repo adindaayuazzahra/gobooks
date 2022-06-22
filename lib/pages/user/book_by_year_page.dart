@@ -5,17 +5,15 @@ import 'package:gobooks/pages/user/book_list_by_year.dart';
 import 'package:gobooks/widgets/booklist.dart';
 
 class BookByYearPage extends StatelessWidget {
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
-  static const ROUTE_NAME = '/bookByYearPage';
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
+  static const routeName = '/bookByYearPage';
 
   final int minYear;
   final int maxYear;
 
-  BookByYearPage({
-    Key? key,
-    required this.minYear,
-    required this.maxYear
-  }) : super(key: key);
+  BookByYearPage({Key? key, required this.minYear, required this.maxYear})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +32,16 @@ class BookByYearPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: maxYear >= 1900
-            ? Text('$maxYear - $minYear', style: Theme.of(context)
-            .textTheme
-            .headline6
-            ?.copyWith(color: accentColor, fontSize: 25))
-            : Text('> 1899', style: Theme.of(context)
-            .textTheme
-            .headline6
-            ?.copyWith(color: accentColor, fontSize: 25)
-        ),
+            ? Text('$maxYear - $minYear',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.copyWith(color: accentColor, fontSize: 25))
+            : Text('> 1899',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.copyWith(color: accentColor, fontSize: 25)),
       ),
       body: StreamBuilder(
         stream: _books.snapshots(),
@@ -50,7 +49,7 @@ class BookByYearPage extends StatelessWidget {
           final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
             streamSnapshot.data!.docs.asMap().forEach((index, value) {
-              if(value['yearPublished'] >= minYear &&
+              if (value['yearPublished'] >= minYear &&
                   value['yearPublished'] <= maxYear) {
                 yearNumber.add(index);
               }
@@ -59,8 +58,8 @@ class BookByYearPage extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: yearNumber.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot = streamSnapshot
-                    .data!.docs[yearNumber[index]];
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[yearNumber[index]];
                 return BookListByYear(
                   documentSnapshot: documentSnapshot,
                 );
