@@ -4,17 +4,22 @@ import 'package:gobooks/common/styles.dart';
 
 import 'bookmark_page.dart';
 
-class DetailBookPage extends StatelessWidget {
+class DetailBookPage extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
 
   const DetailBookPage({Key? key, required this.documentSnapshot})
       : super(key: key);
 
   @override
+  State<DetailBookPage> createState() => _DetailBookPageState();
+}
+
+class _DetailBookPageState extends State<DetailBookPage> {
+  @override
   Widget build(BuildContext context) {
     final CollectionReference _books =
         FirebaseFirestore.instance.collection('Book');
-    var isBookmarked = documentSnapshot['isBookmarked'];
+    var isBookmarked = widget.documentSnapshot['isBookmarked'];
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -38,7 +43,7 @@ class DetailBookPage extends StatelessWidget {
           IconButton(
               onPressed: () {
                 isBookmarked == true ? isBookmarked = false : isBookmarked = true;
-                _books.doc(documentSnapshot.id).update({"isBookmarked": isBookmarked});
+                _books.doc(widget.documentSnapshot.id).update({"isBookmarked": isBookmarked});
               },
               icon: isBookmarked == true ? Container(
                 margin: const EdgeInsets.only(right: 8.0),
@@ -102,7 +107,7 @@ class DetailBookPage extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Image.network(
-                                documentSnapshot['bookUrl'],
+                                widget.documentSnapshot['bookUrl'],
                                 fit: BoxFit.cover,
                                 width: size.width * 0.5,
                                 height: size.height * 0.24,
@@ -111,11 +116,11 @@ class DetailBookPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            '${documentSnapshot['numberOfPages']} Halaman',
+                            '${widget.documentSnapshot['numberOfPages']} Halaman',
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                           Text(
-                            'Tahun Terbit : ${documentSnapshot['yearPublished']}',
+                            'Tahun Terbit : ${widget.documentSnapshot['yearPublished']}',
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle1
@@ -125,7 +130,7 @@ class DetailBookPage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              documentSnapshot['isAvailable'] == true
+                              widget.documentSnapshot['isAvailable'] == true
                                   ? Text('Tersedia',
                                       style: Theme.of(context)
                                           .textTheme
@@ -143,22 +148,22 @@ class DetailBookPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              bool history = documentSnapshot['history'];
+                              bool history = widget.documentSnapshot['history'];
                               // history == true ? history = false : history = true;
                               history = true;
-                              
-                              _books.doc(documentSnapshot.id)
+
+                              _books.doc(widget.documentSnapshot.id)
                                   .update({"history": history});
 
-                              String dateReturned = documentSnapshot['dateReturned'];
+                              String dateReturned = widget.documentSnapshot['dateReturned'];
                               var dt = DateTime.now();
-                              var date = '${dt.day} - ${dt.month} - ${dt.year} • ${dt.hour} : ${dt.minute}'; 
+                              var date = '${dt.day} - ${dt.month} - ${dt.year} • ${dt.hour} : ${dt.minute}';
 
                               // ● ◦
-                              _books.doc(documentSnapshot.id).update({"dateBorrowed": date});
+                              _books.doc(widget.documentSnapshot.id).update({"dateBorrowed": date});
                               // _books.doc(documentSnapshot.id).update({"dateReturned": ""});
 
-                              final bool isAvailable = documentSnapshot['isAvailable'];
+                              final bool isAvailable = widget.documentSnapshot['isAvailable'];
                               // isAvailable == true
                               //     ? _books.doc(documentSnapshot.id).update({"isAvailable": false})
                               //
@@ -166,9 +171,9 @@ class DetailBookPage extends StatelessWidget {
                               //
                               //     : dateReturned == "" ;
                               isAvailable == true
-                                  ? _books.doc(documentSnapshot.id).update({"isAvailable": false})
+                                  ? _books.doc(widget.documentSnapshot.id).update({"isAvailable": false})
 
-                                  : _books.doc(documentSnapshot.id).update({"isAvailable": true, "dateReturned": date});
+                                  : _books.doc(widget.documentSnapshot.id).update({"isAvailable": true, "dateReturned": date});
                             },
                             child: Container(
                               width: size.height * 0.15,
@@ -187,7 +192,7 @@ class DetailBookPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: documentSnapshot['isAvailable'] == true
+                              child: widget.documentSnapshot['isAvailable'] == true
                                   ? Text('PINJAM',
                                       style: Theme.of(context)
                                           .textTheme
@@ -214,7 +219,7 @@ class DetailBookPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            documentSnapshot['bookTitle'],
+                            widget.documentSnapshot['bookTitle'],
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
@@ -230,7 +235,7 @@ class DetailBookPage extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            documentSnapshot['bookAuthor'],
+                            widget.documentSnapshot['bookAuthor'],
                             textAlign: TextAlign.center,
                           ),
                           Text('Penerbit',
@@ -239,7 +244,7 @@ class DetailBookPage extends StatelessWidget {
                                   .headline6
                                   ?.copyWith(color: accentColor, fontSize: 16)),
                           Text(
-                            documentSnapshot['publisher'],
+                            widget.documentSnapshot['publisher'],
                             textAlign: TextAlign.center,
                           ),
                           Text(
@@ -250,7 +255,7 @@ class DetailBookPage extends StatelessWidget {
                                 ?.copyWith(color: accentColor, fontSize: 16),
                           ),
                           Text(
-                            documentSnapshot['bookLocation'],
+                            widget.documentSnapshot['bookLocation'],
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -289,7 +294,7 @@ class DetailBookPage extends StatelessWidget {
                           ?.copyWith(color: accentColor),
                     ),
                     Text(
-                      documentSnapshot['synopsis'],
+                      widget.documentSnapshot['synopsis'],
                       style: Theme.of(context).textTheme.subtitle1,
                       textAlign: TextAlign.justify,
                     ),

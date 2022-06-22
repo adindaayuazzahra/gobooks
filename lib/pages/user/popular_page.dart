@@ -6,7 +6,7 @@ import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/widgets/booklist.dart';
 
 class PopularPage extends StatefulWidget {
-  static const ROUTE_NAME = '/popular_page';
+  static const routeName = '/popular_page';
   const PopularPage({Key? key}) : super(key: key);
 
   @override

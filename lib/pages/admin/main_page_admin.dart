@@ -5,7 +5,7 @@ import 'package:gobooks/pages/admin/booking_list_page.dart';
 
 class MainPageAdmin extends StatefulWidget {
   const MainPageAdmin({Key? key}) : super(key: key);
-  static const ROUTE_NAME = '/main_page_admin';
+  static const routeName = '/main_page_admin';
   @override
   State<MainPageAdmin> createState() => _MainPageAdminState();
 }
@@ -21,12 +21,15 @@ class _MainPageAdminState extends State<MainPageAdmin> {
   final TextEditingController _bookTitleController = TextEditingController();
   final TextEditingController _bookUrlController = TextEditingController();
   final TextEditingController _publisherController = TextEditingController();
-  final TextEditingController _numberOfPagesController = TextEditingController();
+  final TextEditingController _numberOfPagesController =
+      TextEditingController();
   final TextEditingController _synopsisController = TextEditingController();
-  final TextEditingController _yearPublishedController = TextEditingController();
+  final TextEditingController _yearPublishedController =
+      TextEditingController();
   late bool _isAvailable = true;
 
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +154,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -164,7 +167,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -209,9 +212,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                 ),
                               ),
                               SwitchListTile(
-                                title: Text(
-                                    'Status : ${_status(_isAvailable)}'
-                                ),
+                                title:
+                                    Text('Status : ${_status(_isAvailable)}'),
                                 value: _isAvailable,
                                 onChanged: (value) {
                                   setState(() {
@@ -233,12 +235,12 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                       _bookUrlController.text;
                                   final String author =
                                       _bookAuthorController.text;
-                                  final int? numberOfPages =
-                                      int.tryParse(_numberOfPagesController.text);
+                                  final int? numberOfPages = int.tryParse(
+                                      _numberOfPagesController.text);
                                   final String publisher =
                                       _publisherController.text;
-                                  final int? yearPublished =
-                                      int.tryParse(_yearPublishedController.text);
+                                  final int? yearPublished = int.tryParse(
+                                      _yearPublishedController.text);
                                   final String bookLocation =
                                       _bookLocationController.text;
                                   final String synopsis =
@@ -249,11 +251,11 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     "bookTitle": bookTitle, //
                                     "bookUrl": bookUrl, //
                                     "bookAuthor": author, //
-                                    "numberOfPages": numberOfPages,//
+                                    "numberOfPages": numberOfPages, //
                                     "publisher": publisher, //
-                                    "yearPublished": yearPublished,//
+                                    "yearPublished": yearPublished, //
                                     "bookLocation": bookLocation, //
-                                    "synopsis": synopsis,//
+                                    "synopsis": synopsis, //
                                     "isAvailable": isAvailable, //
                                     "dateBorrowed": "",
                                     "dateReturned": "",
@@ -271,9 +273,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   _synopsisController.text = "";
                                   _isAvailable = true;
 
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                      content: Text('Anda telah berhasil menambahkan buku.'))
-                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              'Anda telah berhasil menambahkan buku.')));
                                 },
                                 icon: const Icon(
                                   Icons.save_rounded,
@@ -295,8 +298,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         ),
                       ),
                     ),
-                  )
-              ),
+                  )),
             );
           });
     }
@@ -307,9 +309,11 @@ class _MainPageAdminState extends State<MainPageAdmin> {
         _bookTitleController.text = documentSnapshot['bookTitle'];
         _bookUrlController.text = documentSnapshot['bookUrl'];
         _bookAuthorController.text = documentSnapshot['bookAuthor'];
-        _numberOfPagesController.text = documentSnapshot['numberOfPages'].toString();
+        _numberOfPagesController.text =
+            documentSnapshot['numberOfPages'].toString();
         _publisherController.text = documentSnapshot['publisher'];
-        _yearPublishedController.text = documentSnapshot['yearPublished'].toString();
+        _yearPublishedController.text =
+            documentSnapshot['yearPublished'].toString();
         _bookLocationController.text = documentSnapshot['bookLocation'];
         _synopsisController.text = documentSnapshot['synopsis'];
         _isAvailable = documentSnapshot['isAvailable'];
@@ -419,8 +423,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -433,7 +436,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -447,8 +450,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                         Icons.published_with_changes),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -461,8 +463,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -475,8 +476,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -489,8 +489,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -518,12 +517,12 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                       _bookUrlController.text;
                                   final String author =
                                       _bookAuthorController.text;
-                                  final int? numberOfPages =
-                                      int.tryParse(_numberOfPagesController.text);
+                                  final int? numberOfPages = int.tryParse(
+                                      _numberOfPagesController.text);
                                   final String publisher =
                                       _publisherController.text;
-                                  final int? yearPublished =
-                                      int.tryParse(_yearPublishedController.text);
+                                  final int? yearPublished = int.tryParse(
+                                      _yearPublishedController.text);
                                   final String bookLocation =
                                       _bookLocationController.text;
                                   final String synopsis =
@@ -553,9 +552,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   _isAvailable = true;
                                   Navigator.of(context).pop();
 
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                      content: Text('Anda telah berhasil memperbaharui buku.'))
-                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              'Anda telah berhasil memperbaharui buku.')));
                                 },
                                 icon: const Icon(
                                   Icons.update,
@@ -577,8 +577,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         ),
                       ),
                     ),
-                  )
-              ),
+                  )),
             );
           });
     }
@@ -669,7 +668,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                 height: size.height * 0.7,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
                         itemCount: streamSnapshot.data!.docs.length,
@@ -680,8 +680,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                             margin: const EdgeInsets.all(10),
                             child: ListTile(
                               title: Text(documentSnapshot['bookTitle']),
-                              subtitle:
-                                  Text(documentSnapshot['yearPublished'].toString()),
+                              subtitle: Text(
+                                  documentSnapshot['yearPublished'].toString()),
                               trailing: SizedBox(
                                 width: 100,
                                 child: Row(
@@ -810,7 +810,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                             ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, BookingPage.ROUTE_NAME);
+                        Navigator.pushNamed(context, BookingPage.routeName);
                       },
                     ),
                   ],

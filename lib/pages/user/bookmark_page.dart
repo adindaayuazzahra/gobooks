@@ -6,7 +6,7 @@ import 'package:gobooks/common/styles.dart';
 import '../../widgets/booklist.dart';
 
 class BookmarkPage extends StatelessWidget {
-  static const ROUTE_NAME = '/bookmark';
+  static const routeName = '/bookmark';
   const BookmarkPage({Key? key}) : super(key: key);
 
   @override

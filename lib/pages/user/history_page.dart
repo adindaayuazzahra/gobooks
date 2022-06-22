@@ -139,7 +139,7 @@ import '../../widgets/booklist.dart';
 import 'history_list.dart';
 
 class HistoryPage extends StatelessWidget {
-  static const ROUTE_NAME = '/bookmark';
+  static const routeName = '/bookmark';
   const HistoryPage({Key? key}) : super(key: key);
 
   @override

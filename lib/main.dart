@@ -52,17 +52,17 @@ class GoBooks extends StatelessWidget {
         switch (settings.name) {
           case '/home':
             return MaterialPageRoute(builder: (_) => const MainPage());
-          case BookmarkPage.ROUTE_NAME:
+          case BookmarkPage.routeName:
             return CupertinoPageRoute(builder: (_) => const BookmarkPage());
-          case LatestBookPage.ROUTE_NAME:
+          case LatestBookPage.routeName:
             return CupertinoPageRoute(builder: (_) => const LatestBookPage());
-          case InputBook.ROUTE_NAME:
+          case InputBook.routeName:
             return CupertinoPageRoute(builder: (_) => const InputBook());
-          case MainPageAdmin.ROUTE_NAME:
+          case MainPageAdmin.routeName:
             return CupertinoPageRoute(builder: (_) => const MainPageAdmin());
-          case BookingPage.ROUTE_NAME:
+          case BookingPage.routeName:
             return CupertinoPageRoute(builder: (_) => const BookingPage());
-          case LibraryBookPage.ROUTE_NAME:
+          case LibraryBookPage.routeName:
             return CupertinoPageRoute(builder: (_) => const LibraryBookPage());
           default:
             return MaterialPageRoute(builder: (_) {

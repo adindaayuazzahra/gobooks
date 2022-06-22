@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
 class SearchPage extends StatefulWidget {
-  static const ROUTE_NAME = '/search';
+  static const routeName = '/search';
   const SearchPage({Key? key}) : super(key: key);
 
   @override

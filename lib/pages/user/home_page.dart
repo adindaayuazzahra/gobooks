@@ -36,7 +36,7 @@ class _HomepageState extends State<Homepage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, BookmarkPage.ROUTE_NAME);
+              Navigator.pushNamed(context, BookmarkPage.routeName);
             },
             icon: const Icon(
               Icons.bookmark_outline_rounded,
@@ -188,7 +188,7 @@ class _HomepageState extends State<Homepage> {
               _buildSubHeading(
                 title: 'List Buku Perpustakaan',
                 onTap: () {
-                  Navigator.pushNamed(context, LibraryBookPage.ROUTE_NAME);
+                  Navigator.pushNamed(context, LibraryBookPage.routeName);
                 },
                 key: const Key('rekomendasi_lainnya'),
               ),
@@ -219,7 +219,7 @@ class _HomepageState extends State<Homepage> {
               _buildSubHeading(
                 title: 'List Buku Terbaru',
                 onTap: () {
-                  Navigator.pushNamed(context, LatestBookPage.ROUTE_NAME);
+                  Navigator.pushNamed(context, LatestBookPage.routeName);
                 },
                 key: const Key('List_terbaru_lainnya'),
               ),

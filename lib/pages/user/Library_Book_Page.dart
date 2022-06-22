@@ -5,7 +5,7 @@ import 'package:gobooks/pages/user/detail_book_page.dart';
 import 'package:gobooks/widgets/booklist.dart';
 
 class LibraryBookPage extends StatefulWidget {
-  static const ROUTE_NAME = '/rekomendasi_page';
+  static const routeName = '/rekomendasi_page';
   const LibraryBookPage({Key? key}) : super(key: key);
 
   @override
@@ -13,7 +13,8 @@ class LibraryBookPage extends StatefulWidget {
 }
 
 class _LibraryBookPageState extends State<LibraryBookPage> {
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _LibraryBookPageState extends State<LibraryBookPage> {
               itemCount: streamSnapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
-                streamSnapshot.data!.docs[index];
+                    streamSnapshot.data!.docs[index];
                 return BookList(
                   documentSnapshot: documentSnapshot,
                 );
