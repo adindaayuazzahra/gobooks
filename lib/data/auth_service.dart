@@ -67,22 +67,20 @@ class AuthServices {
     }
   }
 
-  static Future<User?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
+  static Future<User?> signUpWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-      //return await FirebaseAuth.instance.signInWithCredential(credential);
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    return userCredential.user;
+  }   
 
   static Future<void> signOut() async {
     _auth.signOut();
