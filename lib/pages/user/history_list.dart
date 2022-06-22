@@ -15,9 +15,11 @@ class HistoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-            builder: (context) => DetailBookPage(documentSnapshot: documentSnapshot)
-        ));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    DetailBookPage(documentSnapshot: documentSnapshot)));
       },
       child: Card(
         elevation: 7,
@@ -28,14 +30,27 @@ class HistoryList extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  documentSnapshot['bookUrl'],
-                  fit: BoxFit.cover,
-                  //width: size.width * 0.25,
-                  width: 80,
-                  height: 80,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    documentSnapshot['bookUrl'],
+                    fit: BoxFit.cover,
+                    //width: size.width * 0.25,
+                    width: 80,
+                    height: 80,
+                  ),
                 ),
               ),
               Expanded(
@@ -58,15 +73,22 @@ class HistoryList extends StatelessWidget {
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: accentColor,
-                                fontSize: 14,
-                              ),
+                                    fontWeight: FontWeight.bold,
+                                    color: accentColor,
+                                    fontSize: 14,
+                                  ),
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Tanggal dikembalikan : ${documentSnapshot["date"]}',
+                            'Tanggal dikembalikan :',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                ?.copyWith(fontSize: 12),
+                          ),
+                          Text(
+                            '${documentSnapshot["date"]}',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -78,9 +100,9 @@ class HistoryList extends StatelessWidget {
                     Text(
                       'Dipinjam',
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 12,
-                      ),
+                            fontWeight: FontWeight.w300,
+                            fontSize: 12,
+                          ),
                     ),
                   ],
                 ),
