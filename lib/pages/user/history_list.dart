@@ -129,7 +129,8 @@ class HistoryList extends StatelessWidget {
                           color: Colors.red
                       ),
                     ) : Text(
-                      'Telah Dikembalikan',
+                      'Telah \nDikembalikan',
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontWeight: FontWeight.w300,
                           fontSize: 12,
