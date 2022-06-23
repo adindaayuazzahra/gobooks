@@ -203,7 +203,7 @@ class _DetailBookPageState extends State<DetailBookPage> {
                                       style: Theme.of(context)
                                           .textTheme
                                           .button
-                                          ?.copyWith(color: Colors.white),
+                                          ?.copyWith(color: Colors.white, fontSize: 13),
                                     ),
                             ),
                           ),
