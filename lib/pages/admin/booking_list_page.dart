@@ -82,7 +82,7 @@ class _BookingPageState extends State<BookingPage> {
               ),
             ),
             SizedBox(
-              height: size.height * 0.7,
+              height: size.height * 0.8,
               child: StreamBuilder(
                 stream: _books.snapshots(),
                 builder:
