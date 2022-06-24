@@ -606,18 +606,18 @@ class _MainPageAdminState extends State<MainPageAdmin> {
           style: Theme.of(context).textTheme.headline6?.copyWith(
               color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Container(
-                margin: const EdgeInsets.only(right: 8.0),
-                child: const Icon(
-                  Icons.bookmark_outline_rounded,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              ))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () {},
+        //       icon: Container(
+        //         margin: const EdgeInsets.only(right: 8.0),
+        //         child: const Icon(
+        //           Icons.bookmark_outline_rounded,
+        //           color: Colors.black,
+        //           size: 25,
+        //         ),
+        //       ))
+        // ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _create(),
