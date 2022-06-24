@@ -49,15 +49,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CircleAvatar(
-                            backgroundImage:
-                                const AssetImage('assets/image/cover_book.jpg'),
-                            radius: size.width * 0.15,
-                          ),
                           Column(
                             children: [
                               Text('DICODING Indonesia',
