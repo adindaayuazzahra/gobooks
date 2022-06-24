@@ -14,8 +14,7 @@ class LibraryBookList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
+        Navigator.push(context,
           MaterialPageRoute(builder: (context) =>
               DetailBookPage(documentSnapshot: documentSnapshot)
           ),

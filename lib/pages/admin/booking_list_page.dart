@@ -4,17 +4,16 @@ import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
 import 'package:gobooks/widgets/booking_list.dart';
 
-import '../../widgets/history_bookmark_list.dart';
 
-class BookingPage extends StatefulWidget {
+class AdminBookListPage extends StatefulWidget {
   static const routeName = '/booking_list';
-  const BookingPage({Key? key}) : super(key: key);
+  const AdminBookListPage({Key? key}) : super(key: key);
 
   @override
-  State<BookingPage> createState() => _BookingPageState();
+  State<AdminBookListPage> createState() => _AdminBookListPageState();
 }
 
-class _BookingPageState extends State<BookingPage> {
+class _AdminBookListPageState extends State<AdminBookListPage> {
   final CollectionReference _books =
       FirebaseFirestore.instance.collection('Book');
 
@@ -95,12 +94,8 @@ class _BookingPageState extends State<BookingPage> {
                             streamSnapshot.data!.docs[index];
                         return Container(
                           padding: const EdgeInsets.all(8.0),
-                          child: BookingList(
-                            onTap: () {},
+                          child: AdminBookList(
                             documentSnapshot: documentSnapshot,
-                            // imageUrl: documentSnapshot['bookUrl'],
-                            // bookTitle: documentSnapshot['bookTitle'],
-                            // bookLocation: documentSnapshot['bookLocation'],
                           ),
                         );
                       },
