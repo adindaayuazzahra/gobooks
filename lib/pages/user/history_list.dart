@@ -81,7 +81,6 @@ class HistoryList extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          // documentSnapshot['dateBorrowed'] && documentSnapshot[dateReturned]
                           documentSnapshot['isAvailable'] == false ? Column(
                             children: [
                               Text(

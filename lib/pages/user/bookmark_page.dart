@@ -53,7 +53,7 @@ class BookmarkPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
                     streamSnapshot.data!.docs[listOfBookmarked[index]];
-                return BookList(
+                return BookmarkList(
                   documentSnapshot: documentSnapshot,
                 );
               },

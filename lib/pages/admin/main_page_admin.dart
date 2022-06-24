@@ -275,8 +275,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text(
-                                              'Anda telah berhasil menambahkan buku.')));
+                                          content: Text('Anda telah berhasil menambahkan buku.'),
+                                          duration: Duration(milliseconds: 500)
+                                      )
+                                  );
                                 },
                                 icon: const Icon(
                                   Icons.save_rounded,
@@ -554,8 +556,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text(
-                                              'Anda telah berhasil memperbaharui buku.')));
+                                          content: Text('Anda telah berhasil memperbaharui buku.'),
+                                          duration: Duration(milliseconds: 500)
+                                      )
+                                  );
                                 },
                                 icon: const Icon(
                                   Icons.update,
@@ -587,7 +591,11 @@ class _MainPageAdminState extends State<MainPageAdmin> {
       await _books.doc(bookId).delete();
 
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Anda telah berhasil menghapus buku.')));
+          const SnackBar(
+              content: Text('Anda telah berhasil menghapus buku.'),
+              duration: Duration(milliseconds: 500)
+          )
+      );
     }
 
     return Scaffold(
@@ -689,11 +697,13 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     IconButton(
                                         icon: const Icon(Icons.edit),
                                         onPressed: () =>
-                                            _update(documentSnapshot)),
+                                            _update(documentSnapshot)
+                                    ),
                                     IconButton(
                                         icon: const Icon(Icons.delete),
                                         onPressed: () =>
-                                            _delete(documentSnapshot.id)),
+                                            _delete(documentSnapshot.id)
+                                    ),
                                   ],
                                 ),
                               ),
@@ -713,7 +723,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
         ),
       ),
 
-      //drawer
       drawer: Drawer(
         child: Material(
           color: accentColor,
@@ -788,7 +797,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         color: Colors.white,
                       ),
                       title: Text(
-                        'Daftar Buku',
+                        'Edit Buku',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
                               color: Colors.white,
                             ),
@@ -804,13 +813,13 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         color: Colors.white,
                       ),
                       title: Text(
-                        'Daftar Peminjaman',
+                        'Daftar Buku Perpustakaan',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
                               color: Colors.white,
                             ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, BookingPage.routeName);
+                        Navigator.pushNamed(context, AdminBookListPage.routeName);
                       },
                     ),
                   ],

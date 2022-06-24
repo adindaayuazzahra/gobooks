@@ -18,16 +18,9 @@ class _DetailBookPageState extends State<DetailBookPage> {
     final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
     var date = '${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year} '
         '• ${DateTime.now().hour} : ${DateTime.now().minute}';
-    final bool isAvailable = widget.documentSnapshot['isAvailable'];
+    bool isAvailable = widget.documentSnapshot['isAvailable'];
     bool isBookmarked = widget.documentSnapshot['isBookmarked'];
     bool history = widget.documentSnapshot['history'];
-
-    void _bookmarkUpdate() {
-      setState(() {
-        isBookmarked == true ? isBookmarked = false : isBookmarked = true;
-        _books.doc(widget.documentSnapshot.id).update({"isBookmarked": isBookmarked});
-      });
-    }
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -49,39 +42,53 @@ class _DetailBookPageState extends State<DetailBookPage> {
           ),
         ),
         actions: [
-          IconButton(
-              onPressed: () {
-                isBookmarked == true ? isBookmarked = false : isBookmarked = true;
-                _books.doc(widget.documentSnapshot.id).update({"isBookmarked": isBookmarked});
-              },
-            // onPressed: _bookmarkUpdate,
-            //   onPressed: () async {
-            //     final value = await Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) => SecondPage()),
-            //     ),
-            //     );
-            //     setState(() {
-            //     color = color == Colors.white ? Colors.grey : Colors.white;
-            //     });
-            //   },
-              icon: isBookmarked == true ? Container(
-                margin: const EdgeInsets.only(right: 8.0),
-                child: const Icon(
-                  Icons.bookmark,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              ) : Container(
-                margin: const EdgeInsets.only(right: 8.0),
-                child: const Icon(
-                  Icons.bookmark_outline_rounded,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              )
-          )
+          StreamBuilder(
+            stream: _books.snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              if (streamSnapshot.hasData) {
+                return IconButton(
+                    onPressed: () {
+                      if(isBookmarked == false) {
+                        isBookmarked = true;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Menambahkan buku ke bookmark.'),
+                                duration: Duration(milliseconds: 500)
+                            )
+                        );
+                      } else {
+                        isBookmarked = false;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Menghapus buku dari bookmark.'),
+                              duration: Duration(milliseconds: 500)
+                            ),
+                        );
+                      }
+                      _books.doc(widget.documentSnapshot.id).update({"isBookmarked": isBookmarked});
+                    },
+                    icon: isBookmarked == true ? Container(
+                      margin: const EdgeInsets.only(right: 8.0),
+                      child: const Icon(
+                        Icons.bookmark,
+                        color: Colors.black,
+                        size: 25,
+                      ),
+                    ) : Container(
+                      margin: const EdgeInsets.only(right: 8.0),
+                      child: const Icon(
+                        Icons.bookmark_outline_rounded,
+                        color: Colors.black,
+                        size: 25,
+                      ),
+                    )
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.red),
+              );
+            },
+          ),
         ],
         backgroundColor: Colors.blue.withOpacity(0),
         elevation: 0.0,
@@ -148,68 +155,73 @@ class _DetailBookPageState extends State<DetailBookPage> {
                                 ?.copyWith(fontSize: 13),
                             textAlign: TextAlign.center,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              widget.documentSnapshot['isAvailable'] == true
-                                  ? Text('Tersedia',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .caption
-                                          ?.copyWith(
-                                              color: Colors.green,
-                                              fontSize: 16))
-                                  : Text('Tidak Tersedia',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .caption
-                                          ?.copyWith(
-                                              color: Colors.red, fontSize: 16))
-                            ],
+                          widget.documentSnapshot['isAvailable'] == true
+                              ? Text('Tersedia',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption
+                                  ?.copyWith(color: Colors.green, fontSize: 16))
+                              : Text('Tidak Tersedia',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption
+                                  ?.copyWith(color: Colors.red, fontSize: 16)
                           ),
                           InkWell(
-                            onTap: () {
-                              history = true;
-                              _books.doc(widget.documentSnapshot.id).update({"history": history});
-                              _books.doc(widget.documentSnapshot.id).update({"dateBorrowed": date});
-                              isAvailable == true
-                                  ? _books.doc(widget.documentSnapshot.id)
-                                  .update({"isAvailable": false})
-                                  : _books.doc(widget.documentSnapshot.id)
-                                  .update({"isAvailable": true, "dateReturned": date});
-                            },
-                            child: Container(
-                              width: size.height * 0.15,
-                              margin: const EdgeInsets.all(8.0),
-                              padding: const EdgeInsets.all(8.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: secdarkColor,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 3,
-                                    offset: const Offset(2, 3),
+                              onTap: () {
+                                history = true;
+                                _books.doc(widget.documentSnapshot.id).update({"history": history});
+                                _books.doc(widget.documentSnapshot.id).update({"dateBorrowed": date});
+
+                                isAvailable == true
+                                    ? _books.doc(widget.documentSnapshot.id)
+                                    .update({"isAvailable": false})
+                                    : _books.doc(widget.documentSnapshot.id)
+                                    .update({"isAvailable": true, "dateReturned": date});
+                              },
+                              child:
+                              Container(
+                                  width: size.height * 0.15,
+                                  margin: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: secdarkColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 3,
+                                        offset: const Offset(2, 3),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              child: widget.documentSnapshot['isAvailable'] == true
-                                  ? Text('PINJAM',
+                                  child:  isAvailable == true ?
+                                  Text('PINJAM',
                                       style: Theme.of(context)
                                           .textTheme
                                           .button
-                                          ?.copyWith(color: Colors.white))
-                                  : Text(
-                                      'KEMBALIKAN',
+                                          ?.copyWith(color: Colors.white)) :
+                                  Text('KEMBALIKAN',
                                       style: Theme.of(context)
                                           .textTheme
                                           .button
-                                          ?.copyWith(color: Colors.white, fontSize: 13),
-                                    ),
-                            ),
+                                          ?.copyWith(color: Colors.white, fontSize: 13))
+
+                              )
                           ),
+                          // StreamBuilder(
+                          //   stream: _books.snapshots(),
+                          //   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                          //     if (streamSnapshot.hasData) {
+                          //       return
+                          //     }
+                          //     return const Center(
+                          //       child: CircularProgressIndicator(color: Colors.red),
+                          //     );
+                          //   },
+                          // ),
                         ],
                       ),
                     ),
