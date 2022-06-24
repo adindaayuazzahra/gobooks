@@ -102,10 +102,15 @@ class _HomepageState extends State<Homepage> {
                   ],
                 ),
               ),
-              _buildSubHeading(
-                title: 'Tahun dipublikasi',
-                onTap: () {},
-                key: const Key('kategori_lainnya'),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Tahun dipublikasi',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(color: accentColor),
+                ),
               ),
               SizedBox(
                   height: size.height * 0.075,
@@ -190,7 +195,6 @@ class _HomepageState extends State<Homepage> {
                 onTap: () {
                   Navigator.pushNamed(context, LibraryBookPage.routeName);
                 },
-                key: const Key('rekomendasi_lainnya'),
               ),
               SizedBox(
                 height: 180,
@@ -221,7 +225,6 @@ class _HomepageState extends State<Homepage> {
                 onTap: () {
                   Navigator.pushNamed(context, LatestBookPage.routeName);
                 },
-                key: const Key('List_terbaru_lainnya'),
               ),
               SizedBox(
                 height: 277,
@@ -258,7 +261,6 @@ class _HomepageState extends State<Homepage> {
 
   Row _buildSubHeading({
     required String title,
-    required Key key,
     required Function() onTap,
   }) {
     return Row(
@@ -272,7 +274,6 @@ class _HomepageState extends State<Homepage> {
               ?.copyWith(color: accentColor),
         ),
         InkWell(
-          key: key,
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(8.0),

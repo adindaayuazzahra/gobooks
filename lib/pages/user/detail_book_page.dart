@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
 
-import 'bookmark_page.dart';
-
 class DetailBookPage extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
 
@@ -17,9 +15,19 @@ class DetailBookPage extends StatefulWidget {
 class _DetailBookPageState extends State<DetailBookPage> {
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books =
-        FirebaseFirestore.instance.collection('Book');
-    var isBookmarked = widget.documentSnapshot['isBookmarked'];
+    final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+    var date = '${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year} '
+        '• ${DateTime.now().hour} : ${DateTime.now().minute}';
+    final bool isAvailable = widget.documentSnapshot['isAvailable'];
+    bool isBookmarked = widget.documentSnapshot['isBookmarked'];
+    bool history = widget.documentSnapshot['history'];
+
+    void _bookmarkUpdate() {
+      setState(() {
+        isBookmarked == true ? isBookmarked = false : isBookmarked = true;
+        _books.doc(widget.documentSnapshot.id).update({"isBookmarked": isBookmarked});
+      });
+    }
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -28,7 +36,8 @@ class _DetailBookPageState extends State<DetailBookPage> {
         centerTitle: true,
         title: Text('Detail Buku',
             style: Theme.of(context).textTheme.headline6?.copyWith(
-                color: accentColor, fontWeight: FontWeight.bold, fontSize: 25)),
+                color: accentColor, fontWeight: FontWeight.bold, fontSize: 25)
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -45,6 +54,18 @@ class _DetailBookPageState extends State<DetailBookPage> {
                 isBookmarked == true ? isBookmarked = false : isBookmarked = true;
                 _books.doc(widget.documentSnapshot.id).update({"isBookmarked": isBookmarked});
               },
+            // onPressed: _bookmarkUpdate,
+            //   onPressed: () async {
+            //     final value = await Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (context) => SecondPage()),
+            //     ),
+            //     );
+            //     setState(() {
+            //     color = color == Colors.white ? Colors.grey : Colors.white;
+            //     });
+            //   },
               icon: isBookmarked == true ? Container(
                 margin: const EdgeInsets.only(right: 8.0),
                 child: const Icon(
@@ -148,32 +169,14 @@ class _DetailBookPageState extends State<DetailBookPage> {
                           ),
                           InkWell(
                             onTap: () {
-                              bool history = widget.documentSnapshot['history'];
-                              // history == true ? history = false : history = true;
                               history = true;
-
-                              _books.doc(widget.documentSnapshot.id)
-                                  .update({"history": history});
-
-                              String dateReturned = widget.documentSnapshot['dateReturned'];
-                              var dt = DateTime.now();
-                              var date = '${dt.day} - ${dt.month} - ${dt.year} • ${dt.hour} : ${dt.minute}';
-
-                              // ● ◦
+                              _books.doc(widget.documentSnapshot.id).update({"history": history});
                               _books.doc(widget.documentSnapshot.id).update({"dateBorrowed": date});
-                              // _books.doc(documentSnapshot.id).update({"dateReturned": ""});
-
-                              final bool isAvailable = widget.documentSnapshot['isAvailable'];
-                              // isAvailable == true
-                              //     ? _books.doc(documentSnapshot.id).update({"isAvailable": false})
-                              //
-                              //     : dateReturned != "" ? _books.doc(documentSnapshot.id).update({"isAvailable": true, "dateReturned": date})
-                              //
-                              //     : dateReturned == "" ;
                               isAvailable == true
-                                  ? _books.doc(widget.documentSnapshot.id).update({"isAvailable": false})
-
-                                  : _books.doc(widget.documentSnapshot.id).update({"isAvailable": true, "dateReturned": date});
+                                  ? _books.doc(widget.documentSnapshot.id)
+                                  .update({"isAvailable": false})
+                                  : _books.doc(widget.documentSnapshot.id)
+                                  .update({"isAvailable": true, "dateReturned": date});
                             },
                             child: Container(
                               width: size.height * 0.15,
@@ -242,7 +245,8 @@ class _DetailBookPageState extends State<DetailBookPage> {
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
-                                  ?.copyWith(color: accentColor, fontSize: 16)),
+                                  ?.copyWith(color: accentColor, fontSize: 16)
+                          ),
                           Text(
                             widget.documentSnapshot['publisher'],
                             textAlign: TextAlign.center,

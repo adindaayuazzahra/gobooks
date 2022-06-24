@@ -26,7 +26,7 @@ class _LatestBookPageState extends State<LatestBookPage> {
             Navigator.pop(context);
           },
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.black,
           ),
         ),

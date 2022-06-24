@@ -37,7 +37,7 @@ class _LibraryBookPageState extends State<LibraryBookPage> {
           style: Theme.of(context)
               .textTheme
               .headline6
-              ?.copyWith(color: accentColor, fontSize: 25),
+              ?.copyWith(color: accentColor, fontSize: 20),
         ),
       ),
       body: StreamBuilder(
