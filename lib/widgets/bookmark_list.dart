@@ -4,7 +4,8 @@ import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/pages/user/detail_book_page.dart';
 
 class BookmarkList extends StatelessWidget {
-  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books =
+      FirebaseFirestore.instance.collection('Book');
   final DocumentSnapshot documentSnapshot;
 
   BookmarkList({
@@ -17,11 +18,11 @@ class BookmarkList extends StatelessWidget {
     bool isBookmarked = documentSnapshot['isBookmarked'];
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>
-                DetailBookPage(documentSnapshot: documentSnapshot)
-            )
-        );
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    DetailBookPage(documentSnapshot: documentSnapshot)));
       },
       child: Card(
         elevation: 7,
@@ -74,49 +75,60 @@ class BookmarkList extends StatelessWidget {
                                   .textTheme
                                   .bodyText1
                                   ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: accentColor,
-                                fontSize: 14,
-                              ),
+                                    fontWeight: FontWeight.bold,
+                                    color: accentColor,
+                                    fontSize: 14,
+                                  ),
                             ),
                           ),
-                          Text(documentSnapshot['bookAuthor'],
-                              style: Theme.of(context).textTheme.bodyText2
+                          SizedBox(
+                            width: 130,
+                            child: Text(
+                              documentSnapshot['bookAuthor'],
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
                           ),
                         ],
                       ),
                     ),
                     StreamBuilder(
                       stream: _books.snapshots(),
-                      builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                      builder: (context,
+                          AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                         if (streamSnapshot.hasData) {
                           return IconButton(
                               onPressed: () {
-                                isBookmarked == true ? isBookmarked = false : isBookmarked = true;
-                                _books.doc(documentSnapshot.id).update({"isBookmarked": isBookmarked});
+                                isBookmarked == true
+                                    ? isBookmarked = false
+                                    : isBookmarked = true;
+                                _books
+                                    .doc(documentSnapshot.id)
+                                    .update({"isBookmarked": isBookmarked});
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content: Text('Menghapus buku dari bookmark.'),
-                                        duration: Duration(milliseconds: 500)
-                                    )
-                                );
+                                        content: Text(
+                                            'Menghapus buku dari bookmark.'),
+                                        duration: Duration(milliseconds: 500)));
                               },
-                              icon: isBookmarked == true ? Container(
-                                margin: const EdgeInsets.only(right: 8.0),
-                                child: const Icon(
-                                  Icons.bookmark,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                              ) : Container(
-                                margin: const EdgeInsets.only(right: 8.0),
-                                child: const Icon(
-                                  Icons.bookmark_outline_rounded,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                              )
-                          );
+                              icon: isBookmarked == true
+                                  ? Container(
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                      child: const Icon(
+                                        Icons.bookmark,
+                                        color: Colors.black,
+                                        size: 25,
+                                      ),
+                                    )
+                                  : Container(
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                      child: const Icon(
+                                        Icons.bookmark_outline_rounded,
+                                        color: Colors.black,
+                                        size: 25,
+                                      ),
+                                    ));
                         }
                         return const Center(
                           child: CircularProgressIndicator(color: Colors.red),
