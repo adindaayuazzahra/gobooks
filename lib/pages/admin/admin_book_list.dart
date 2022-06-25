@@ -1,9 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/admin/main_page_admin.dart';
-import 'package:gobooks/widgets/booking_list.dart';
-
+import 'package:gobooks/main.dart';
 
 class AdminBookListPage extends StatefulWidget {
   static const routeName = '/booking_list';
@@ -218,89 +213,6 @@ class _AdminBookListPageState extends State<AdminBookListPage> {
         ),
       ),
     );
-  }
-
-  // Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
-  //   if (documentSnapshot != null) {
-  //     // // final TextEditingController _bookAuthorController = TextEditingController();
-  //     // // final TextEditingController _bookLocationController = TextEditingController();
-  //     // final TextEditingController _bookTitleController = TextEditingController();
-  //     // final TextEditingController _bookUrlController = TextEditingController();
-  //     // // final TextEditingController _idController = TextEditingController();
-  //     // // // bool or false
-  //     // // // final TextEditingController _isAvailableController = TextEditingController();
-  //     // bool _isAvaiable;
-  //     // //
-  //     // // final TextEditingController _publisherController = TextEditingController();
-  //     // // final TextEditingController _ratingController = TextEditingController();
-  //     // // final TextEditingController _releaseDateController = TextEditingController();
-  //     // // final TextEditingController _synopsisController = TextEditingController();
-  //
-  //
-  //     _bookTitleController.text = documentSnapshot['bookTitle'];
-  //     _bookUrlController.text = documentSnapshot['bookUrl'];
-  //     _isAvaiable = documentSnapshot['isAvailable'];
-  //
-  //
-  //   }
-  //
-  //   await showModalBottomSheet(
-  //       isScrollControlled: true,
-  //       context: context,
-  //       builder: (BuildContext ctx) {
-  //         return Padding(
-  //           padding: EdgeInsets.only(
-  //               top: 20,
-  //               left: 20,
-  //               right: 20,
-  //               bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               TextField(
-  //                 controller: _bookTitleController,
-  //                 decoration: const InputDecoration(labelText: 'Name'),
-  //               ),
-  //               TextField(
-  //                 keyboardType:
-  //                 const TextInputType.numberWithOptions(decimal: true),
-  //                 controller: _priceController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Price',
-  //                 ),
-  //               ),
-  //               const SizedBox(
-  //                 height: 20,
-  //               ),
-  //               ElevatedButton(
-  //                 child: const Text( 'Update'),
-  //                 onPressed: () async {
-  //                   final String name = _nameController.text;
-  //                   final double? price =
-  //                   double.tryParse(_priceController.text);
-  //                   if (price != null) {
-  //
-  //                     await _products
-  //                         .doc(documentSnapshot!.id)
-  //                         .update({"name": name, "price": price});
-  //                     _nameController.text = '';
-  //                     _priceController.text = '';
-  //                     Navigator.of(context).pop();
-  //                   }
-  //                 },
-  //               )
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
-
-  Future<void> _delete(String productId) async {
-    await _books.doc(productId).delete();
-
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Menghapus buku telah berhasil.')));
   }
 
   @override

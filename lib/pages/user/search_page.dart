@@ -1,12 +1,7 @@
-import 'dart:ffi';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:gobooks/main.dart';
 
 class SearchPage extends StatefulWidget {
-  static const routeName = '/search';
+  static const routeName = '/searchPage';
   const SearchPage({Key? key}) : super(key: key);
 
   @override
@@ -14,8 +9,10 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  String queries = '';
+  final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
   final TextEditingController _searchControl = TextEditingController();
+  String queries = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,16 +20,6 @@ class _SearchPageState extends State<SearchPage> {
         appBar: AppBar(
           toolbarHeight: 120,
           elevation: 0,
-          // leading: IconButton(
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //   },
-          //   icon: Icon(
-          //     Icons.arrow_back,
-          //     color: Colors.black,
-          //   ),
-          // ),
-
           title: Text(
             'Pencarian\n\n',
             style: Theme.of(context)
@@ -41,250 +28,91 @@ class _SearchPageState extends State<SearchPage> {
                 ?.copyWith(color: accentColor, fontSize: 25),
           ),
 
-          flexibleSpace: Column(children: [
-            SizedBox(
-              height: 70,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: const Offset(2, 3), // changes position of shadow
+          flexibleSpace: Column(
+              children: [
+                const SizedBox(
+                  height: 70,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15), 
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10), 
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1), 
+                    decoration: BoxDecoration(
+                      color: Colors.white, 
+                      borderRadius: BorderRadius.circular(30), 
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3), 
+                          spreadRadius: 1, 
+                          blurRadius: 3, 
+                          offset: const Offset(2, 3),
+                        ),
+                      ],
+                    ), 
+                    child: TextField(
+                      cursorColor: Colors.black, 
+                      decoration: const InputDecoration(
+                        icon: Icon(
+                          Icons.search_rounded, 
+                          color: secdarkColor,
+                        ), 
+                        hintText: "Cari Judul/Penulis/Kategori", 
+                        border: InputBorder.none,
+                      ), 
+                      onChanged: (value) {
+                        setState(() {
+                          queries = value;
+                        });
+                        },
                     ),
-                  ],
-                ),
-                child: TextField(
-                  cursorColor: Colors.black,
-                  decoration: const InputDecoration(
-                    icon: Icon(
-                      Icons.search_rounded,
-                      color: secdarkColor,
-                    ),
-                    hintText: "Cari Judul/Penulis/Kategori",
-                    border: InputBorder.none,
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      queries = value;
-                    });
-                  },
                 ),
-              ),
-            ), /*(Text(
-            'Pencarian',
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(color: accentColor, fontSize: 25),
-          ), 
-              Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 1,
-                    blurRadius: 3,
-                    offset: const Offset(2, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: TextField(
-                cursorColor: Colors.black,
-                decoration: const InputDecoration(
-                  icon: Icon(
-                    Icons.search_rounded,
-                    color: secdarkColor,
-                  ),
-                  hintText: "Cari Judul/Penulis/Kategori",
-                  border: InputBorder.none,
-                ),
-                onChanged: (value) {
-                  queries = value;
-                },
-              ),
-            ),
-          ),
-        ),*/
-
-            //  Card(
-
-            // child: Row(
-            // children: <Widget>[
-            /* Text(
-                  'Pencarian',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      ?.copyWith(color: accentColor, fontSize: 25),
-                ),
-                */
-
-            /* TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    hintText: 'search',
-                    iconColor: Colors.black,
-                  ),
-                  onChanged: (val) {
-                    setState(() {
-                      queries = val;
-                    });
-                  },
-                ),*/
-            //],
-            // ),
           ]),
         ),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('Book').snapshots(),
-          builder: (context, snapshots) {
-            return (snapshots.connectionState == ConnectionState.waiting)
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : ListView.builder(
-                    itemBuilder: (context, index) {
-                      var data = snapshots.data?.docs[index].data()
-                          as Map<String, dynamic>;
-                      if (queries.isEmpty) {
-                        return Center();
-                      }
-                      if (data['bookTitle']
-                              .toString()
-                              .toLowerCase()
-                              .contains(queries.toLowerCase()) ||
-                          data['bookTitle']
-                              .toString()
-                              .toLowerCase()
-                              .startsWith(queries.toLowerCase())) {
-                        return ListTile(
-                          title: Text(
-                            data['bookTitle'].toString(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Text(
-                            '${data['bookAuthor'].toString()}\n',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          leading: Image.network(data['bookUrl'].toString()),
-                        );
-                      } else if (data['bookAuthor']
-                              .toString()
-                              .toLowerCase()
-                              .contains(queries.toLowerCase()) ||
-                          data['bookTitle']
-                              .toString()
-                              .toLowerCase()
-                              .startsWith(queries.toLowerCase())) {
-                        return ListTile(
-                            title: Text(
-                              data['bookTitle'].toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Text(
-                              data['bookAuthor'].toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            leading: Image.network(data['bookUrl'].toString()));
-                      } else {
-                        return Center();
-                      }
-                    },
-                    itemCount: snapshots.data?.docs.length,
-                  );
+        body: StreamBuilder(
+          stream: _books.snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+            if(streamSnapshot.hasData){
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: streamSnapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  final DocumentSnapshot documentSnapshot = streamSnapshot
+                      .data!.docs[index];
+                  if (queries.isEmpty) {
+                    return const Center();
+                  }
+                  if (documentSnapshot['bookTitle']
+                      .toString()
+                      .toLowerCase()
+                      .contains(queries.toLowerCase()) ||
+                      documentSnapshot['bookTitle']
+                          .toString()
+                          .toLowerCase()
+                          .startsWith(queries.toLowerCase())) {
+                    return BookList(documentSnapshot: documentSnapshot);
+                  } else if (documentSnapshot['bookAuthor']
+                      .toString()
+                      .toLowerCase()
+                      .contains(queries.toLowerCase()) ||
+                      documentSnapshot['bookTitle']
+                          .toString()
+                          .toLowerCase()
+                          .startsWith(queries.toLowerCase())) {
+                    return BookList(documentSnapshot: documentSnapshot);
+                  } else {
+                    return const Center();
+                  }
+                }
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(color: accentColor),
+            );
           },
         )
-
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Card(
-        //     elevation: 10,
-        //     shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(25)),
-        //     child: Container(
-        //       decoration: const BoxDecoration(
-        //         color: Colors.white,
-        //         borderRadius: BorderRadius.all(
-        //           Radius.circular(25),
-        //         ),
-        //       ),
-        //       child: TextField(
-        //         style: const TextStyle(
-        //           fontSize: 15.0,
-        //           color: Colors.black,
-        //         ),
-        //         decoration: InputDecoration(
-        //           contentPadding: const EdgeInsets.all(10.0),
-        //           border: OutlineInputBorder(
-        //             borderRadius: BorderRadius.circular(25),
-        //             borderSide: const BorderSide(
-        //               color: Colors.white,
-        //             ),
-        //           ),
-        //           enabledBorder: OutlineInputBorder(
-        //             borderSide: BorderSide(
-        //               color: Colors.white,
-        //             ),
-        //             borderRadius: BorderRadius.circular(25),
-        //           ),
-        //           hintText: "Search Resto or Menu",
-        //           prefixIcon: Icon(
-        //             Icons.search,
-        //             color: Colors.black,
-        //           ),
-        //         ),
-        //         maxLines: 1,
-        //         controller: _searchControl,
-        //         onChanged: (String query) {
-        //           // if (query.isNotEmpty) {
-        //           //   setState(() {
-        //           //     queries = query;
-        //           //   });
-        //           //   state.fetchSearch(query);
-        //           // }
-        //         },
-        //       ),
-        //     ),
-        //   ),
-        // )
-
-        );
+    );
   }
 
   @override

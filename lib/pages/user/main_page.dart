@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:gobooks/pages/user/history_page.dart';
-import 'package:gobooks/pages/user/home_page.dart';
-import 'package:gobooks/pages/user/profile_page.dart';
-import 'package:gobooks/pages/user/search_page.dart';
-import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/main.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -22,7 +17,6 @@ class _MainPageState extends State<MainPage> {
   ];
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
       body: pages[currentIndex],
@@ -37,7 +31,7 @@ class _MainPageState extends State<MainPage> {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: const Offset(0, 0), // changes position of shadow
+              offset: const Offset(0, 0),
             ),
           ],
         ),

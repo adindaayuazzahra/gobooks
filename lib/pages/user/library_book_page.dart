@@ -1,11 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/user/detail_book_page.dart';
-import 'package:gobooks/widgets/booklist.dart';
+import 'package:gobooks/main.dart';
 
 class LibraryBookPage extends StatefulWidget {
-  static const routeName = '/rekomendasi_page';
+  static const routeName = '/library_book_page';
   const LibraryBookPage({Key? key}) : super(key: key);
 
   @override

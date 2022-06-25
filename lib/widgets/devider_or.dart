@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/main.dart';
 
 class DeviderOr extends StatelessWidget {
   const DeviderOr({

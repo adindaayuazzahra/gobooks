@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/admin/booking_list_page.dart';
+import 'package:gobooks/main.dart';
 
 class MainPageAdmin extends StatefulWidget {
   const MainPageAdmin({Key? key}) : super(key: key);
@@ -35,7 +32,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    // Fungsi untuk menambahkan buku
     Future<void> _create() async {
       await showModalBottomSheet(
           isScrollControlled: true,
@@ -248,15 +244,15 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   final bool isAvailable = _isAvailable;
 
                                   _books.add({
-                                    "bookTitle": bookTitle, //
-                                    "bookUrl": bookUrl, //
-                                    "bookAuthor": author, //
-                                    "numberOfPages": numberOfPages, //
-                                    "publisher": publisher, //
-                                    "yearPublished": yearPublished, //
-                                    "bookLocation": bookLocation, //
-                                    "synopsis": synopsis, //
-                                    "isAvailable": isAvailable, //
+                                    "bookTitle": bookTitle,
+                                    "bookUrl": bookUrl,
+                                    "bookAuthor": author,
+                                    "numberOfPages": numberOfPages,
+                                    "publisher": publisher,
+                                    "yearPublished": yearPublished,
+                                    "bookLocation": bookLocation,
+                                    "synopsis": synopsis,
+                                    "isAvailable": isAvailable,
                                     "dateBorrowed": "",
                                     "dateReturned": "",
                                     "history": false,
@@ -305,7 +301,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
           });
     }
 
-    //Update Informasi Buku
     Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
       if (documentSnapshot != null) {
         _bookTitleController.text = documentSnapshot['bookTitle'];
@@ -399,7 +394,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.book),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -412,7 +408,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.link),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -425,7 +422,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -438,7 +436,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -452,7 +451,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                         Icons.published_with_changes),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -465,7 +465,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -478,7 +479,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -491,7 +493,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -586,7 +589,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
           });
     }
 
-    //Menghapus Buku
     Future<void> _delete(String bookId) async {
       await _books.doc(bookId).delete();
 
@@ -614,18 +616,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
           style: Theme.of(context).textTheme.headline6?.copyWith(
               color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
         ),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {},
-        //       icon: Container(
-        //         margin: const EdgeInsets.only(right: 8.0),
-        //         child: const Icon(
-        //           Icons.bookmark_outline_rounded,
-        //           color: Colors.black,
-        //           size: 25,
-        //         ),
-        //       ))
-        // ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _create(),
@@ -653,7 +643,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         spreadRadius: 1,
                         blurRadius: 3,
                         offset:
-                            const Offset(2, 3), // changes position of shadow
+                            const Offset(2, 3),
                       ),
                     ],
                   ),
@@ -676,8 +666,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                 height: size.height * 0.7,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder:
-                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
                         itemCount: streamSnapshot.data!.docs.length,
@@ -689,20 +678,19 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                             child: ListTile(
                               title: Text(documentSnapshot['bookTitle']),
                               subtitle: Text(
-                                  documentSnapshot['yearPublished'].toString()),
+                                  documentSnapshot['yearPublished'].toString()
+                              ),
                               trailing: SizedBox(
                                 width: 100,
                                 child: Row(
                                   children: [
                                     IconButton(
                                         icon: const Icon(Icons.edit),
-                                        onPressed: () =>
-                                            _update(documentSnapshot)
+                                        onPressed: () => _update(documentSnapshot)
                                     ),
                                     IconButton(
                                         icon: const Icon(Icons.delete),
-                                        onPressed: () =>
-                                            _delete(documentSnapshot.id)
+                                        onPressed: () => _delete(documentSnapshot.id)
                                     ),
                                   ],
                                 ),

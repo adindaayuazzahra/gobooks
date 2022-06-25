@@ -1,9 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gobooks/widgets/bookmark_list.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-
-import '../../widgets/booklist.dart';
+import 'package:gobooks/main.dart';
 
 class BookmarkPage extends StatelessWidget {
   static const routeName = '/bookmark';

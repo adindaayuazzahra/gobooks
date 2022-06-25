@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/main.dart';
 
 class DetailBookPage extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -17,9 +15,16 @@ class _DetailBookPageState extends State<DetailBookPage> {
   Widget build(BuildContext context) {
     final CollectionReference _books =
         FirebaseFirestore.instance.collection('Book');
+    var dt = DateTime.now();
     var date =
-        '${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year} '
-        '• ${DateTime.now().hour} : ${DateTime.now().minute}';
+        '${dt.day} '
+        '${(dt.month == 1)? 'Jan':(dt.month == 2) ? 'Feb': (dt.month == 3) ? 'Mar'
+          : (dt.month == 4)? 'Apr':(dt.month == 5) ? 'Mei': (dt.month == 6) ? 'Jun'
+          : (dt.month == 7) ? 'Jul':(dt.month == 8) ? 'Agt': (dt.month == 9) ? 'Sep'
+          : (dt.month == 10)? 'Okt':(dt.month == 11) ? 'Nov': 'Des'} '
+        '${dt.year} • ${dt.hour} : ${dt.minute}';
+
+
     bool isAvailable = widget.documentSnapshot['isAvailable'];
     bool isBookmarked = widget.documentSnapshot['isBookmarked'];
     bool history = widget.documentSnapshot['history'];
@@ -54,7 +59,8 @@ class _DetailBookPageState extends State<DetailBookPage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('Menambahkan buku ke bookmark.'),
-                                duration: Duration(milliseconds: 600)));
+                                duration: Duration(milliseconds: 600))
+                        );
                       } else {
                         isBookmarked = false;
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -83,10 +89,11 @@ class _DetailBookPageState extends State<DetailBookPage> {
                               color: Colors.black,
                               size: 25,
                             ),
-                          ));
+                          )
+                );
               }
               return const Center(
-                child: CircularProgressIndicator(color: Colors.red),
+                child: CircularProgressIndicator(color: accentColor),
               );
             },
           ),
@@ -172,13 +179,14 @@ class _DetailBookPageState extends State<DetailBookPage> {
                                                   color: Colors.green,
                                                   fontSize: 16),
                                         )
-                                      : Text('Tidak Tersedia',
+                                      : Text('Sedang dipinjam',
                                           style: Theme.of(context)
                                               .textTheme
                                               .caption
                                               ?.copyWith(
                                                   color: Colors.red,
-                                                  fontSize: 16)),
+                                                  fontSize: 16)
+                                  ),
                                 );
                               }
                               return const Center(
@@ -187,40 +195,6 @@ class _DetailBookPageState extends State<DetailBookPage> {
                               );
                             },
                           ),
-                          // widget.documentSnapshot['isAvailable'] == true
-                          //     ? Text('Tersedia',
-                          //         style: Theme.of(context)
-                          //             .textTheme
-                          //             .caption
-                          //             ?.copyWith(
-                          //                 color: Colors.green, fontSize: 16))
-                          //     : Text('Tidak Tersedia',
-                          //         style: Theme.of(context)
-                          //             .textTheme
-                          //             .caption
-                          //             ?.copyWith(
-                          //                 color: Colors.red, fontSize: 16)),
-                          // InkWell(
-                          //   onTap: () {
-                          //     history = true;
-                          //     _books
-                          //         .doc(widget.documentSnapshot.id)
-                          //         .update({"history": history});
-                          //     _books
-                          //         .doc(widget.documentSnapshot.id)
-                          //         .update({"dateBorrowed": date});
-
-                          //     isAvailable == true
-                          //         ? _books
-                          //             .doc(widget.documentSnapshot.id)
-                          //             .update({"isAvailable": false})
-                          //         : _books
-                          //             .doc(widget.documentSnapshot.id)
-                          //             .update({
-                          //             "isAvailable": true,
-                          //             "dateReturned": date
-                          //           });
-                          //   },
                           Container(
                             width: size.width * 0.35,
                             margin: const EdgeInsets.all(8.0),
@@ -309,18 +283,6 @@ class _DetailBookPageState extends State<DetailBookPage> {
                               },
                             ),
                           ),
-                          //),
-                          // StreamBuilder(
-                          //   stream: _books.snapshots(),
-                          //   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                          //     if (streamSnapshot.hasData) {
-                          //       return
-                          //     }
-                          //     return const Center(
-                          //       child: CircularProgressIndicator(color: Colors.red),
-                          //     );
-                          //   },
-                          // ),
                         ],
                       ),
                     ),
@@ -356,7 +318,8 @@ class _DetailBookPageState extends State<DetailBookPage> {
                               style: Theme.of(context)
                                   .textTheme
                                   .headline6
-                                  ?.copyWith(color: accentColor, fontSize: 16)),
+                                  ?.copyWith(color: accentColor, fontSize: 16)
+                          ),
                           Text(
                             widget.documentSnapshot['publisher'],
                             textAlign: TextAlign.center,

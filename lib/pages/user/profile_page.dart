@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/data/auth_service.dart';
-import 'package:gobooks/pages/admin/main_page_admin.dart';
-import 'package:gobooks/pages/welcome_page.dart';
-import 'package:gobooks/widgets/profile_item.dart';
+import 'package:gobooks/main.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -24,7 +19,8 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text(
           'Profile',
           style: Theme.of(context).textTheme.headline6?.copyWith(
-              color: accentColor, fontWeight: FontWeight.bold, fontSize: 25),
+              color: accentColor, fontWeight: FontWeight.bold, fontSize: 25
+          ),
         ),
         automaticallyImplyLeading: false,
       ),
@@ -41,13 +37,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
-                  //border: Border.all(width: 1),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.3),
                       spreadRadius: 1,
                       blurRadius: 3,
-                      offset: const Offset(2, 3), // changes position of shadow
+                      offset: const Offset(2, 3),
                     ),
                   ],
                 ),
@@ -57,7 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: Theme.of(context)
                             .textTheme
                             .headline6
-                            ?.copyWith(color: accentColor)),
+                            ?.copyWith(color: accentColor)
+                    ),
                     const Text('Status : Mahasiswa',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
@@ -68,17 +64,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: ElevatedButton.styleFrom(
                           primary: secdarkColor,
                           padding: const EdgeInsets.symmetric(
-                              vertical: 6, horizontal: 20),
+                              vertical: 6, horizontal: 20
+                          ),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
+                              borderRadius: BorderRadius.circular(20)
+                          )
+                      ),
                       onPressed: () async {
                         await AuthServices.signOut();
-                        Navigator.push(
-                          context,
+                        Navigator.push(context,
                           MaterialPageRoute(
-                            builder: (context) {
-                              return const WelcomePage();
-                            },
+                            builder: (context) => const WelcomePage()
                           ),
                         );
                       },
@@ -95,48 +91,22 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                       ),
                     ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const MainPageAdmin()));
-                    //   },
-                    //   child: Container(
-                    //     color: secdarkColor,
-                    //     child: const Text('Page untuk Admin'),
-                    //   ),
-                    // ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder:
+                                (context) => const MainPageAdmin()
+                            )
+                        );
+                      },
+                      child: Container(
+                        color: secdarkColor,
+                        child: const Text('Page untuk Admin'),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              // const SizedBox(height: 20),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     ProfileItem(
-              //         size: size.width * 0.35,
-              //         icon: Icons.settings,
-              //         title: 'Settings'),
-              //     ProfileItem(
-              //         size: size.width * 0.35,
-              //         icon: Icons.bug_report,
-              //         title: 'Report'),
-              //   ],
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     ProfileItem(
-              //         size: size.width * 0.35,
-              //         icon: Icons.language,
-              //         title: 'Language'),
-              //     ProfileItem(
-              //         size: size.width * 0.35,
-              //         icon: Icons.logout,
-              //         title: 'Log Out'),
-              //   ],
-              // )
             ],
           ),
         ),

@@ -1,8 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/user/book_list_by_year.dart';
-import 'package:gobooks/widgets/booklist.dart';
+import 'package:gobooks/main.dart';
 
 class BookByYearPage extends StatelessWidget {
   final CollectionReference _books =
@@ -12,8 +8,11 @@ class BookByYearPage extends StatelessWidget {
   final int minYear;
   final int maxYear;
 
-  BookByYearPage({Key? key, required this.minYear, required this.maxYear})
-      : super(key: key);
+  BookByYearPage({
+    Key? key,
+    required this.minYear,
+    required this.maxYear
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class BookByYearPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        title: maxYear >= 1900
+        title: maxYear > 1899
             ? Text('$maxYear - $minYear',
                 style: Theme.of(context)
                     .textTheme
@@ -60,7 +59,7 @@ class BookByYearPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
                     streamSnapshot.data!.docs[yearNumber[index]];
-                return BookListByYear(
+                return BookByYearList(
                   documentSnapshot: documentSnapshot,
                 );
               },

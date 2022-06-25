@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/user/detail_book_page.dart';
+import 'package:gobooks/main.dart';
 
 class HistoryList extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
@@ -13,7 +10,6 @@ class HistoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books = FirebaseFirestore.instance.collection('Book');
     return InkWell(
       onTap: () {
         Navigator.push(context,
@@ -48,7 +44,6 @@ class HistoryList extends StatelessWidget {
                   child: Image.network(
                     documentSnapshot['bookUrl'],
                     fit: BoxFit.cover,
-                    //width: size.width * 0.25,
                     width: 80,
                     height: 80,
                   ),
@@ -69,7 +64,7 @@ class HistoryList extends StatelessWidget {
                             child: Text(
                               documentSnapshot['bookTitle'],
                               maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                              // overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
@@ -84,6 +79,7 @@ class HistoryList extends StatelessWidget {
                           documentSnapshot['isAvailable'] == false ? Column(
                             children: [
                               Text(
+                                // '📅 Dipinjam Pada : ',
                                 '📅 Dipinjam Pada : ',
                                 style: Theme.of(context)
                                     .textTheme
@@ -101,11 +97,12 @@ class HistoryList extends StatelessWidget {
                           ) : Column(
                             children: [
                               Text(
+                                // '📅 Dikembalikan Pada : ',
                                 '📅 Dikembalikan Pada : ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText2
-                                    ?.copyWith(fontSize: 12),
+                                    ?.copyWith(fontSize: 12, color: Colors.green),
                               ),
                               Text(
                                 '${documentSnapshot["dateReturned"]}',
@@ -121,14 +118,15 @@ class HistoryList extends StatelessWidget {
                     ),
                     documentSnapshot['isAvailable'] == false ?
                     Text(
-                      'Dipinjam',
+                      'Sedang \ndipinjam',
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontWeight: FontWeight.w300,
                           fontSize: 12,
                           color: Colors.red
                       ),
                     ) : Text(
-                      'Telah \nDikembalikan',
+                      'Telah \ndikembalikan',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           fontWeight: FontWeight.w300,
