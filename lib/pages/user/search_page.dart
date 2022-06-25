@@ -89,60 +89,69 @@ class _SearchPageState extends State<SearchPage> {
         body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('Book').snapshots(),
           builder: (context, snapshots) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                var data =
-                    snapshots.data!.docs[index].data() as Map<String, dynamic>;
-                if (queries.isEmpty) {
-                  return ListTile(
-                    title: Text(
-                      data['bookTitle'],
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    subtitle: Text(
-                      data['bookAuthor'],
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.black),
-                    ),
+            return (snapshots.connectionState == ConnectionState.waiting)
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    itemBuilder: (context, index) {
+                      var data = snapshots.data?.docs[index].data()
+                          as Map<String, dynamic>;
+
+                      if (queries.isEmpty) {
+                        return ListTile(
+                          title: Text(
+                            data['bookTitle'],
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          subtitle: Text(
+                            data['bookAuthor'],
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        );
+                      }
+                      if (data['bookTitle']
+                              .toString()
+                              .toLowerCase()
+                              .contains(queries.toLowerCase()) ||
+                          data['bookTitle']
+                              .toString()
+                              .toLowerCase()
+                              .startsWith(queries.toLowerCase())) {
+                        return ListTile(
+                          title: Text(
+                            data['bookTitle'].toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            data['bookLocation'].toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          leading: Image.network(data['bookUrl'].toString()),
+                        );
+                      }
+                      return Container(
+                        child: Center(
+                          child: Text('error'),
+                        ),
+                      );
+                    },
+                    itemCount: snapshots.data?.docs.length,
                   );
-                }
-                if (data['bookTitle']
-                        .toString()
-                        .toLowerCase()
-                        .contains(queries.toLowerCase()) ||
-                    data['bookTitle']
-                        .toString()
-                        .toLowerCase()
-                        .startsWith(queries.toLowerCase())) {
-                  return ListTile(
-                    title: Text(
-                      data['bookTitle'].toString(),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      data['bookLocation'].toString(),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    leading: Image.network(data['bookUrl'].toString()),
-                  );
-                }
-                return Container();
-              },
-              itemCount: snapshots.data!.docs.length,
-            );
           },
         )
 
