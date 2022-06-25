@@ -144,11 +144,7 @@ class _SearchPageState extends State<SearchPage> {
                           leading: Image.network(data['bookUrl'].toString()),
                         );
                       }
-                      return Container(
-                        child: Center(
-                          child: Text('error'),
-                        ),
-                      );
+                      return Container();
                     },
                     itemCount: snapshots.data?.docs.length,
                   );
