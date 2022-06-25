@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/widgets/booklist.dart';
+import 'package:gobooks/main.dart';
 
 class LatestBookPage extends StatefulWidget {
-  static const routeName = '/popular_page';
+  static const routeName = '/latest_book_page';
   const LatestBookPage({Key? key}) : super(key: key);
 
   @override
@@ -45,7 +42,7 @@ class _LatestBookPageState extends State<LatestBookPage> {
           final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
             streamSnapshot.data!.docs.asMap().forEach((index, value) {
-              if (value['yearPublished'] >= 2021) {
+              if (value['yearPublished'] >= 2018) {
                 yearNumber.add(index);
               }
             });

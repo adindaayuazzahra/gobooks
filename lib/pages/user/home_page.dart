@@ -1,13 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/pages/user/book_by_year_page.dart';
-import 'package:gobooks/pages/user/bookmark_page.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/user/latest_book_page.dart';
-import 'package:gobooks/pages/user/library_book_page.dart';
-import 'package:gobooks/widgets/book_by_year_list.dart';
-import 'package:gobooks/widgets/latest_book_list.dart';
-import 'package:gobooks/widgets/library_book_list.dart';
+import 'package:gobooks/main.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -117,7 +108,7 @@ class _HomepageState extends State<Homepage> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      BookByYearList(
+                      _bookByYearWidget(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -131,7 +122,7 @@ class _HomepageState extends State<Homepage> {
                         },
                         numberOfPages: 'Sekarang - 2010',
                       ),
-                      BookByYearList(
+                      _bookByYearWidget(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -145,7 +136,7 @@ class _HomepageState extends State<Homepage> {
                         },
                         numberOfPages: '2000 - 1975',
                       ),
-                      BookByYearList(
+                      _bookByYearWidget(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -159,7 +150,7 @@ class _HomepageState extends State<Homepage> {
                         },
                         numberOfPages: '1974 - 1950',
                       ),
-                      BookByYearList(
+                      _bookByYearWidget(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -173,14 +164,14 @@ class _HomepageState extends State<Homepage> {
                         },
                         numberOfPages: '1949 - 1900',
                       ),
-                      BookByYearList(
+                      _bookByYearWidget(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
                               return BookByYearPage(
                                 minYear: 0,
-                                maxYear: 1989,
+                                maxYear: 1899,
                               );
                             }),
                           );
@@ -200,8 +191,7 @@ class _HomepageState extends State<Homepage> {
                 height: 180,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder:
-                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -209,8 +199,7 @@ class _HomepageState extends State<Homepage> {
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
                               streamSnapshot.data!.docs[index];
-                          return LibraryBookList(
-                              documentSnapshot: documentSnapshot);
+                          return LibraryBookList(documentSnapshot: documentSnapshot);
                         },
                       );
                     }
@@ -230,24 +219,28 @@ class _HomepageState extends State<Homepage> {
                 height: 277,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder:
-                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    final List<int> yearNumber = <int>[];
                     if (streamSnapshot.hasData) {
+                      streamSnapshot.data!.docs.asMap().forEach((index, value) {
+                        if (value['yearPublished'] >= 2018) {
+                          yearNumber.add(index);
+                        }
+                      });
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: streamSnapshot.data!.docs.length,
+                        itemCount: yearNumber.length > 4 ? 4 : yearNumber.length,
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
-                              streamSnapshot.data!.docs[index];
+                          streamSnapshot.data!.docs[yearNumber[index]];
                           return LatestBookList(
-                            key: const Key('latest_book_list_1'),
                             documentSnapshot: documentSnapshot,
                           );
                         },
                       );
                     }
                     return const Center(
-                      child: CircularProgressIndicator(color: Colors.red),
+                      child: CircularProgressIndicator(color: accentColor),
                     );
                   },
                 ),
@@ -289,6 +282,47 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ],
+    );
+  }
+
+  InkWell _bookByYearWidget({
+    required Function() onTap,
+    required String numberOfPages
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(right: 4, left: 6, bottom: 7, top: 7),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(2, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          children: <Widget>[
+            const Icon(
+                Icons.date_range,
+                color: accentColor
+            ),
+            const SizedBox(width: 3),
+            Text(
+              numberOfPages,
+              style: Theme.of(context)
+                  .textTheme
+                  .caption
+                  ?.copyWith(fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

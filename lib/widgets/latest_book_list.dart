@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import '../pages/user/detail_book_page.dart';
+import 'package:gobooks/main.dart';
 
 class LatestBookList extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;

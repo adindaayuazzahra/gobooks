@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gobooks/pages/user/main_page.dart';
-import 'package:gobooks/pages/register_page.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:lottie/lottie.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../data/auth_service.dart';
-import '../widgets/devider_or.dart';
+import 'package:gobooks/main.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -153,7 +144,8 @@ class LoginPage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .button
-                                ?.copyWith(color: Colors.black, fontSize: 13)),
+                                ?.copyWith(color: Colors.black, fontSize: 13)
+                        ),
                       ],
                     ),
                   ),

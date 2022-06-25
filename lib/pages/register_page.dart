@@ -172,7 +172,8 @@ class RegisterPage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .button
-                                ?.copyWith(color: Colors.black, fontSize: 13)),
+                                ?.copyWith(color: Colors.black, fontSize: 13)
+                        ),
                       ],
                     ),
                   ),

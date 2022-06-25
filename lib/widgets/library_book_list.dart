@@ -1,8 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
 import 'package:gobooks/main.dart';
-import '../pages/user/detail_book_page.dart';
 
 class LibraryBookList extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
@@ -21,7 +17,6 @@ class LibraryBookList extends StatelessWidget {
         );
       },
       child: Card(
-        //color: secLightColor,
         elevation: 7,
         margin: const EdgeInsets.fromLTRB(6, 13, 10, 13),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
@@ -80,19 +75,8 @@ class LibraryBookList extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2
-                            ?.copyWith(fontWeight: FontWeight.bold)),
-                    // Row(
-                    //   children: [
-                    //     const Icon(
-                    //       Icons.star,
-                    //       color: Colors.amber,
-                    //     ),
-                    //     Text(
-                    //       documentSnapshot['rating'].toString(),
-                    //       style: Theme.of(context).textTheme.bodyText2,
-                    //     ),
-                    //   ],
-                    // ),
+                            ?.copyWith(fontWeight: FontWeight.bold)
+                    ),
                     Text('${documentSnapshot['numberOfPages']} Halaman')
                   ],
                 ),

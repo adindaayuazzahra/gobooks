@@ -1,20 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/pages/user/detail_book_page.dart';
+import 'package:gobooks/main.dart';
 
 class BookmarkList extends StatelessWidget {
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
   final DocumentSnapshot documentSnapshot;
 
-  BookmarkList({
+  const BookmarkList({
     Key? key,
     required this.documentSnapshot,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books =
+    FirebaseFirestore.instance.collection('Book');
     bool isBookmarked = documentSnapshot['isBookmarked'];
     return InkWell(
       onTap: () {

@@ -1,12 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gobooks/pages/login_page.dart';
-import 'package:gobooks/pages/register_page.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:lottie/lottie.dart';
+import 'package:gobooks/main.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
