@@ -168,7 +168,7 @@ class RegisterPage extends StatelessWidget {
                           width: 20,
                         ),
                         const SizedBox(width: 5),
-                        Text('Lanjut dengan Akun Google',
+                        Text('Sign Up dengan Akun Google',
                             style: Theme.of(context)
                                 .textTheme
                                 .button

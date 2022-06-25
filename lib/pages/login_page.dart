@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gobooks/pages/user/main_page.dart';
 import 'package:gobooks/pages/register_page.dart';
 import 'package:gobooks/common/styles.dart';
@@ -6,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../data/auth_service.dart';
+import '../widgets/devider_or.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -115,6 +117,44 @@ class LoginPage extends StatelessWidget {
                           .textTheme
                           .button
                           ?.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: size.height * 0.001),
+              DeviderOr(size: size),
+              SizedBox(
+                width: size.width * 0.7,
+                height: size.height * 0.06,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(7),
+                  child: OutlinedButton(
+                    onPressed: () async {
+                       final result = await AuthServices.signUpWithGoogle();
+                       if (result != null) {
+                         Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) => const MainPage(),
+                           ),
+                         );
+                       }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/image/google.svg',
+                          height: 20,
+                          width: 20,
+                        ),
+                        const SizedBox(width: 5),
+                        Text('Lanjut dengan Akun Google',
+                            style: Theme.of(context)
+                                .textTheme
+                                .button
+                                ?.copyWith(color: Colors.black, fontSize: 13)),
+                      ],
                     ),
                   ),
                 ),
