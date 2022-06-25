@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/data/auth_service.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
+import 'package:gobooks/pages/welcome_page.dart';
 import 'package:gobooks/widgets/profile_item.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -69,7 +71,17 @@ class _ProfilePageState extends State<ProfilePage> {
                               vertical: 6, horizontal: 20),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await AuthServices.signOut();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const WelcomePage();
+                            },
+                          ),
+                        );
+                      },
                       icon: const Icon(
                         Icons.logout_rounded,
                         color: Colors.white,
