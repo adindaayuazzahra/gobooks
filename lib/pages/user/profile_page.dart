@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
+import 'package:gobooks/data/auth_service.dart';
 import 'package:gobooks/pages/admin/main_page_admin.dart';
+import 'package:gobooks/pages/welcome_page.dart';
 import 'package:gobooks/widgets/profile_item.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -30,87 +32,111 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                  padding: const EdgeInsets.symmetric(vertical: 25.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    //border: Border.all(width: 1),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset:
-                            const Offset(2, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              Text('DICODING Indonesia',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      ?.copyWith(color: accentColor)),
-                              const Text('Status : Mahasiswa',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                  )),
-                              const Text('0812344566655')
-                            ],
+                width: size.width * 1,
+                padding: const EdgeInsets.symmetric(vertical: 25.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  //border: Border.all(width: 1),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(2, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Text('DICODING Indonesia',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: accentColor)),
+                    const Text('Status : Mahasiswa',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        )),
+                    const Text('0812344566655'),
+                    const SizedBox(height: 20),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                          primary: secdarkColor,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 20),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                      onPressed: () async {
+                        await AuthServices.signOut();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const WelcomePage();
+                            },
                           ),
-                        ],
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.logout_rounded,
+                        color: Colors.white,
+                        size: 25,
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MainPageAdmin()));
-                        },
-                        child: Container(
-                          color: secdarkColor,
-                          child: const Text('Page untuk Admin'),
-                        ),
+                      label: Text(
+                        'Log Out',
+                        style: Theme.of(context).textTheme.button?.copyWith(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
                       ),
-                    ],
-                  )),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ProfileItem(
-                      size: size.width * 0.35,
-                      icon: Icons.settings,
-                      title: 'Settings'),
-                  ProfileItem(
-                      size: size.width * 0.35,
-                      icon: Icons.bug_report,
-                      title: 'Report'),
-                ],
+                    ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => const MainPageAdmin()));
+                    //   },
+                    //   child: Container(
+                    //     color: secdarkColor,
+                    //     child: const Text('Page untuk Admin'),
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ProfileItem(
-                      size: size.width * 0.35,
-                      icon: Icons.language,
-                      title: 'Language'),
-                  ProfileItem(
-                      size: size.width * 0.35,
-                      icon: Icons.logout,
-                      title: 'Log Out'),
-                ],
-              )
+              // const SizedBox(height: 20),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     ProfileItem(
+              //         size: size.width * 0.35,
+              //         icon: Icons.settings,
+              //         title: 'Settings'),
+              //     ProfileItem(
+              //         size: size.width * 0.35,
+              //         icon: Icons.bug_report,
+              //         title: 'Report'),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     ProfileItem(
+              //         size: size.width * 0.35,
+              //         icon: Icons.language,
+              //         title: 'Language'),
+              //     ProfileItem(
+              //         size: size.width * 0.35,
+              //         icon: Icons.logout,
+              //         title: 'Log Out'),
+              //   ],
+              // )
             ],
           ),
         ),
