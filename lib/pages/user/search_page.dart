@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gobooks/common/styles.dart';
@@ -19,6 +21,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
+          toolbarHeight: 120,
           elevation: 0,
           // leading: IconButton(
           //   onPressed: () {
@@ -30,7 +33,54 @@ class _SearchPageState extends State<SearchPage> {
           //   ),
           // ),
 
-          title: /*(Text(
+          title: Text(
+            'Pencarian\n\n',
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(color: accentColor, fontSize: 25),
+          ),
+
+          flexibleSpace: Column(children: [
+            SizedBox(
+              height: 70,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(2, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  cursorColor: Colors.black,
+                  decoration: const InputDecoration(
+                    icon: Icon(
+                      Icons.search_rounded,
+                      color: secdarkColor,
+                    ),
+                    hintText: "Cari Judul/Penulis/Kategori",
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      queries = value;
+                    });
+                  },
+                ),
+              ),
+            ), /*(Text(
             'Pencarian',
             style: Theme.of(context)
                 .textTheme
@@ -71,20 +121,35 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),*/
-              Card(
-            child: TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                hintText: 'search',
-                iconColor: Colors.black,
-              ),
-              onChanged: (val) {
-                setState(() {
-                  queries = val;
-                });
-              },
-            ),
-          ),
+
+            //  Card(
+
+            // child: Row(
+            // children: <Widget>[
+            /* Text(
+                  'Pencarian',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(color: accentColor, fontSize: 25),
+                ),
+                */
+
+            /* TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'search',
+                    iconColor: Colors.black,
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      queries = val;
+                    });
+                  },
+                ),*/
+            //],
+            // ),
+          ]),
         ),
         body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection('Book').snapshots(),
@@ -97,22 +162,8 @@ class _SearchPageState extends State<SearchPage> {
                     itemBuilder: (context, index) {
                       var data = snapshots.data?.docs[index].data()
                           as Map<String, dynamic>;
-
                       if (queries.isEmpty) {
-                        return ListTile(
-                          title: Text(
-                            data['bookTitle'],
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          subtitle: Text(
-                            data['bookAuthor'],
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        );
+                        return Center();
                       }
                       if (data['bookTitle']
                               .toString()
@@ -133,8 +184,8 @@ class _SearchPageState extends State<SearchPage> {
                                 fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            data['bookLocation'].toString(),
-                            maxLines: 1,
+                            '${data['bookAuthor'].toString()}\n',
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.black54,
@@ -143,8 +194,37 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                           leading: Image.network(data['bookUrl'].toString()),
                         );
+                      } else if (data['bookAuthor']
+                              .toString()
+                              .toLowerCase()
+                              .contains(queries.toLowerCase()) ||
+                          data['bookTitle']
+                              .toString()
+                              .toLowerCase()
+                              .startsWith(queries.toLowerCase())) {
+                        return ListTile(
+                            title: Text(
+                              data['bookTitle'].toString(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(
+                              data['bookAuthor'].toString(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            leading: Image.network(data['bookUrl'].toString()));
+                      } else {
+                        return Center();
                       }
-                      return Container();
                     },
                     itemCount: snapshots.data?.docs.length,
                   );
