@@ -1,13 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gobooks/pages/user/main_page.dart';
-import 'package:gobooks/pages/login_page.dart';
-import 'package:gobooks/common/styles.dart';
-import 'package:gobooks/widgets/devider_or.dart';
-import 'package:lottie/lottie.dart';
-
-import '../data/auth_service.dart';
+import 'package:gobooks/main.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
