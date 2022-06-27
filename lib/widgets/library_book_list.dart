@@ -59,7 +59,7 @@ class LibraryBookList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 160,
+                      width: 200,
                       child: Text(
                         documentSnapshot['bookTitle'],
                         maxLines: 3,
@@ -72,10 +72,12 @@ class LibraryBookList extends StatelessWidget {
                       ),
                     ),
                     Text(documentSnapshot['bookAuthor'],
-                        style: Theme.of(context)
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
                             .textTheme
                             .bodyText2
-                            ?.copyWith(fontWeight: FontWeight.bold)
+                            ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Text('${documentSnapshot['numberOfPages']} Halaman')
                   ],

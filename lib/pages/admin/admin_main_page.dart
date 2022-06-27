@@ -1,13 +1,13 @@
 import 'package:gobooks/main.dart';
 
-class MainPageAdmin extends StatefulWidget {
-  const MainPageAdmin({Key? key}) : super(key: key);
+class AdminMainPage extends StatefulWidget {
+  const AdminMainPage({Key? key}) : super(key: key);
   static const routeName = '/main_page_admin';
   @override
-  State<MainPageAdmin> createState() => _MainPageAdminState();
+  State<AdminMainPage> createState() => _AdminMainPageState();
 }
 
-class _MainPageAdminState extends State<MainPageAdmin> {
+class _AdminMainPageState extends State<AdminMainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   void _openDrawer() {
     _scaffoldKey.currentState!.openDrawer();
@@ -27,6 +27,9 @@ class _MainPageAdminState extends State<MainPageAdmin> {
 
   final CollectionReference _books =
       FirebaseFirestore.instance.collection('Book');
+  
+  final TextEditingController _searchControl = TextEditingController();
+  String queries = '';
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +150,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   controller: _numberOfPagesController,
                                   decoration: InputDecoration(
                                     labelText: "Jumlah Halaman",
-                                    icon: const Icon(Icons.people),
+                                    icon: const Icon(Icons.insert_page_break_outlined),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
@@ -160,7 +163,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   controller: _yearPublishedController,
                                   decoration: InputDecoration(
                                     labelText: "Tahun Terbit",
-                                    icon: const Icon(Icons.people),
+                                    icon: const Icon(Icons.date_range),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
@@ -177,7 +180,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                         Icons.published_with_changes),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -190,7 +194,8 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -200,10 +205,11 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   controller: _synopsisController,
                                   decoration: InputDecoration(
                                     labelText: "Sinopsis",
-                                    icon: const Icon(Icons.library_books_sharp),
+                                    icon: const Icon(Icons.newspaper),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)),
+                                            BorderRadius.circular(5.0)
+                                    ),
                                   ),
                                 ),
                               ),
@@ -433,7 +439,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   controller: _numberOfPagesController,
                                   decoration: InputDecoration(
                                     labelText: "Jumlah Halaman",
-                                    icon: const Icon(Icons.people),
+                                    icon: const Icon(Icons.insert_page_break_outlined),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)
@@ -490,7 +496,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                                   controller: _synopsisController,
                                   decoration: InputDecoration(
                                     labelText: "Sinopsis",
-                                    icon: const Icon(Icons.library_books_sharp),
+                                    icon: const Icon(Icons.newspaper),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)
@@ -631,7 +637,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  margin: const EdgeInsets.only(top: 10),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
                   decoration: BoxDecoration(
@@ -654,57 +660,191 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         Icons.search_rounded,
                         color: secdarkColor,
                       ),
-                      hintText: "Cari Buku",
+                      hintText: "Cari Judul atau Penulis",
                       border: InputBorder.none,
                     ),
-                    onChanged: (String value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        queries = value;
+                      });
+                    },
                   ),
                 ),
               ),
-              const SizedBox(height: 5),
               SizedBox(
-                height: size.height * 0.7,
-                child: StreamBuilder(
+                height: size.height * 0.9,
+                child: queries == ""
+                    ?
+                StreamBuilder(
                   stream: _books.snapshots(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: streamSnapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final DocumentSnapshot documentSnapshot =
-                              streamSnapshot.data!.docs[index];
-                          return Card(
-                            margin: const EdgeInsets.all(10),
-                            child: ListTile(
-                              title: Text(documentSnapshot['bookTitle']),
-                              subtitle: Text(
-                                  documentSnapshot['yearPublished'].toString()
-                              ),
-                              trailing: SizedBox(
-                                width: 100,
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                        icon: const Icon(Icons.edit),
-                                        onPressed: () => _update(documentSnapshot)
-                                    ),
-                                    IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () => _delete(documentSnapshot.id)
-                                    ),
-                                  ],
+                      return Column(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: Container(
+                                alignment: Alignment.centerRight,
+                                width: size.width * 0.90,
+                                child: Text(
+                                  'Jumlah buku : ${streamSnapshot.data!.docs.length}',
+                                  style: const TextStyle(
+                                      color: accentColor,
+                                      fontWeight: FontWeight.bold
+                                  ),
                                 ),
-                              ),
+                              )
+                          ),
+                          Expanded(
+                            flex: 30,
+                            child: ListView.builder(
+                              itemCount: streamSnapshot.data!.docs.length,
+                              itemBuilder: (context, index) {
+                                final DocumentSnapshot documentSnapshot =
+                                streamSnapshot.data!.docs[index];
+                                return Card(
+                                  margin: const EdgeInsets.all(10),
+                                  child: ListTile(
+                                    title: Text(documentSnapshot['bookTitle']),
+                                    trailing: SizedBox(
+                                      width: 100,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                              icon: const Icon(Icons.edit),
+                                              onPressed: () => _update(documentSnapshot)
+                                          ),
+                                          IconButton(
+                                              icon: const Icon(Icons.delete),
+                                              onPressed: () => _delete(documentSnapshot.id)
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
+                          )
+                        ],
                       );
                     }
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
                   },
-                ),
+                )
+                    : StreamBuilder(
+                  stream: _books.snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    if (streamSnapshot.hasData) {
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: streamSnapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            final DocumentSnapshot documentSnapshot =
+                            streamSnapshot.data!.docs[index];
+                            if (documentSnapshot['bookTitle']
+                                .toString()
+                                .toLowerCase()
+                                .contains(queries.toLowerCase()) ||
+                                documentSnapshot['bookTitle']
+                                    .toString()
+                                    .toLowerCase()
+                                    .startsWith(queries.toLowerCase())) {
+                              return Card(
+                                margin: const EdgeInsets.all(10),
+                                child: ListTile(
+                                  title: Text(documentSnapshot['bookTitle']),
+                                  trailing: SizedBox(
+                                    width: 100,
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                            icon: const Icon(Icons.edit),
+                                            onPressed: () => _update(documentSnapshot)
+                                        ),
+                                        IconButton(
+                                            icon: const Icon(Icons.delete),
+                                            onPressed: () => _delete(documentSnapshot.id)
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else if (documentSnapshot['bookAuthor']
+                                .toString()
+                                .toLowerCase()
+                                .contains(queries.toLowerCase()) ||
+                                documentSnapshot['bookTitle']
+                                    .toString()
+                                    .toLowerCase()
+                                    .startsWith(queries.toLowerCase())) {
+                              return Card(
+                                margin: const EdgeInsets.all(10),
+                                child: ListTile(
+                                  title: Text(documentSnapshot['bookTitle']),
+                                  trailing: SizedBox(
+                                    width: 100,
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                            icon: const Icon(Icons.edit),
+                                            onPressed: () => _update(documentSnapshot)
+                                        ),
+                                        IconButton(
+                                            icon: const Icon(Icons.delete),
+                                            onPressed: () => _delete(documentSnapshot.id)
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return const Center();
+                            }
+                          });
+                      // return Column(
+                      //   children: [
+                      //     Expanded(
+                      //       flex: 20,
+                      //       child: ListView.builder(
+                      //         scrollDirection: Axis.vertical,
+                      //         itemCount: streamSnapshot.data!.docs.length,
+                      //         itemBuilder: (context, index) {
+                      //           final DocumentSnapshot documentSnapshot =
+                      //           streamSnapshot.data!.docs[index];
+                      //           return BookList(
+                      //             documentSnapshot: documentSnapshot,
+                      //           );
+                      //         },
+                      //       ),
+                      //     ),
+                      //     Expanded(
+                      //         flex: 1,
+                      //         child: Container(
+                      //           alignment: Alignment.centerRight,
+                      //           width: size.width * 0.90,
+                      //           child: Text(
+                      //             'Jumlah buku : ${streamSnapshot.data!.docs.length}',
+                      //             style: const TextStyle(
+                      //               // color: accentColor,
+                      //                 color: Colors.black,
+                      //                 fontWeight: FontWeight.bold
+                      //             ),
+                      //           ),
+                      //         )
+                      //     ),
+                      //   ],
+                      // );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(color: accentColor),
+                    );
+                  },
+                )
               ),
             ],
           ),
@@ -794,22 +934,6 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                         Navigator.pop(context);
                       },
                     ),
-                    const SizedBox(height: 16),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.group,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        'Daftar Buku Perpustakaan',
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                              color: Colors.white,
-                            ),
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, AdminBookListPage.routeName);
-                      },
-                    ),
                   ],
                 ),
               ),
@@ -822,5 +946,11 @@ class _MainPageAdminState extends State<MainPageAdmin> {
 
   String _status(bool value) {
     return value == true ? 'Tersedia' : 'Tidak tersedia';
+  }
+
+  @override
+  void dispose() {
+    _searchControl.dispose();
+    super.dispose();
   }
 }

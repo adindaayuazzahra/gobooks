@@ -79,7 +79,6 @@ class HistoryList extends StatelessWidget {
                           documentSnapshot['isAvailable'] == false ? Column(
                             children: [
                               Text(
-                                // '📅 Dipinjam Pada : ',
                                 '📅 Dipinjam Pada : ',
                                 style: Theme.of(context)
                                     .textTheme
@@ -97,7 +96,6 @@ class HistoryList extends StatelessWidget {
                           ) : Column(
                             children: [
                               Text(
-                                // '📅 Dikembalikan Pada : ',
                                 '📅 Dikembalikan Pada : ',
                                 style: Theme.of(context)
                                     .textTheme

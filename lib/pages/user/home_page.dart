@@ -193,12 +193,14 @@ class _HomepageState extends State<Homepage> {
                   stream: _books.snapshots(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
+                      List randomList = List.generate(4, (i) => i);
+                      randomList.shuffle();
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: 4,
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
-                              streamSnapshot.data!.docs[index];
+                              streamSnapshot.data!.docs[randomList[index]];
                           return LibraryBookList(documentSnapshot: documentSnapshot);
                         },
                       );
@@ -223,16 +225,18 @@ class _HomepageState extends State<Homepage> {
                     final List<int> yearNumber = <int>[];
                     if (streamSnapshot.hasData) {
                       streamSnapshot.data!.docs.asMap().forEach((index, value) {
-                        if (value['yearPublished'] >= 2018) {
+                        if (value['yearPublished'] != null && value['yearPublished'] >= 2020) {
                           yearNumber.add(index);
                         }
                       });
+                      List randomList = List.generate(4, (i) => i);
+                      randomList.shuffle();
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: yearNumber.length > 4 ? 4 : yearNumber.length,
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
-                          streamSnapshot.data!.docs[yearNumber[index]];
+                          streamSnapshot.data!.docs[yearNumber[randomList[index]]];
                           return LatestBookList(
                             documentSnapshot: documentSnapshot,
                           );

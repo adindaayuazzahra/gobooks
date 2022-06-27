@@ -29,47 +29,49 @@ class _SearchPageState extends State<SearchPage> {
                 .headline6
                 ?.copyWith(color: accentColor, fontSize: 25),
           ),
-          flexibleSpace: Column(children: [
-            const SizedBox(
-              height: 70,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: const Offset(2, 3),
-                    ),
-                  ],
+          flexibleSpace: Column(
+              children: [
+                const SizedBox(
+                  height: 70,
                 ),
-                child: TextField(
-                  cursorColor: Colors.black,
-                  decoration: const InputDecoration(
-                    icon: Icon(
-                      Icons.search_rounded,
-                      color: secdarkColor,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(2, 3),
+                        ),
+                      ],
                     ),
-                    hintText: "Cari Judul atau Penulis",
-                    border: InputBorder.none,
+                    child: TextField(
+                      cursorColor: Colors.black,
+                      decoration: const InputDecoration(
+                        icon: Icon(
+                          Icons.search_rounded,
+                          color: secdarkColor,
+                        ),
+                        hintText: "Cari Judul atau Penulis",
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          queries = value;
+                        });
+                      },
+                    ),
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      queries = value;
-                    });
-                  },
                 ),
-              ),
-            ),
-          ]),
+              ]
+          ),
         ),
         body: StreamBuilder(
           stream: _books.snapshots(),
@@ -111,7 +113,8 @@ class _SearchPageState extends State<SearchPage> {
               child: CircularProgressIndicator(color: accentColor),
             );
           },
-        ));
+        )
+    );
   }
 
   @override

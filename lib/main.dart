@@ -25,9 +25,9 @@ export 'package:gobooks/pages/user/main_page.dart';
 export 'package:gobooks/pages/register_page.dart';
 export 'package:gobooks/pages/login_page.dart';
 export 'package:gobooks/pages/user/detail_book_page.dart';
+export 'package:gobooks/pages/admin/admin_profile_page.dart';
 
 // => Widget
-export 'package:gobooks/pages/admin/admin_book_list.dart';
 export 'package:gobooks/widgets/book_by_year_list.dart';
 export 'package:gobooks/widgets/book_list.dart';
 export 'package:gobooks/widgets/bookmark_list.dart';
@@ -80,10 +80,8 @@ class GoBooks extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const BookmarkPage());
           case LatestBookPage.routeName:
             return MaterialPageRoute(builder: (_) => const LatestBookPage());
-          case MainPageAdmin.routeName:
-            return MaterialPageRoute(builder: (_) => const MainPageAdmin());
-          case AdminBookListPage.routeName:
-            return MaterialPageRoute(builder: (_) => const AdminBookListPage());
+          case AdminMainPage.routeName:
+            return MaterialPageRoute(builder: (_) => const AdminMainPage());
           case LibraryBookPage.routeName:
             return MaterialPageRoute(builder: (_) => const LibraryBookPage());
           default:
