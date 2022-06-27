@@ -42,7 +42,7 @@ class _LatestBookPageState extends State<LatestBookPage> {
           final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
             streamSnapshot.data!.docs.asMap().forEach((index, value) {
-              if (value['yearPublished'] >= 2018) {
+              if (value['yearPublished'] >= 2020) {
                 yearNumber.add(index);
               }
             });

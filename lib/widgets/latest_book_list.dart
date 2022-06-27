@@ -57,7 +57,10 @@ class LatestBookList extends StatelessWidget {
                   textAlign: TextAlign.center,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      ?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: accentColor,
                         fontSize: 14,
@@ -69,7 +72,7 @@ class LatestBookList extends StatelessWidget {
                 child: Text(
                   documentSnapshot['bookAuthor'],
                   textAlign: TextAlign.center,
-                  maxLines: 3,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)
                       .textTheme

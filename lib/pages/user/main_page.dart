@@ -13,7 +13,8 @@ class _MainPageState extends State<MainPage> {
     const Homepage(),
     const SearchPage(),
     const HistoryPage(),
-    const ProfilePage(),
+    // const ProfilePage(),
+    const AdminProfilePage()
   ];
   @override
   Widget build(BuildContext context) {

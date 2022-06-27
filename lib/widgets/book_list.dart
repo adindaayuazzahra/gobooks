@@ -10,6 +10,7 @@ class BookList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         Navigator.push(context,
@@ -60,10 +61,10 @@ class BookList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 130,
+                            width: size.width * 0.60,
                             child: Text(
                               documentSnapshot['bookTitle'],
-                              maxLines: 2,
+                              maxLines: 4,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
@@ -75,9 +76,14 @@ class BookList extends StatelessWidget {
                                   ),
                             ),
                           ),
-                          Text(documentSnapshot['bookAuthor'],
-                              style: Theme.of(context).textTheme.bodyText2
-                          ),
+                          SizedBox(
+                            width: size.width * 0.60,
+                            child: Text(documentSnapshot['bookAuthor'],
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.bodyText2
+                            ),
+                          )
                         ],
                       ),
                     ),
