@@ -14,6 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
         title: Text(
           'Profile',
@@ -27,13 +28,14 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            // mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: size.width,
-                height: size.height * 1/6,
-                margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                width: size.width * 0.9,
+                height: size.height * 1 / 6,
+                margin:
+                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                 decoration: BoxDecoration(
                   color: accentColor,
                   borderRadius: BorderRadius.circular(10),
@@ -46,8 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: Theme.of(context)
                             .textTheme
                             .headline6
-                            ?.copyWith(color: Colors.white)
-                    ),
+                            ?.copyWith(color: Colors.white)),
                     const Text('Status : Mahasiswa',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
@@ -67,15 +68,13 @@ class _ProfilePageState extends State<ProfilePage> {
               await AuthServices.signOut();
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const WelcomePage()
-                ),
+                MaterialPageRoute(builder: (context) => const WelcomePage()),
               );
             },
             child: Container(
               margin: const EdgeInsets.all(16.0),
-              height: size.height * 1/16,
-              width: size.width,
+              height: size.height * 1 / 16,
+              width: size.width * 0.9,
               decoration: BoxDecoration(
                 color: secLightColor,
                 borderRadius: BorderRadius.circular(10),
@@ -92,10 +91,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   Text(
                     'Log Out',
                     style: Theme.of(context).textTheme.button?.copyWith(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                   ),
                 ],
               ),
