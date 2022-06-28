@@ -1,19 +1,13 @@
 import 'package:gobooks/main.dart';
 
-class LibraryBookPage extends StatefulWidget {
-  static const routeName = '/library_book_page';
+class LibraryBookPage extends StatelessWidget {
   const LibraryBookPage({Key? key}) : super(key: key);
-
-  @override
-  State<LibraryBookPage> createState() => _LibraryBookPageState();
-}
-
-class _LibraryBookPageState extends State<LibraryBookPage> {
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
+  static const routeName = '/library_book_page';
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -63,12 +57,12 @@ class _LibraryBookPageState extends State<LibraryBookPage> {
                       alignment: Alignment.centerRight,
                       width: size.width * 0.90,
                       child: Text(
-                          'Jumlah buku : ${streamSnapshot.data!.docs.length}',
-                          style: const TextStyle(
-                              // color: accentColor,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),
+                        'Jumlah buku : ${streamSnapshot.data!.docs.length}',
+                        style: const TextStyle(
+                          // color: accentColor,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                     )
                 ),

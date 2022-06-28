@@ -1,14 +1,9 @@
 import 'package:gobooks/main.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
   static const routeName = '/profile_page';
 
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -36,13 +31,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: size.width * 0.9,
                 height: size.height * 1 / 6,
                 margin:
-                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                 decoration: BoxDecoration(
                   color: accentColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
-                  // mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Dicoding Indonesia',
@@ -94,10 +88,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   Text(
                     'Log Out',
                     style: Theme.of(context).textTheme.button?.copyWith(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ],
               ),

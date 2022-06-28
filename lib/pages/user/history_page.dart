@@ -1,19 +1,18 @@
 import 'package:gobooks/main.dart';
 
 class HistoryPage extends StatefulWidget {
-  static const routeName = '/history_page';
   const HistoryPage({Key? key}) : super(key: key);
+  static const routeName = '/history_page';
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
-
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
     return DefaultTabController(
       length: 2,
       child: Scaffold(

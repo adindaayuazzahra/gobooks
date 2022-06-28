@@ -15,8 +15,8 @@ class BookByYearPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books =
-    FirebaseFirestore.instance.collection('Book');
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
 
     return Scaffold(
       backgroundColor: bgColor,
