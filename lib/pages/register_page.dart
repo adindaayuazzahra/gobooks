@@ -134,21 +134,21 @@ class RegisterPage extends StatelessWidget {
               SizedBox(height: size.height * 0.001),
               DeviderOr(size: size),
               SizedBox(
-                width: size.width * 0.7,
+                width: size.width * 0.75,
                 height: size.height * 0.06,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(7),
                   child: OutlinedButton(
                     onPressed: () async {
-                       final result = await AuthServices.signUpWithGoogle();
-                       if (result != null) {
-                         Navigator.pushReplacement(
-                           context,
-                           MaterialPageRoute(
-                             builder: (context) => const MainPage(),
-                           ),
-                         );
-                       }
+                      final result = await AuthServices.signUpWithGoogle();
+                      if (result != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MainPage(),
+                          ),
+                        );
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -163,8 +163,7 @@ class RegisterPage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .button
-                                ?.copyWith(color: Colors.black, fontSize: 13)
-                        ),
+                                ?.copyWith(color: Colors.black, fontSize: 13)),
                       ],
                     ),
                   ),

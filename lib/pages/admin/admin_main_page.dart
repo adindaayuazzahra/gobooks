@@ -8,11 +8,6 @@ class AdminMainPage extends StatefulWidget {
 }
 
 class _AdminMainPageState extends State<AdminMainPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  void _openDrawer() {
-    _scaffoldKey.currentState!.openDrawer();
-  }
-
   final TextEditingController _bookAuthorController = TextEditingController();
   final TextEditingController _bookLocationController = TextEditingController();
   final TextEditingController _bookTitleController = TextEditingController();
@@ -27,7 +22,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
   final CollectionReference _books =
       FirebaseFirestore.instance.collection('Book');
-  
+
   final TextEditingController _searchControl = TextEditingController();
   String queries = '';
 
@@ -150,7 +145,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                   controller: _numberOfPagesController,
                                   decoration: InputDecoration(
                                     labelText: "Jumlah Halaman",
-                                    icon: const Icon(Icons.insert_page_break_outlined),
+                                    icon: const Icon(
+                                        Icons.insert_page_break_outlined),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0)),
@@ -180,8 +176,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                         Icons.published_with_changes),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -194,8 +189,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -208,8 +202,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.newspaper),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -277,10 +270,10 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text('Anda telah berhasil menambahkan buku.'),
-                                          duration: Duration(milliseconds: 500)
-                                      )
-                                  );
+                                          content: Text(
+                                              'Anda telah berhasil menambahkan buku.'),
+                                          duration:
+                                              Duration(milliseconds: 500)));
                                 },
                                 icon: const Icon(
                                   Icons.save_rounded,
@@ -400,8 +393,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.book),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -414,8 +406,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.link),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -428,8 +419,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -439,11 +429,11 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                   controller: _numberOfPagesController,
                                   decoration: InputDecoration(
                                     labelText: "Jumlah Halaman",
-                                    icon: const Icon(Icons.insert_page_break_outlined),
+                                    icon: const Icon(
+                                        Icons.insert_page_break_outlined),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -457,8 +447,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                         Icons.published_with_changes),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -471,8 +460,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.people),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -485,8 +473,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.library_books_sharp),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -499,8 +486,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     icon: const Icon(Icons.newspaper),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(5.0)
-                                    ),
+                                            BorderRadius.circular(5.0)),
                                   ),
                                 ),
                               ),
@@ -565,10 +551,10 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text('Anda telah berhasil memperbaharui buku.'),
-                                          duration: Duration(milliseconds: 500)
-                                      )
-                                  );
+                                          content: Text(
+                                              'Anda telah berhasil memperbaharui buku.'),
+                                          duration:
+                                              Duration(milliseconds: 500)));
                                 },
                                 icon: const Icon(
                                   Icons.update,
@@ -598,24 +584,22 @@ class _AdminMainPageState extends State<AdminMainPage> {
     Future<void> _delete(String bookId) async {
       await _books.doc(bookId).delete();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Anda telah berhasil menghapus buku.'),
-              duration: Duration(milliseconds: 500)
-          )
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Anda telah berhasil menghapus buku.'),
+          duration: Duration(milliseconds: 500)));
     }
 
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.menu_rounded),
+          icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
-          onPressed: _openDrawer,
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Text(
           'Dashboard',
@@ -627,7 +611,6 @@ class _AdminMainPageState extends State<AdminMainPage> {
         onPressed: () => _create(),
         child: const Icon(Icons.add),
       ),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
@@ -648,8 +631,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 1,
                         blurRadius: 3,
-                        offset:
-                            const Offset(2, 3),
+                        offset: const Offset(2, 3),
                       ),
                     ],
                   ),
@@ -672,279 +654,156 @@ class _AdminMainPageState extends State<AdminMainPage> {
                 ),
               ),
               SizedBox(
-                height: size.height * 0.9,
-                child: queries == ""
-                    ?
-                StreamBuilder(
-                  stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                    if (streamSnapshot.hasData) {
-                      return Column(
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: Container(
-                                alignment: Alignment.centerRight,
-                                width: size.width * 0.90,
-                                child: Text(
-                                  'Jumlah buku : ${streamSnapshot.data!.docs.length}',
-                                  style: const TextStyle(
-                                      color: accentColor,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              )
-                          ),
-                          Expanded(
-                            flex: 30,
-                            child: ListView.builder(
-                              itemCount: streamSnapshot.data!.docs.length,
-                              itemBuilder: (context, index) {
-                                final DocumentSnapshot documentSnapshot =
-                                streamSnapshot.data!.docs[index];
-                                return Card(
-                                  margin: const EdgeInsets.all(10),
-                                  child: ListTile(
-                                    title: Text(documentSnapshot['bookTitle']),
-                                    trailing: SizedBox(
-                                      width: 100,
-                                      child: Row(
-                                        children: [
-                                          IconButton(
-                                              icon: const Icon(Icons.edit),
-                                              onPressed: () => _update(documentSnapshot)
+                  height: size.height * 0.9,
+                  child: queries == ""
+                      ? StreamBuilder(
+                          stream: _books.snapshots(),
+                          builder: (context,
+                              AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                            if (streamSnapshot.hasData) {
+                              return Column(
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        alignment: Alignment.centerRight,
+                                        width: size.width * 0.90,
+                                        child: Text(
+                                          'Jumlah buku : ${streamSnapshot.data!.docs.length}',
+                                          style: const TextStyle(
+                                              color: accentColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )),
+                                  Expanded(
+                                    flex: 30,
+                                    child: ListView.builder(
+                                      itemCount:
+                                          streamSnapshot.data!.docs.length,
+                                      itemBuilder: (context, index) {
+                                        final DocumentSnapshot
+                                            documentSnapshot =
+                                            streamSnapshot.data!.docs[index];
+                                        return Card(
+                                          margin: const EdgeInsets.all(10),
+                                          child: ListTile(
+                                            title: Text(
+                                                documentSnapshot['bookTitle']),
+                                            trailing: SizedBox(
+                                              width: 100,
+                                              child: Row(
+                                                children: [
+                                                  IconButton(
+                                                      icon: const Icon(
+                                                          Icons.edit),
+                                                      onPressed: () => _update(
+                                                          documentSnapshot)),
+                                                  IconButton(
+                                                      icon: const Icon(
+                                                          Icons.delete),
+                                                      onPressed: () => _delete(
+                                                          documentSnapshot.id)),
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                          IconButton(
-                                              icon: const Icon(Icons.delete),
-                                              onPressed: () => _delete(documentSnapshot.id)
-                                          ),
-                                        ],
-                                      ),
+                                        );
+                                      },
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                        ],
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                )
-                    : StreamBuilder(
-                  stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                    if (streamSnapshot.hasData) {
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: streamSnapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[index];
-                            if (documentSnapshot['bookTitle']
-                                .toString()
-                                .toLowerCase()
-                                .contains(queries.toLowerCase()) ||
-                                documentSnapshot['bookTitle']
-                                    .toString()
-                                    .toLowerCase()
-                                    .startsWith(queries.toLowerCase())) {
-                              return Card(
-                                margin: const EdgeInsets.all(10),
-                                child: ListTile(
-                                  title: Text(documentSnapshot['bookTitle']),
-                                  trailing: SizedBox(
-                                    width: 100,
-                                    child: Row(
-                                      children: [
-                                        IconButton(
-                                            icon: const Icon(Icons.edit),
-                                            onPressed: () => _update(documentSnapshot)
-                                        ),
-                                        IconButton(
-                                            icon: const Icon(Icons.delete),
-                                            onPressed: () => _delete(documentSnapshot.id)
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                  )
+                                ],
                               );
-                            } else if (documentSnapshot['bookAuthor']
-                                .toString()
-                                .toLowerCase()
-                                .contains(queries.toLowerCase()) ||
-                                documentSnapshot['bookTitle']
-                                    .toString()
-                                    .toLowerCase()
-                                    .startsWith(queries.toLowerCase())) {
-                              return Card(
-                                margin: const EdgeInsets.all(10),
-                                child: ListTile(
-                                  title: Text(documentSnapshot['bookTitle']),
-                                  trailing: SizedBox(
-                                    width: 100,
-                                    child: Row(
-                                      children: [
-                                        IconButton(
-                                            icon: const Icon(Icons.edit),
-                                            onPressed: () => _update(documentSnapshot)
-                                        ),
-                                        IconButton(
-                                            icon: const Icon(Icons.delete),
-                                            onPressed: () => _delete(documentSnapshot.id)
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return const Center();
                             }
-                          });
-                      // return Column(
-                      //   children: [
-                      //     Expanded(
-                      //       flex: 20,
-                      //       child: ListView.builder(
-                      //         scrollDirection: Axis.vertical,
-                      //         itemCount: streamSnapshot.data!.docs.length,
-                      //         itemBuilder: (context, index) {
-                      //           final DocumentSnapshot documentSnapshot =
-                      //           streamSnapshot.data!.docs[index];
-                      //           return BookList(
-                      //             documentSnapshot: documentSnapshot,
-                      //           );
-                      //         },
-                      //       ),
-                      //     ),
-                      //     Expanded(
-                      //         flex: 1,
-                      //         child: Container(
-                      //           alignment: Alignment.centerRight,
-                      //           width: size.width * 0.90,
-                      //           child: Text(
-                      //             'Jumlah buku : ${streamSnapshot.data!.docs.length}',
-                      //             style: const TextStyle(
-                      //               // color: accentColor,
-                      //                 color: Colors.black,
-                      //                 fontWeight: FontWeight.bold
-                      //             ),
-                      //           ),
-                      //         )
-                      //     ),
-                      //   ],
-                      // );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(color: accentColor),
-                    );
-                  },
-                )
-              ),
-            ],
-          ),
-        ),
-      ),
-
-      drawer: Drawer(
-        child: Material(
-          color: accentColor,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(color: secLightColor),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-                child: Row(
-                  children: <Widget>[
-                    ClipOval(
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Image.asset(
-                          'assets/image/profil.png',
-                          width: 90,
-                          height: 90,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Admin',
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle2
-                              ?.copyWith(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'admin@gmail.com',
-                          style: Theme.of(context).textTheme.caption?.copyWith(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                              primary: secdarkColor,
-                              padding: const EdgeInsets.all(7)),
-                          onPressed: () async {
-                            await AuthServices.signOut();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const WelcomePage()
-                              ),
+                            return const Center(
+                              child: CircularProgressIndicator(),
                             );
                           },
-                          icon: const Icon(
-                            Icons.logout_rounded,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                          label: Text(
-                            'Log Out',
-                            style: Theme.of(context).textTheme.button?.copyWith(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 16),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.menu_book_rounded,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        'Edit Buku',
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                              color: Colors.white,
-                            ),
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
+                        )
+                      : StreamBuilder(
+                          stream: _books.snapshots(),
+                          builder: (context,
+                              AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                            if (streamSnapshot.hasData) {
+                              return ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: streamSnapshot.data!.docs.length,
+                                itemBuilder: (context, index) {
+                                  final DocumentSnapshot documentSnapshot =
+                                      streamSnapshot.data!.docs[index];
+                                  if (documentSnapshot['bookTitle']
+                                          .toString()
+                                          .toLowerCase()
+                                          .contains(queries.toLowerCase()) ||
+                                      documentSnapshot['bookTitle']
+                                          .toString()
+                                          .toLowerCase()
+                                          .startsWith(queries.toLowerCase())) {
+                                    return Card(
+                                      margin: const EdgeInsets.all(10),
+                                      child: ListTile(
+                                        title:
+                                            Text(documentSnapshot['bookTitle']),
+                                        trailing: SizedBox(
+                                          width: 100,
+                                          child: Row(
+                                            children: [
+                                              IconButton(
+                                                  icon: const Icon(Icons.edit),
+                                                  onPressed: () => _update(
+                                                      documentSnapshot)),
+                                              IconButton(
+                                                  icon:
+                                                      const Icon(Icons.delete),
+                                                  onPressed: () => _delete(
+                                                      documentSnapshot.id)),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  } else if (documentSnapshot['bookAuthor']
+                                          .toString()
+                                          .toLowerCase()
+                                          .contains(queries.toLowerCase()) ||
+                                      documentSnapshot['bookTitle']
+                                          .toString()
+                                          .toLowerCase()
+                                          .startsWith(queries.toLowerCase())) {
+                                    return Card(
+                                      margin: const EdgeInsets.all(10),
+                                      child: ListTile(
+                                        title:
+                                            Text(documentSnapshot['bookTitle']),
+                                        trailing: SizedBox(
+                                          width: 100,
+                                          child: Row(
+                                            children: [
+                                              IconButton(
+                                                  icon: const Icon(Icons.edit),
+                                                  onPressed: () => _update(
+                                                      documentSnapshot)),
+                                              IconButton(
+                                                  icon:
+                                                      const Icon(Icons.delete),
+                                                  onPressed: () => _delete(
+                                                      documentSnapshot.id)),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return const Center();
+                                  }
+                                },
+                              );
+                            }
+                            return const Center(
+                              child:
+                                  CircularProgressIndicator(color: accentColor),
+                            );
+                          },
+                        )),
             ],
           ),
         ),

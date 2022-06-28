@@ -70,7 +70,8 @@ class GoBooks extends StatelessWidget {
         textTheme: myTextTheme,
       ),
       // home: const WelcomePage(),
-      home: const MainPage(),
+      //home: const MainPage(),
+      home: const AdminProfilePage(),
 
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
