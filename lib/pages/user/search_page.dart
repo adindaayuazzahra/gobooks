@@ -1,16 +1,16 @@
 import 'package:gobooks/main.dart';
 
 class SearchPage extends StatefulWidget {
-  static const routeName = '/searchPage';
   const SearchPage({Key? key}) : super(key: key);
+  static const routeName = '/search_page';
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
+  final CollectionReference _books = FirebaseFirestore
+      .instance.collection('Book');
   final TextEditingController _searchControl = TextEditingController();
   String queries = '';
 

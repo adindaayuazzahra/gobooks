@@ -1,21 +1,23 @@
 import 'package:gobooks/main.dart';
 
 class BookByYearPage extends StatelessWidget {
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
   static const routeName = '/bookByYearPage';
 
   final int minYear;
   final int maxYear;
 
-  BookByYearPage({
+  const BookByYearPage({
     Key? key,
     required this.minYear,
     required this.maxYear
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
+
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -48,8 +50,8 @@ class BookByYearPage extends StatelessWidget {
           final List<int> yearNumber = <int>[];
           if (streamSnapshot.hasData) {
             streamSnapshot.data!.docs.asMap().forEach((index, value) {
-              if (value['yearPublished'] >= minYear &&
-                  value['yearPublished'] <= maxYear) {
+              if (value['yearPublished'] != null && value['yearPublished'] >= minYear &&
+                  value['yearPublished'] != null && value['yearPublished'] <= maxYear) {
                 yearNumber.add(index);
               }
             });

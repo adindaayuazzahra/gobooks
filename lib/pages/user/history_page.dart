@@ -1,19 +1,18 @@
 import 'package:gobooks/main.dart';
 
 class HistoryPage extends StatefulWidget {
-  static const routeName = '/history_page';
   const HistoryPage({Key? key}) : super(key: key);
+  static const routeName = '/history_page';
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
-
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -23,11 +22,17 @@ class _HistoryPageState extends State<HistoryPage> {
               tabs: [
                 Tab(
                     icon: Text('Masih dipinjam',
-                        style: TextStyle(color: accentColor))
+                        style: TextStyle(
+                            color: accentColor,
+                            fontWeight: FontWeight.bold)
+                    )
                 ),
                 Tab(
                     icon: Text('Sudah dikembalikan',
-                        style: TextStyle(color: accentColor))
+                        style: TextStyle(
+                            color: accentColor,
+                            fontWeight: FontWeight.bold)
+                    )
                 ),
               ],
             ),

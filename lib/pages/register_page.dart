@@ -16,7 +16,7 @@ class RegisterPage extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: size.height * 0.05),
               Text(
-                'REGISTER',
+                'DAFTAR',
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: accentColor,
                       fontWeight: FontWeight.w700,
@@ -112,8 +112,14 @@ class RegisterPage extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MainPage(),
+                            builder: (context) => const LoginPage(),
                           ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Akun anda telah terdaftar, silahkan masuk kembali.'),
+                              duration: Duration(milliseconds: 4000),
+                            )
                         );
                       }
                     },
@@ -123,7 +129,7 @@ class RegisterPage extends StatelessWidget {
                         horizontal: 40,
                       ),
                     ),
-                    child: Text('Register',
+                    child: Text('Daftar',
                         style: Theme.of(context)
                             .textTheme
                             .button

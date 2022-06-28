@@ -2,8 +2,10 @@ import 'package:gobooks/main.dart';
 
 class DetailBookPage extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
-  const DetailBookPage({Key? key, required this.documentSnapshot})
-      : super(key: key);
+  const DetailBookPage({
+    Key? key,
+    required this.documentSnapshot
+  }) : super(key: key);
   @override
   State<DetailBookPage> createState() => _DetailBookPageState();
 }
@@ -11,8 +13,8 @@ class DetailBookPage extends StatefulWidget {
 class _DetailBookPageState extends State<DetailBookPage> {
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books =
-        FirebaseFirestore.instance.collection('Book');
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
     var dt = DateTime.now();
     var date =
         '${dt.day} '

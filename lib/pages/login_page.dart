@@ -96,7 +96,11 @@ class LoginPage extends StatelessWidget {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Email / Password salah. Silakan coba lagi.')));
+                            const SnackBar(
+                              content: Text('Email / Password salah. Silakan coba lagi.'),
+                              duration: Duration(milliseconds: 600),
+                            )
+                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -115,7 +119,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-                            SizedBox(height: size.height * 0.001),
+              SizedBox(height: size.height * 0.001),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 width: size.width * 0.8,
@@ -124,14 +128,17 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                   child: ElevatedButton(
                     onPressed: () async {
-                      final result = await AuthServices.signIn(emailController.text, passwordController.text);
+                      final result = await AuthServices.signIn(
+                          emailController.text,
+                          passwordController.text
+                      );
                        if (result != null) {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const AdminMainPage(),
                               ),
-                          );
+                            );
                        }
                     },
                     style: ElevatedButton.styleFrom(

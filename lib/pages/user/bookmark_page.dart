@@ -1,13 +1,13 @@
 import 'package:gobooks/main.dart';
 
 class BookmarkPage extends StatelessWidget {
-  static const routeName = '/bookmark_page';
   const BookmarkPage({Key? key}) : super(key: key);
+  static const routeName = '/bookmark_page';
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books =
-        FirebaseFirestore.instance.collection('Book');
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
 
     return Scaffold(
       backgroundColor: bgColor,

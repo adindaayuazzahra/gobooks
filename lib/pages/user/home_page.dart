@@ -10,8 +10,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books =
-        FirebaseFirestore.instance.collection('Book');
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -127,7 +127,7 @@ class _HomepageState extends State<Homepage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return BookByYearPage(
+                              return const BookByYearPage(
                                 minYear: 1975,
                                 maxYear: 2009,
                               );
@@ -141,7 +141,7 @@ class _HomepageState extends State<Homepage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return BookByYearPage(
+                              return const BookByYearPage(
                                 minYear: 1950,
                                 maxYear: 1974,
                               );
@@ -155,7 +155,7 @@ class _HomepageState extends State<Homepage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return BookByYearPage(
+                              return const BookByYearPage(
                                 minYear: 1900,
                                 maxYear: 1949,
                               );
@@ -169,7 +169,7 @@ class _HomepageState extends State<Homepage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return BookByYearPage(
+                              return const BookByYearPage(
                                 minYear: 0,
                                 maxYear: 1899,
                               );
@@ -179,7 +179,8 @@ class _HomepageState extends State<Homepage> {
                         numberOfPages: '> 1899',
                       ),
                     ],
-                  )),
+                  )
+              ),
               const SizedBox(height: 5),
               _buildSubHeading(
                 title: 'List Buku Perpustakaan',
