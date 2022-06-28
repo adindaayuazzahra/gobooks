@@ -8,10 +8,10 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  final CollectionReference _books =
-      FirebaseFirestore.instance.collection('Book');
   @override
   Widget build(BuildContext context) {
+    final CollectionReference _books = FirebaseFirestore
+        .instance.collection('Book');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -193,7 +193,7 @@ class _HomepageState extends State<Homepage> {
                   stream: _books.snapshots(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
-                      List randomList = List.generate(4, (i) => i);
+                      List randomList = List.generate(streamSnapshot.data!.docs.length, (i) => i);
                       randomList.shuffle();
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -229,7 +229,7 @@ class _HomepageState extends State<Homepage> {
                           yearNumber.add(index);
                         }
                       });
-                      List randomList = List.generate(4, (i) => i);
+                      List randomList = List.generate(yearNumber.length, (i) => i);
                       randomList.shuffle();
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,

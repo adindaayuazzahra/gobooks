@@ -53,17 +53,40 @@ class BookByYearPage extends StatelessWidget {
                 yearNumber.add(index);
               }
             });
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: yearNumber.length,
-              itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot =
-                    streamSnapshot.data!.docs[yearNumber[index]];
-                return BookByYearList(
-                  documentSnapshot: documentSnapshot,
-                );
-              },
-            );
+            return yearNumber.isNotEmpty
+                ? ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: yearNumber.length,
+                      itemBuilder: (context, index) {
+                        final DocumentSnapshot documentSnapshot =
+                        streamSnapshot.data!.docs[yearNumber[index]];
+                        return BookByYearList(
+                          documentSnapshot: documentSnapshot,
+                        );
+                      },
+                    )
+                : Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.menu_book,
+                            color: secLightColor,
+                            size: 50,
+                          ),
+                          Text('Tidak ada buku yang dipublikasi \n'
+                              'dari tahun $maxYear - $minYear',
+                              style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(color: secLightColor,
+                                  fontSize: 15
+                              ),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      )
+                  );
           }
           return const Center(
             child: CircularProgressIndicator(color: accentColor),
