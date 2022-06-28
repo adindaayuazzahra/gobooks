@@ -895,7 +895,15 @@ class _AdminMainPageState extends State<AdminMainPage> {
                           style: ElevatedButton.styleFrom(
                               primary: secdarkColor,
                               padding: const EdgeInsets.all(7)),
-                          onPressed: () {},
+                          onPressed: () async {
+                            await AuthServices.signOut();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const WelcomePage()
+                              ),
+                            );
+                          },
                           icon: const Icon(
                             Icons.logout_rounded,
                             color: Colors.white,
