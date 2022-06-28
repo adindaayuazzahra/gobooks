@@ -94,6 +94,9 @@ class LoginPage extends StatelessWidget {
                             builder: (context) => const MainPage(),
                           ),
                         );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Email / Password salah. Silakan coba lagi.')));
                       }
                     },
                     style: ElevatedButton.styleFrom(
