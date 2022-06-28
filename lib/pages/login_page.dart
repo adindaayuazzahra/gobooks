@@ -112,6 +112,42 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+                            SizedBox(height: size.height * 0.001),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                width: size.width * 0.8,
+                height: size.height * 0.07,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(7),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final result = await AuthServices.signIn(emailController.text, passwordController.text);
+                       if (result != null) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AdminMainPage(),
+                              ),
+                          );
+                       }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: accentColor,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                      ),
+                    ),
+                    child: Text(
+                      'Login sebagai admin',
+                      style: Theme.of(context)
+                          .textTheme
+                          .button
+                          ?.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: size.height * 0.001),
               SizedBox(height: size.height * 0.001),
               DeviderOr(size: size),
               SizedBox(
