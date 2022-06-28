@@ -36,6 +36,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
           context: context,
           builder: (BuildContext ctx) {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 colorScheme: Theme.of(context).colorScheme.copyWith(
                       primary: accentColor,
@@ -320,6 +321,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
           context: context,
           builder: (BuildContext ctx) {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 colorScheme: Theme.of(context).colorScheme.copyWith(
                       primary: accentColor,

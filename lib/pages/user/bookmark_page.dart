@@ -1,7 +1,7 @@
 import 'package:gobooks/main.dart';
 
 class BookmarkPage extends StatelessWidget {
-  static const routeName = '/bookmark';
+  static const routeName = '/bookmark_page';
   const BookmarkPage({Key? key}) : super(key: key);
 
   @override

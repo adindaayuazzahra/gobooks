@@ -1,13 +1,9 @@
 import 'package:gobooks/main.dart';
 
-class AdminProfilePage extends StatefulWidget {
+class AdminProfilePage extends StatelessWidget {
+  static const routeName = '/admin_profile_page';
   const AdminProfilePage({Key? key}) : super(key: key);
 
-  @override
-  State<AdminProfilePage> createState() => _AdminProfilePageState();
-}
-
-class _AdminProfilePageState extends State<AdminProfilePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -35,7 +31,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 width: size.width * 0.9,
                 height: size.height * 1 / 6,
                 margin:
-                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                 decoration: BoxDecoration(
                   color: accentColor,
                   borderRadius: BorderRadius.circular(10),
@@ -48,15 +44,17 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                         style: Theme.of(context)
                             .textTheme
                             .headline6
-                            ?.copyWith(color: Colors.white)),
+                            ?.copyWith(color: Colors.white)
+                    ),
+                    const Text(
+                      'dicoding.admin@gmail.com',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     const Text('Status : Admin Perpustakaan',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
-                        )),
-                    const Text(
-                      '0812344566655',
-                      style: TextStyle(color: Colors.white),
+                        )
                     ),
                   ],
                 ),
@@ -127,10 +125,10 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                   Text(
                     'Log Out',
                     style: Theme.of(context).textTheme.button?.copyWith(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ],
               ),

@@ -2,6 +2,7 @@ import 'package:gobooks/main.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+  static const routeName = '/profile_page';
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -48,15 +49,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: Theme.of(context)
                             .textTheme
                             .headline6
-                            ?.copyWith(color: Colors.white)),
+                            ?.copyWith(color: Colors.white)
+                    ),
+                    const Text(
+                      'dicoding@gmail.com',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     const Text('Status : Mahasiswa',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
-                        )),
-                    const Text(
-                      '0812344566655',
-                      style: TextStyle(color: Colors.white),
+                        )
                     ),
                   ],
                 ),
