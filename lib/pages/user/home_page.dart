@@ -10,8 +10,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _books = FirebaseFirestore
-        .instance.collection('Book');
+    final CollectionReference _books =
+        FirebaseFirestore.instance.collection('Book');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: bgColor,
@@ -191,9 +191,11 @@ class _HomepageState extends State<Homepage> {
                 height: 180,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
-                      List randomList = List.generate(streamSnapshot.data!.docs.length, (i) => i);
+                      List randomList = List.generate(
+                          streamSnapshot.data!.docs.length, (i) => i);
                       randomList.shuffle();
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -201,7 +203,8 @@ class _HomepageState extends State<Homepage> {
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
                               streamSnapshot.data!.docs[randomList[index]];
-                          return LibraryBookList(documentSnapshot: documentSnapshot);
+                          return LibraryBookList(
+                              documentSnapshot: documentSnapshot);
                         },
                       );
                     }
@@ -221,22 +224,27 @@ class _HomepageState extends State<Homepage> {
                 height: 277,
                 child: StreamBuilder(
                   stream: _books.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     final List<int> yearNumber = <int>[];
                     if (streamSnapshot.hasData) {
                       streamSnapshot.data!.docs.asMap().forEach((index, value) {
-                        if (value['yearPublished'] != null && value['yearPublished'] >= 2020) {
+                        if (value['yearPublished'] != null &&
+                            value['yearPublished'] >= 2020) {
                           yearNumber.add(index);
                         }
                       });
-                      List randomList = List.generate(yearNumber.length, (i) => i);
+                      List randomList =
+                          List.generate(yearNumber.length, (i) => i);
                       randomList.shuffle();
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: yearNumber.length > 4 ? 4 : yearNumber.length,
+                        itemCount:
+                            yearNumber.length > 4 ? 4 : yearNumber.length,
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
-                          streamSnapshot.data!.docs[yearNumber[randomList[index]]];
+                              streamSnapshot
+                                  .data!.docs[yearNumber[randomList[index]]];
                           return LatestBookList(
                             documentSnapshot: documentSnapshot,
                           );
@@ -289,10 +297,8 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  InkWell _bookByYearWidget({
-    required Function() onTap,
-    required String numberOfPages
-  }) {
+  InkWell _bookByYearWidget(
+      {required Function() onTap, required String numberOfPages}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -312,10 +318,7 @@ class _HomepageState extends State<Homepage> {
         ),
         child: Row(
           children: <Widget>[
-            const Icon(
-                Icons.date_range,
-                color: accentColor
-            ),
+            const Icon(Icons.date_range, color: accentColor),
             const SizedBox(width: 3),
             Text(
               numberOfPages,

@@ -8,12 +8,14 @@ class LibraryBookList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-          MaterialPageRoute(builder: (context) =>
-              DetailBookPage(documentSnapshot: documentSnapshot)
-          ),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DetailBookPage(documentSnapshot: documentSnapshot)),
         );
       },
       child: Card(
@@ -25,6 +27,7 @@ class LibraryBookList extends StatelessWidget {
           child: Row(
             children: [
               Container(
+                width: 87,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(20),
@@ -59,7 +62,7 @@ class LibraryBookList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 200,
+                      width: 145,
                       child: Text(
                         documentSnapshot['bookTitle'],
                         maxLines: 3,
@@ -71,13 +74,17 @@ class LibraryBookList extends StatelessWidget {
                             ),
                       ),
                     ),
-                    Text(documentSnapshot['bookAuthor'],
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
+                    SizedBox(
+                      width: 145,
+                      child: Text(
+                        documentSnapshot['bookAuthor'],
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
                             .textTheme
                             .bodyText2
                             ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Text('${documentSnapshot['numberOfPages']} Halaman')
                   ],

@@ -10,7 +10,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   final CollectionReference _books =
-  FirebaseFirestore.instance.collection('Book');
+      FirebaseFirestore.instance.collection('Book');
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +19,14 @@ class _HistoryPageState extends State<HistoryPage> {
       child: Scaffold(
           appBar: AppBar(
             bottom: const TabBar(
+              indicatorColor: accentColor,
               tabs: [
                 Tab(
                     icon: Text('Masih dipinjam',
-                        style: TextStyle(color: Colors.red)
-                    )
-                ),
+                        style: TextStyle(color: Colors.red))),
                 Tab(
                     icon: Text('Sudah dikembalikan',
-                        style: TextStyle(color: Colors.green)
-                    )
-                ),
+                        style: TextStyle(color: Colors.green))),
               ],
             ),
             title: Text(
@@ -48,10 +45,13 @@ class _HistoryPageState extends State<HistoryPage> {
                 Tab(
                   child: StreamBuilder(
                     stream: _books.snapshots(),
-                    builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    builder:
+                        (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                       final List<int> listOfBooked = <int>[];
                       if (streamSnapshot.hasData) {
-                        streamSnapshot.data!.docs.asMap().forEach((index, value) {
+                        streamSnapshot.data!.docs
+                            .asMap()
+                            .forEach((index, value) {
                           if (value['history'] == true) {
                             listOfBooked.add(index);
                           }
@@ -61,10 +61,11 @@ class _HistoryPageState extends State<HistoryPage> {
                           itemCount: listOfBooked.length,
                           itemBuilder: (context, index) {
                             final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[listOfBooked[index]];
+                                streamSnapshot.data!.docs[listOfBooked[index]];
 
                             return documentSnapshot['isAvailable'] == false
-                                ? HistoryList(documentSnapshot: documentSnapshot)
+                                ? HistoryList(
+                                    documentSnapshot: documentSnapshot)
                                 : const Center();
                           },
                         );
@@ -77,10 +78,13 @@ class _HistoryPageState extends State<HistoryPage> {
                 Tab(
                   child: StreamBuilder(
                     stream: _books.snapshots(),
-                    builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    builder:
+                        (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                       final List<int> listOfBooked = <int>[];
                       if (streamSnapshot.hasData) {
-                        streamSnapshot.data!.docs.asMap().forEach((index, value) {
+                        streamSnapshot.data!.docs
+                            .asMap()
+                            .forEach((index, value) {
                           if (value['history'] == true) {
                             listOfBooked.add(index);
                           }
@@ -90,10 +94,11 @@ class _HistoryPageState extends State<HistoryPage> {
                           itemCount: listOfBooked.length,
                           itemBuilder: (context, index) {
                             final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[listOfBooked[index]];
+                                streamSnapshot.data!.docs[listOfBooked[index]];
 
                             return documentSnapshot['isAvailable'] == true
-                                ? HistoryList(documentSnapshot: documentSnapshot)
+                                ? HistoryList(
+                                    documentSnapshot: documentSnapshot)
                                 : const Center();
                           },
                         );
@@ -105,8 +110,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
               ],
             ),
-          )
-      ),
+          )),
     );
   }
 }
