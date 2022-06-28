@@ -17,35 +17,35 @@ class AuthServices {
     }
   }
 
-  static Future<User?> signUp(
-      String email, String password, String role, String ussername) async {
-    try {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) async {
-        User user = FirebaseAuth.instance.currentUser!;
-        await FirebaseFirestore.instance
-            .collection('tblUser')
-            .doc(user.uid)
-            .set({
-          'userUID': user.uid,
-          'email': email,
-          'password': password,
-          'role': role,
-          'ussername': ussername,
-        });
-        return "SignedUp";
-      });
+  //static Future<User?> signUp(
+  //    String email, String password, String role, String ussername) async {
+  //  try {
+  //    await _auth
+  //        .createUserWithEmailAndPassword(email: email, password: password)
+  //        .then((value) async {
+  //      User user = FirebaseAuth.instance.currentUser!;
+  //      await FirebaseFirestore.instance
+  //          .collection('tblUser')
+  //          .doc(user.uid)
+  //          .set({
+  //        'userUID': user.uid,
+  //        'email': email,
+  //        'password': password,
+  //        'role': role,
+  //        'ussername': ussername,
+  //      });
+  //      return "SignedUp";
+  //    });
 
       ///     UserCredential result = await _auth.createUserWithEmailAndPassword(
       ///      email: email, password: password);
       //User firebaseUser = result.user!;
       //return firebaseUser;
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
+  //  } catch (e) {
+  //    print(e.toString());
+  //    return null;
+  //  }
+  //}
 
   //static Future<User?> signIn(String email, String password) async {
   //  try {
@@ -63,6 +63,18 @@ class AuthServices {
   //    }
   //  }
   //}
+
+  static Future<User?> signUp(String email, String password) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User firebaseUser = result.user!;
+
+      return firebaseUser;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   static Future<User?> signIn(String email, String password) async {
     try {
