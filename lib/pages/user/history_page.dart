@@ -23,10 +23,12 @@ class _HistoryPageState extends State<HistoryPage> {
               tabs: [
                 Tab(
                     icon: Text('Masih dipinjam',
-                        style: TextStyle(color: Colors.red))),
+                        style: TextStyle(color: accentColor))
+                ),
                 Tab(
                     icon: Text('Sudah dikembalikan',
-                        style: TextStyle(color: Colors.green))),
+                        style: TextStyle(color: accentColor))
+                ),
               ],
             ),
             title: Text(
@@ -62,7 +64,6 @@ class _HistoryPageState extends State<HistoryPage> {
                           itemBuilder: (context, index) {
                             final DocumentSnapshot documentSnapshot =
                                 streamSnapshot.data!.docs[listOfBooked[index]];
-
                             return documentSnapshot['isAvailable'] == false
                                 ? HistoryList(
                                     documentSnapshot: documentSnapshot)
@@ -110,7 +111,8 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
               ],
             ),
-          )),
+          )
+      ),
     );
   }
 }

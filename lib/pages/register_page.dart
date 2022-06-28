@@ -108,14 +108,14 @@ class RegisterPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       final result = await AuthServices.signUp(emailController.text, passwordController.text);
-                       if (result != null) {
-                         Navigator.pushReplacement(
-                           context,
-                           MaterialPageRoute(
-                             builder: (context) => const MainPage(),
-                           ),
-                         );
-                       }
+                      if (result != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MainPage(),
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       primary: secdarkColor,

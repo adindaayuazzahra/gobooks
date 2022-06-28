@@ -70,8 +70,8 @@ class GoBooks extends StatelessWidget {
         textTheme: myTextTheme,
       ),
       // home: const WelcomePage(),
-      //home: const MainPage(),
-      home: const AdminProfilePage(),
+      home: const MainPage(),
+      // home: const AdminProfilePage(),
 
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
@@ -83,6 +83,10 @@ class GoBooks extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const LatestBookPage());
           case AdminMainPage.routeName:
             return MaterialPageRoute(builder: (_) => const AdminMainPage());
+          case AdminProfilePage.routeName:
+            return MaterialPageRoute(builder: (_) => const AdminProfilePage());
+          case ProfilePage.routeName:
+            return MaterialPageRoute(builder: (_) => const ProfilePage());
           case LibraryBookPage.routeName:
             return MaterialPageRoute(builder: (_) => const LibraryBookPage());
           default:

@@ -2,10 +2,8 @@ import 'package:gobooks/main.dart';
 
 class DetailBookPage extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
-
   const DetailBookPage({Key? key, required this.documentSnapshot})
       : super(key: key);
-
   @override
   State<DetailBookPage> createState() => _DetailBookPageState();
 }
