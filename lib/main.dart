@@ -61,7 +61,7 @@ class GoBooks extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'goBooks',
       theme: ThemeData(
         colorScheme: Theme.of(context).colorScheme.copyWith(
               primary: bgColor,
