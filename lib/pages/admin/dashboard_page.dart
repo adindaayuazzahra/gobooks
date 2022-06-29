@@ -29,10 +29,11 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'Profile',
+          'Dashboard',
           style: Theme.of(context).textTheme.headline6?.copyWith(
               color: accentColor, fontWeight: FontWeight.bold, fontSize: 25),
         ),

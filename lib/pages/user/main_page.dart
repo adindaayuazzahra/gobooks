@@ -17,7 +17,6 @@ class _MainPageState extends State<MainPage> {
     const SearchPage(),
     const HistoryPage(),
     const ProfilePage(),
-    // const AdminProfilePage()
   ];
   @override
   void initState() {

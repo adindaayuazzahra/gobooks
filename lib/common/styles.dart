@@ -3,10 +3,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const Color accentColor = Color(0xFF413B89);
-const Color secdarkColor = Color(0xFFA99153);
-final Color secLightColor = Color(0xFFF0E5C8);
-const Color bgColor = Color(0xFFfcfbf7);
+// const Color accentColor = Color(0xFF413B89);
+// const Color secdarkColor = Color(0xFFA99153);
+// final Color secLightColor = Color(0xFFF0E5C8);
+// const Color bgColor = Color(0xFFfcfbf7);
+
+// const Color accentColor = Color(0xFF33546D);
+// const Color secdarkColor = Color(0xFFF1485B);
+// final Color secLightColor = Color(0xFF7FA7B8);
+// const Color bgColor = Color(0xFFF7EFED);
+
+// => Favorite
+const Color accentColor = Color(0xFF121212);
+const Color secdarkColor = Color(0xFF30475E);
+final Color secLightColor = Color(0xFFF05454);
+const Color bgColor = Color(0xFFEEEEEE);
+// const Color secdarkColor = Color(0xFF630000);
+
+// => Favorite 02
+// const Color accentColor = Color(0xFF11324D);
+// const Color secdarkColor = Color(0xFF6B7AA1);
+// final Color secLightColor = Color(0xFFC1CFC0);
+// const Color bgColor = Color(0xFFF9F9F9);
+
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(

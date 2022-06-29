@@ -210,7 +210,7 @@ class _HomepageState extends State<Homepage> {
                       );
                     }
                     return const Center(
-                      child: CircularProgressIndicator(color: Colors.red),
+                      child: CircularProgressIndicator(color: accentColor),
                     );
                   },
                 ),
@@ -284,11 +284,11 @@ class _HomepageState extends State<Homepage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              children: const [
+              children: [
                 Text(
                   'Lainnya',
                   style: TextStyle(
-                      fontWeight: FontWeight.w500, color: secdarkColor),
+                      fontWeight: FontWeight.w500, color: secLightColor),
                 ),
               ],
             ),
