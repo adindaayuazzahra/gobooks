@@ -6,10 +6,13 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Anggota:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- P2172A129 - Daniel Hamonangan Sidauruk
+- P7290A252 - Adinda Ayu Azzahra
+- P2359A341 - Brian Agustian Kristianto
+- P2010A053 - Ananda Luqman Mahendra
+
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
