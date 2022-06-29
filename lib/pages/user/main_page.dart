@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:gobooks/main.dart';
+import 'package:gobooks/notification/notification.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  String notificationMessages = "";
   int currentIndex = 0;
   final pages = [
     const Homepage(),
@@ -19,14 +21,71 @@ class _MainPageState extends State<MainPage> {
   ];
   @override
   void initState() {
+    super.initState();
+
+    LocalNotificationService.initilize();
+
+    // Terminated State
+    FirebaseMessaging.instance.getInitialMessage().then((event) {
+      if (event != null) {
+        setState(() {
+          notificationMessages =
+              "${event.notification!.title} ${event.notification!.body} I am coming from terminated state";
+        });
+      }
+    });
+
+    // Foregrand State
+    FirebaseMessaging.onMessage.listen((event) {
+      LocalNotificationService.showNotificationOnForeground(event);
+      setState(() {
+        notificationMessages =
+            "${event.notification!.title} ${event.notification!.body} I am coming from foreground";
+      });
+    });
+
+    // background State
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      setState(() {
+        notificationMessages =
+            "${event.notification!.title} ${event.notification!.body} I am coming from background";
+      });
+    });
+
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        print(message.data);
+        print(message.notification!.title);
+        print(message.notification!.body);
+      }
+    });
+    print(notificationMessages);
+    //onbackground notification
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {});
+    //foreground notification
     FirebaseMessaging.onMessage.listen((event) {
       print(event);
       if (event.notification != null) {
         print(event.notification!.title);
         print(event.notification!.body);
+        /* showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  title: Text("Notification"),
+                  content: Text(
+                      '${event.notification!.title}/n ${event.notification!.body!}'),
+                  actions: [
+                    TextButton(
+                      child: Text("Ok"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ]);
+            });*/
       }
     });
-    super.initState();
   }
 
   @override

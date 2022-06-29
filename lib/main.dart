@@ -38,27 +38,15 @@ export 'package:gobooks/widgets/admin_book_list.dart';
 export 'package:gobooks/widgets/devider_or.dart';
 //=>notification
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 // => Assets
 export 'package:flutter_svg/svg.dart';
 export 'package:lottie/lottie.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-
-  print("Handling a background message: ${message.messageId}");
+  print("Handling a background message: ${message.notification!.title}");
 }
 
-AndroidNotificationChannel channel = const AndroidNotificationChannel(
-  'badrustuts', // id
-  'High Importance Notifications', // title
-  importance: Importance.high,
-);
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
 Future<void> requestPermission() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   NotificationSettings settings = await messaging.requestPermission(
@@ -82,17 +70,13 @@ Future<void> requestPermission() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await requestPermission();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await requestPermission();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     systemNavigationBarColor: bgColor,
   ));
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
   runApp(const GoBooks());
 }
 
