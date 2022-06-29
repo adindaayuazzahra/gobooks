@@ -26,6 +26,7 @@ dependencies:
   firebase_storage: ^10.2.17
   file_picker: ^4.6.1
   date_field: ^3.0.1
+  flutter_local_notifications: ^9.6.1
 #  android_alarm_manager_plus: ^2.0.5
 #  flutter_local_notifications: ^9.4.0
 #  rxdart: ^0.27.3

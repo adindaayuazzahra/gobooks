@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:gobooks/main.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,6 +17,18 @@ class _MainPageState extends State<MainPage> {
     // const ProfilePage(),
     const AdminProfilePage()
   ];
+  @override
+  void initState() {
+    FirebaseMessaging.onMessage.listen((event) {
+      print(event);
+      if (event.notification != null) {
+        print(event.notification!.title);
+        print(event.notification!.body);
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
