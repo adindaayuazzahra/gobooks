@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: size.height * 0.06),
               Text(
-                'LOGIN',
+                'MASUK',
                 style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: accentColor,
                       fontWeight: FontWeight.w700,
@@ -68,10 +68,10 @@ class LoginPage extends StatelessWidget {
                       Icons.lock,
                       color: secdarkColor,
                     ),
-                    suffixIcon: Icon(
-                      Icons.visibility,
-                      color: secdarkColor,
-                    ),
+                    // suffixIcon: Icon(
+                    //   Icons.visibility,
+                    //   color: secdarkColor,
+                    // ),
                     hintText: "Password",
                     border: InputBorder.none,
                   ),
@@ -86,13 +86,24 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                   child: ElevatedButton(
                     onPressed: () async {
-                      final result = await AuthServices.signIn(emailController.text, passwordController.text);
+                      final result = await AuthServices.signIn(
+                          emailController.text,
+                          passwordController.text
+                      );
                       if (result != null) {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const MainPage(),
                           ),
+                        );
+                      } else if(emailController.text == ""
+                          || passwordController.text == "") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Email / Password tidak boleh kosong.'),
+                              duration: Duration(milliseconds: 600),
+                            )
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -110,7 +121,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Login',
+                      'Masuk',
                       style: Theme.of(context)
                           .textTheme
                           .button
@@ -132,14 +143,29 @@ class LoginPage extends StatelessWidget {
                           emailController.text,
                           passwordController.text
                       );
-                       if (result != null) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AdminMainPage(),
-                              ),
-                            );
-                       }
+                      if (result != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MainPage(),
+                          ),
+                        );
+                      } else if(emailController.text == ""
+                          || passwordController.text == "") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Email / Password tidak boleh kosong.'),
+                              duration: Duration(milliseconds: 600),
+                            )
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Email / Password salah. Silakan coba lagi.'),
+                              duration: Duration(milliseconds: 600),
+                            )
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       primary: accentColor,
@@ -148,7 +174,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Login sebagai admin',
+                      'Masuk sebagai admin',
                       style: Theme.of(context)
                           .textTheme
                           .button
@@ -220,7 +246,7 @@ class LoginPage extends StatelessWidget {
                       );
                     },
                     child: Text(
-                      "Register",
+                      "Daftar",
                       style: Theme.of(context).textTheme.button?.copyWith(
                           color: accentColor,
                           fontWeight: FontWeight.bold,

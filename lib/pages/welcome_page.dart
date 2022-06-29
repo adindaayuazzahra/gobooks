@@ -69,7 +69,7 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Login',
+                    'Masuk',
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
@@ -98,7 +98,7 @@ class WelcomePage extends StatelessWidget {
                       horizontal: 40,
                     ),
                   ),
-                  child: Text('Register',
+                  child: Text('Daftar',
                       style: Theme.of(context)
                           .textTheme
                           .button

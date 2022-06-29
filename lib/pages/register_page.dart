@@ -26,28 +26,28 @@ class RegisterPage extends StatelessWidget {
                 'assets/lottie/register.json',
                 height: size.height * 0.30,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                width: size.width * 0.8,
-                decoration: BoxDecoration(
-                  color: secLightColor,
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                child: TextField(
-                  cursorColor: secdarkColor,
-                  decoration: const InputDecoration(
-                    icon: Icon(
-                      Icons.person,
-                      color: secdarkColor,
-                    ),
-                    hintText: "Username",
-                    border: InputBorder.none,
-                  ),
-                  onChanged: (String value) {},
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.symmetric(vertical: 10),
+              //   padding:
+              //       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              //   width: size.width * 0.8,
+              //   decoration: BoxDecoration(
+              //     color: secLightColor,
+              //     borderRadius: BorderRadius.circular(7),
+              //   ),
+              //   child: TextField(
+              //     cursorColor: secdarkColor,
+              //     decoration: const InputDecoration(
+              //       icon: Icon(
+              //         Icons.person,
+              //         color: secdarkColor,
+              //       ),
+              //       hintText: "Username",
+              //       border: InputBorder.none,
+              //     ),
+              //     onChanged: (String value) {},
+              //   ),
+              // ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 padding:
@@ -68,7 +68,6 @@ class RegisterPage extends StatelessWidget {
                     hintText: "Email",
                     border: InputBorder.none,
                   ),
-                  onChanged: (String value) {},
                 ),
               ),
               Container(
@@ -89,14 +88,13 @@ class RegisterPage extends StatelessWidget {
                       Icons.lock,
                       color: secdarkColor,
                     ),
-                    suffixIcon: Icon(
-                      Icons.visibility,
-                      color: secdarkColor,
-                    ),
+                    // suffixIcon: Icon(
+                    //   Icons.visibility,
+                    //   color: secdarkColor,
+                    // ),
                     hintText: "Password",
                     border: InputBorder.none,
                   ),
-                  onChanged: (String value) {},
                 ),
               ),
               Container(
@@ -107,7 +105,9 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(7),
                   child: ElevatedButton(
                     onPressed: () async {
-                      final result = await AuthServices.signUp(emailController.text, passwordController.text);
+                      final result = await AuthServices.signUp(
+                          emailController.text, passwordController.text
+                      );
                       if (result != null) {
                         Navigator.pushReplacement(
                           context,
@@ -118,6 +118,21 @@ class RegisterPage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Akun anda telah terdaftar, silahkan masuk kembali.'),
+                              duration: Duration(milliseconds: 4000),
+                            )
+                        );
+                      } else if (emailController.text == ""
+                          || passwordController.text == "") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Email/Password tidak boleh kosong.'),
+                              duration: Duration(milliseconds: 4000),
+                            )
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Format email salah, silahkan coba kembali.'),
                               duration: Duration(milliseconds: 4000),
                             )
                         );
@@ -198,7 +213,7 @@ class RegisterPage extends StatelessWidget {
                       );
                     },
                     child: Text(
-                      "Login",
+                      "Masuk",
                       style: Theme.of(context).textTheme.button?.copyWith(
                           color: accentColor,
                           fontWeight: FontWeight.bold,

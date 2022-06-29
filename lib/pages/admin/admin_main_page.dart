@@ -521,7 +521,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                   final String publisher =
                                       _publisherController.text;
                                   final int? yearPublished = int.tryParse(
-                                      _yearPublishedController.text);
+                                      _yearPublishedController.text) ?? 0;
                                   final String bookLocation =
                                       _bookLocationController.text;
                                   final String synopsis =
