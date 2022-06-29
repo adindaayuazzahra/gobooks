@@ -1,6 +1,6 @@
 # gobooks
 
-A new Flutter project.
+capstone project from SIB - DICODING
 
 ## Getting Started
 
