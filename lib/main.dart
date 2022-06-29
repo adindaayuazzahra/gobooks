@@ -19,13 +19,13 @@ export 'package:gobooks/pages/user/history_page.dart';
 export 'package:gobooks/pages/user/home_page.dart';
 export 'package:gobooks/pages/user/profile_page.dart';
 export 'package:gobooks/pages/user/search_page.dart';
-export 'package:gobooks/pages/admin/admin_main_page.dart';
+export 'package:gobooks/pages/admin/set_book_page.dart';
 export 'package:gobooks/pages/welcome_page.dart';
 export 'package:gobooks/pages/user/main_page.dart';
 export 'package:gobooks/pages/register_page.dart';
 export 'package:gobooks/pages/login_page.dart';
 export 'package:gobooks/pages/user/detail_book_page.dart';
-export 'package:gobooks/pages/admin/admin_profile_page.dart';
+export 'package:gobooks/pages/admin/dashboard_page.dart';
 
 // => Widget
 export 'package:gobooks/widgets/book_by_year_list.dart';
@@ -95,8 +95,8 @@ class GoBooks extends StatelessWidget {
             ),
         textTheme: myTextTheme,
       ),
-      // home: const WelcomePage(),
-      home: const MainPage(),
+      home: const WelcomePage(),
+      // home: const MainPage(),
       // home: const AdminProfilePage(),
 
       onGenerateRoute: (RouteSettings settings) {

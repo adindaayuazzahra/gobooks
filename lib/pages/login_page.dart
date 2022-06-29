@@ -68,10 +68,6 @@ class LoginPage extends StatelessWidget {
                       Icons.lock,
                       color: secdarkColor,
                     ),
-                    // suffixIcon: Icon(
-                    //   Icons.visibility,
-                    //   color: secdarkColor,
-                    // ),
                     hintText: "Password",
                     border: InputBorder.none,
                   ),
@@ -147,7 +143,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MainPage(),
+                            builder: (context) => const AdminProfilePage(),
                           ),
                         );
                       } else if(emailController.text == ""

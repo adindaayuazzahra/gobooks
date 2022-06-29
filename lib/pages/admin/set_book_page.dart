@@ -604,7 +604,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
           },
         ),
         title: Text(
-          'Dashboard',
+          'Set Buku',
           style: Theme.of(context).textTheme.headline6?.copyWith(
               color: accentColor, fontSize: 25, fontWeight: FontWeight.bold),
         ),
@@ -655,8 +655,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 8.0),
               SizedBox(
-                  height: size.height * 0.9,
+                  height: size.height * 0.75,
                   child: queries == ""
                       ? StreamBuilder(
                           stream: _books.snapshots(),
@@ -664,21 +665,10 @@ class _AdminMainPageState extends State<AdminMainPage> {
                               AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                             if (streamSnapshot.hasData) {
                               return Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        alignment: Alignment.centerRight,
-                                        width: size.width * 0.90,
-                                        child: Text(
-                                          'Jumlah buku : ${streamSnapshot.data!.docs.length}',
-                                          style: const TextStyle(
-                                              color: accentColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      )),
-                                  Expanded(
-                                    flex: 30,
+                                    flex: 33,
                                     child: ListView.builder(
                                       itemCount:
                                           streamSnapshot.data!.docs.length,
@@ -692,19 +682,21 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                             title: Text(
                                                 documentSnapshot['bookTitle']),
                                             trailing: SizedBox(
-                                              width: 100,
+                                              width: size.width * 0.3,
                                               child: Row(
                                                 children: [
                                                   IconButton(
                                                       icon: const Icon(
                                                           Icons.edit),
                                                       onPressed: () => _update(
-                                                          documentSnapshot)),
+                                                          documentSnapshot)
+                                                  ),
                                                   IconButton(
                                                       icon: const Icon(
                                                           Icons.delete),
                                                       onPressed: () => _delete(
-                                                          documentSnapshot.id)),
+                                                          documentSnapshot.id)
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -712,7 +704,23 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                         );
                                       },
                                     ),
-                                  )
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        width: size.width * 0.85,
+                                        child: Text(
+                                          'Jumlah buku : ${streamSnapshot.data!.docs.length}',
+                                          style: const TextStyle(
+                                              color: accentColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                  ),
                                 ],
                               );
                             }
@@ -805,7 +813,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                   CircularProgressIndicator(color: accentColor),
                             );
                           },
-                        )),
+                  )
+              ),
             ],
           ),
         ),

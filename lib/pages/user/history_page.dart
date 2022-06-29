@@ -16,15 +16,16 @@ class _HistoryPageState extends State<HistoryPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: bgColor,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             bottom: const TabBar(
               indicatorColor: accentColor,
               tabs: [
                 Tab(
                     icon: Text('Masih dipinjam',
                         style: TextStyle(
-                            // color: accentColor,
-                            color: Colors.red,
+                            color: secdarkColor,
                             fontWeight: FontWeight.bold)
                     )
                 ),
@@ -32,7 +33,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     icon: Text('Sudah dikembalikan',
                         style: TextStyle(
                             // color: accentColor,
-                            color: Colors.green,
+                            color: secdarkColor,
                             fontWeight: FontWeight.bold)
                     )
                 ),

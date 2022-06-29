@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 margin:
                 const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                 decoration: BoxDecoration(
-                  color: accentColor,
+                  color: secdarkColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
