@@ -23,14 +23,16 @@ class _HistoryPageState extends State<HistoryPage> {
                 Tab(
                     icon: Text('Masih dipinjam',
                         style: TextStyle(
-                            color: accentColor,
+                            // color: accentColor,
+                            color: Colors.red,
                             fontWeight: FontWeight.bold)
                     )
                 ),
                 Tab(
                     icon: Text('Sudah dikembalikan',
                         style: TextStyle(
-                            color: accentColor,
+                            // color: accentColor,
+                            color: Colors.green,
                             fontWeight: FontWeight.bold)
                     )
                 ),

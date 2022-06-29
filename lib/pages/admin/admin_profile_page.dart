@@ -1,8 +1,27 @@
 import 'package:gobooks/main.dart';
 
-class AdminProfilePage extends StatelessWidget {
+class AdminProfilePage extends StatefulWidget {
   static const routeName = '/admin_profile_page';
   const AdminProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<AdminProfilePage> createState() => _AdminProfilePageState();
+}
+
+class _AdminProfilePageState extends State<AdminProfilePage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late User user;
+
+  @override
+  void initState() {
+    super.initState();
+    initUser();
+  }
+
+  initUser() async {
+    user = _auth.currentUser!;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +59,11 @@ class AdminProfilePage extends StatelessWidget {
                   // mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Dicoding Indonesia',
+                    Text('${user.email}',
                         style: Theme.of(context)
                             .textTheme
                             .headline6
                             ?.copyWith(color: Colors.white)
-                    ),
-                    const Text(
-                      'dicoding.admin@gmail.com',
-                      style: TextStyle(color: Colors.white),
                     ),
                     const Text('Status : Admin Perpustakaan',
                         style: TextStyle(

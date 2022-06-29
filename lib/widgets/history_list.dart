@@ -10,6 +10,7 @@ class HistoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         Navigator.push(context,
@@ -60,11 +61,12 @@ class HistoryList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 130,
+                            // width: 130,
+                            width: size.width * 0.60,
                             child: Text(
                               documentSnapshot['bookTitle'],
                               maxLines: 2,
-                              // overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
@@ -114,24 +116,24 @@ class HistoryList extends StatelessWidget {
                         ],
                       ),
                     ),
-                    documentSnapshot['isAvailable'] == false ?
-                    Text(
-                      'Sedang \ndipinjam',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 12,
-                          color: Colors.red
-                      ),
-                    ) : Text(
-                      'Telah \ndikembalikan',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 12,
-                          color: Colors.green
-                      ),
-                    )
+                    // documentSnapshot['isAvailable'] == false ?
+                    // Text(
+                    //   'Sedang \ndipinjam',
+                    //   textAlign: TextAlign.center,
+                    //   style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                    //       fontWeight: FontWeight.w300,
+                    //       fontSize: 12,
+                    //       color: Colors.red
+                    //   ),
+                    // ) : Text(
+                    //   'Telah \ndikembalikan',
+                    //   textAlign: TextAlign.center,
+                    //   style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                    //       fontWeight: FontWeight.w300,
+                    //       fontSize: 12,
+                    //       color: Colors.green
+                    //   ),
+                    // )
                   ],
                 ),
               ),

@@ -1,9 +1,27 @@
 import 'package:gobooks/main.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
   static const routeName = '/profile_page';
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late User user;
+
+  @override
+  void initState() {
+    super.initState();
+    initUser();
+  }
+
+  initUser() async {
+    user = _auth.currentUser!;
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,15 +57,11 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Dicoding Indonesia',
+                    Text('${user.email}',
                         style: Theme.of(context)
                             .textTheme
                             .headline6
                             ?.copyWith(color: Colors.white)
-                    ),
-                    const Text(
-                      'dicoding@gmail.com',
-                      style: TextStyle(color: Colors.white),
                     ),
                     const Text('Status : Mahasiswa',
                         style: TextStyle(

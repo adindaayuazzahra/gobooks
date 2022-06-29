@@ -24,7 +24,7 @@ class DeviderOr extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              "OR",
+              "atau",
               style: Theme.of(context).textTheme.button?.copyWith(
                   color: accentColor,
                   fontWeight: FontWeight.bold,
