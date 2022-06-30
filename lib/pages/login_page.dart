@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget {
                           emailController.text,
                           passwordController.text
                       );
-                      if (result != null) {
+                      if (result != null && emailController.text == 'gobooks.admin@email.com') {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
