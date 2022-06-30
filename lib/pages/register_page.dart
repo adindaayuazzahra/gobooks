@@ -88,10 +88,6 @@ class RegisterPage extends StatelessWidget {
                       Icons.lock,
                       color: secdarkColor,
                     ),
-                    // suffixIcon: Icon(
-                    //   Icons.visibility,
-                    //   color: secdarkColor,
-                    // ),
                     hintText: "Password",
                     border: InputBorder.none,
                   ),
