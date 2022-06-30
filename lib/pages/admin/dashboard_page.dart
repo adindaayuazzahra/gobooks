@@ -53,11 +53,10 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 margin:
                 const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                 decoration: BoxDecoration(
-                  color: accentColor,
+                  color: secdarkColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
-                  // mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('${user.email}',
