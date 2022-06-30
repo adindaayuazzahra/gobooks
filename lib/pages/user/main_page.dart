@@ -29,26 +29,29 @@ class _MainPageState extends State<MainPage> {
       if (event != null) {
         setState(() {
           notificationMessages =
-              "${event.notification!.title} ${event.notification!.body} I am coming from terminated state";
+              "${event.notification!.title} ${event.notification!.body} terminated state";
         });
       }
+      print(notificationMessages);
     });
 
-    // Foregrand State
+    // Foreground State
     FirebaseMessaging.onMessage.listen((event) {
       LocalNotificationService.showNotificationOnForeground(event);
       setState(() {
         notificationMessages =
-            "${event.notification!.title} ${event.notification!.body} I am coming from foreground";
+            "${event.notification!.title} ${event.notification!.body} foreground";
       });
+      print(notificationMessages);
     });
 
     // background State
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       setState(() {
         notificationMessages =
-            "${event.notification!.title} ${event.notification!.body} I am coming from background";
+            "${event.notification!.title} ${event.notification!.body} background";
       });
+      print(notificationMessages);
     });
   }
 

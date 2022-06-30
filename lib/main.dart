@@ -53,7 +53,6 @@ Future<void> requestPermission() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   if (getSwitchState() == false) {
-    print('notification silent');
     NotificationSettings settings = await messaging.requestPermission(
       alert: false,
       announcement: false,
@@ -72,7 +71,6 @@ Future<void> requestPermission() async {
       print('user declined or has not accepted permission');
     }
   } else {
-    print('notification not silent');
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
