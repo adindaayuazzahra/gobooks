@@ -679,6 +679,12 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                         return Card(
                                           margin: const EdgeInsets.all(10),
                                           child: ListTile(
+                                            onTap: () {
+                                              Navigator.push(context, MaterialPageRoute(
+                                                  builder: (context) => DetailBookPage(
+                                                      documentSnapshot: documentSnapshot)
+                                              ));
+                                            },
                                             title: Text(
                                                 documentSnapshot['bookTitle']),
                                             trailing: SizedBox(
@@ -755,6 +761,12 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                     return Card(
                                       margin: const EdgeInsets.all(10),
                                       child: ListTile(
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) => DetailBookPage(
+                                                  documentSnapshot: documentSnapshot)
+                                          ));
+                                        },
                                         title:
                                             Text(documentSnapshot['bookTitle']),
                                         trailing: SizedBox(
@@ -762,12 +774,12 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                           child: Row(
                                             children: [
                                               IconButton(
-                                                  icon: const Icon(Icons.edit),
+                                                  icon: const Icon(Icons.edit, color: secdarkColor,),
                                                   onPressed: () => _update(
                                                       documentSnapshot)),
                                               IconButton(
                                                   icon:
-                                                      const Icon(Icons.delete),
+                                                      Icon(Icons.delete, color: secLightColor),
                                                   onPressed: () => _delete(
                                                       documentSnapshot.id)),
                                             ],
@@ -793,12 +805,17 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                           child: Row(
                                             children: [
                                               IconButton(
-                                                  icon: const Icon(Icons.edit),
+                                                  icon: const Icon(
+                                                    Icons.edit,
+                                                    color: secdarkColor,
+                                                  ),
                                                   onPressed: () => _update(
                                                       documentSnapshot)),
                                               IconButton(
                                                   icon:
-                                                      const Icon(Icons.delete),
+                                                      Icon(Icons.delete,
+                                                      color: secLightColor
+                                                      ),
                                                   onPressed: () => _delete(
                                                       documentSnapshot.id)),
                                             ],
