@@ -1,4 +1,5 @@
 export 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/gestures.dart';
 import 'package:gobooks/main.dart';
 
 export 'package:flutter/services.dart';
@@ -38,6 +39,7 @@ export 'package:gobooks/widgets/admin_book_list.dart';
 export 'package:gobooks/widgets/devider_or.dart';
 //=>notification
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'notification/notification_provider.dart';
 
 // => Assets
 export 'package:flutter_svg/svg.dart';
@@ -49,27 +51,52 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> requestPermission() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print('user granted permission');
-  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    print('user granted provisional permission');
+
+  if (getSwitchState() == false) {
+    print('notification silent');
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: false,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('user granted permission but no notification');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print('user granted provisional permission');
+    } else {
+      print('user declined or has not accepted permission');
+    }
   } else {
-    print('user declined or has not accepted permission');
+    print('notification not silent');
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('user granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print('user granted provisional permission');
+    } else {
+      print('user declined or has not accepted permission');
+    }
   }
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await requestPermission();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
