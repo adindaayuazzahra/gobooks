@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               },
               child: Container(
-                margin: const EdgeInsets.all(16.0),
+                margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                 height: size.height * 1 / 16,
                 width: size.width * 0.9,
                 decoration: BoxDecoration(
@@ -120,28 +120,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              Text(
-                'Notification',
-                style: Theme.of(context).textTheme.button?.copyWith(
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Notifikasi',
+                    style: Theme.of(context).textTheme.button?.copyWith(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
-              ),
-              Switch(
-                value: isNotif,
-                onChanged: (bool value) {
-                  setState(() {
-                    isNotif = value;
-                    print('switch state changed to ${value}');
-                    saveSwitchState(value);
-                  });
-                },
-                activeTrackColor: Colors.greenAccent,
-                activeColor: Colors.green,
-              ),
-            ]),
+                  ),
+                  Switch(
+                    value: isNotif,
+                    onChanged: (bool value) {
+                      setState(() {
+                        isNotif = value;
+                        print('switch state changed to ${value}');
+                        saveSwitchState(value);
+                      });
+                    },
+                    activeTrackColor: Colors.greenAccent,
+                    activeColor: Colors.green,
+                  ),
+                ]
+            ),
           ]),
     );
   }
