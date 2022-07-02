@@ -774,14 +774,19 @@ class _AdminMainPageState extends State<AdminMainPage> {
                                           child: Row(
                                             children: [
                                               IconButton(
-                                                  icon: const Icon(Icons.edit, color: secdarkColor,),
-                                                  onPressed: () => _update(
-                                                      documentSnapshot)),
+                                                  icon: const Icon(
+                                                      Icons.edit,
+                                                    color: secdarkColor
+                                                  ),
+                                                  onPressed: () => _update(documentSnapshot)
+                                              ),
                                               IconButton(
-                                                  icon:
-                                                      Icon(Icons.delete, color: secLightColor),
-                                                  onPressed: () => _delete(
-                                                      documentSnapshot.id)),
+                                                  icon: Icon(
+                                                      Icons.delete,
+                                                      color: secLightColor
+                                                  ),
+                                                  onPressed: () => _delete(documentSnapshot.id)
+                                              ),
                                             ],
                                           ),
                                         ),
