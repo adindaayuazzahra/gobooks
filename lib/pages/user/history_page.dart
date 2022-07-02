@@ -62,21 +62,39 @@ class _HistoryPageState extends State<HistoryPage> {
                         streamSnapshot.data!.docs
                             .asMap()
                             .forEach((index, value) {
-                          if (value['history'] == true) {
+                          if (value['history'] == true && value['isAvailable'] == false) {
                             listOfBooked.add(index);
                           }
                         });
-                        return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: listOfBooked.length,
-                          itemBuilder: (context, index) {
-                            final DocumentSnapshot documentSnapshot =
-                                streamSnapshot.data!.docs[listOfBooked[index]];
-                            return documentSnapshot['isAvailable'] == false
-                                ? HistoryList(
-                                    documentSnapshot: documentSnapshot)
-                                : const Center();
-                          },
+                        return listOfBooked.isNotEmpty
+                            ? ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: listOfBooked.length,
+                                itemBuilder: (context, index) {
+                                  final DocumentSnapshot documentSnapshot =
+                                      streamSnapshot.data!.docs[listOfBooked[index]];
+                                  return HistoryList(documentSnapshot: documentSnapshot);
+                                })
+                            : Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.menu_book,
+                                    color: secLightColor,
+                                    size: 50,
+                                  ),
+                                  Text('Belum ada buku yang dipinjam',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        ?.copyWith(color: secLightColor,
+                                        fontSize: 15
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              )
                         );
                       }
                       return const Center(
@@ -94,23 +112,41 @@ class _HistoryPageState extends State<HistoryPage> {
                         streamSnapshot.data!.docs
                             .asMap()
                             .forEach((index, value) {
-                          if (value['history'] == true) {
+                          if (value['history'] == true && value['isAvailable'] == true) {
                             listOfBooked.add(index);
                           }
                         });
-                        return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: listOfBooked.length,
-                          itemBuilder: (context, index) {
-                            final DocumentSnapshot documentSnapshot =
-                                streamSnapshot.data!.docs[listOfBooked[index]];
+                        return listOfBooked.isNotEmpty
+                            ? ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: listOfBooked.length,
+                              itemBuilder: (context, index) {
+                                final DocumentSnapshot documentSnapshot =
+                                    streamSnapshot.data!.docs[listOfBooked[index]];
 
-                            return documentSnapshot['isAvailable'] == true
-                                ? HistoryList(
-                                    documentSnapshot: documentSnapshot)
-                                : const Center();
-                          },
-                        );
+                                return HistoryList(documentSnapshot: documentSnapshot);
+                              })
+                            : Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.menu_book,
+                                    color: Colors.green,
+                                    size: 50,
+                                  ),
+                                  Text('Belum ada buku yang dikembalikan',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        ?.copyWith(color: Colors.green,
+                                        fontSize: 15
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              )
+                          );
                       }
                       return const Center(
                           child: CircularProgressIndicator(color: accentColor));
