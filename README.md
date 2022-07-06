@@ -1,4 +1,4 @@
-# gobooks
+# gobooks | CPSG-38
 capstone project from SIB - DICODING
 
 Anggota:
